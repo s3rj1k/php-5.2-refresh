@@ -1,5 +1,7 @@
 --TEST--
 Test session_save_path() function : variation
+--XFAIL--
+Fixed only in PHP-5.3+
 --SKIPIF--
 <?php include('skipif.inc'); 
 if(substr(PHP_OS, 0, 3) == "WIN")

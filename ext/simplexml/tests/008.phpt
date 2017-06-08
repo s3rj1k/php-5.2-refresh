@@ -36,4 +36,5 @@ array(1) {
     }
   }
 }
-bool(false)
+array(0) {
+}

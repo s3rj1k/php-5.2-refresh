@@ -30,7 +30,7 @@ Test 10: EXSLT Support
     month-in-year        : 12
     month-name           : December
     month-abbreviation   : Dec
-    week-in-year         : 53
+    week-in-year         : 1
     day-in-year          : 365
     day-in-month         : 31
     day-of-week-in-month : 5
@@ -84,7 +84,7 @@ Test 10: EXSLT Support
     month-in-year        : 12
     month-name           : December
     month-abbreviation   : Dec
-    week-in-year         : 53
+    week-in-year         : 1
     day-in-year          : 365
     day-in-month         : 31
     day-of-week-in-month : 5
@@ -102,7 +102,7 @@ Test 10: EXSLT Support
     month-in-year        : 2
     month-name           : February
     month-abbreviation   : Feb
-    week-in-year         : 10
+    week-in-year         : 9
     day-in-year          : 60
     day-in-month         : 29
     day-of-week-in-month : 5

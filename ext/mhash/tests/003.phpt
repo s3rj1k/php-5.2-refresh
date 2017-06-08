@@ -2,36 +2,34 @@
 mhash_keygen_s2k() test
 --SKIPIF--
 <?php
-	include "skip.inc";
+	include "skip_mhash.inc";
 ?>
 --FILE--
 <?php
 
 $supported_hash_al = array(
-"MHASH_MD5"       => "†\x15N¯”2Íé4z¡P”¹ÀFë\x06æ ”\x0CTyªzcg®hµààt^W\x09şŞ-Ÿésš­A7Yú§:Ìí‚\x10w´İ²x€dãqëS³©Õ^Òƒš«&UÈ,şÛè: „aÇ™Ù×zä\x06\x1CS›\x01",
-"MHASH_SHA1"      => "İ1\\p\x06\x1D\x07E]SÂû\x0B\x08ß\x0Caªf\\\x1A±§\x01ú\x10•T#\$‹¨2¥­ä\x06³›xc\x0Aº=\x16ˆæ\"IJ\x0E®'NÎšÔ½÷n‡Ë\x08J3É\x15<+H\x13\x1D0§[\x00§À[‘ñÿê¿Y»\x12qÄØ¡\x19¸K¯mI",
-"MHASH_HAVAL256"  => "ŞG\x00Ÿ‡Õé¢NÏPwÖ\x0CH6W¥Ù„«+·€õ‡,Êö\x1C\x0DgdZ„Uşá\x07)oAiÉ[Nağ®îú²d…TÁ\x17\x1F°¢ü2ªZîÓÕÁUÓ46}IYb,ÚŞşC®\x17½\x1AuùÔş÷{ñ’¾[x",
-"MHASH_HAVAL224"  => "\\Jÿ=‚ZÖ\x08ö\x08Èêçyî8haÆ\x0A˜ó×p³¦g|yÂÚÜ«qİàÀ\x19\x1E\x06ƒ—«)
-åË¼l¼ĞÇŒ¨G\x0CB@kwèÂºQ“ù‚v52O¸P¬-0·5\x00L	m`G-2ÃI",
-"MHASH_HAVAL192"  => "\"àÂq&\x02<….ùA\x07»/\x1Eá2°d\x17‹Ëû\x1C2æXv\x0Bp½Å±Å%™\x03\x16(ÂC;î+\x08p«z8®²\x12\x15\x13NÁ\x08‰u¹©d‡d)qï³Ù‡ºùv_ÙæÖMINª„¯çà xLt—º±Ç‡",
-"MHASH_HAVAL160"  => "Öåğï\x07óúÌídní¶6GXìŞmÆû\x06\x1E\x00¤–õÎ·#÷¡5ˆM–‚\"míiÁ\x1D„1\$\x0Eù|­X<O)Y;¿=ÓÊ°¸y.³Ø`\"Ê`\x02ëĞÙ´B™	Ô¯…¾Òµ©k>G¹¸ÊÉ\x19Á\x17~Ä\x0D~",
-"MHASH_RIPEMD160" => "äÕÛFšòŸxâ¹\x0DÇ5ÉÏ\x02\x0a\x1D[\x19¦gDXgw”ÔÜ¡DÔ&Åb¯ù†jŠ’B™ëö°êš7ù‡¡û]é¶GíÃ[\x14G`^\x1B«Ã\x08Kç “\x11\x17ë3C-ABâ%ß\x04K\x03??öK´¡†‚¤ù",
-"MHASH_GOST"      => "ÀDöi½~†C•=wÆ‚ı\x17’BÙß\x15}­øs¾M–\x01äd|\x01‚4h“Yç\"\x0A°I*b@Ñ„Äxc@sŞ¨y¾†ıN%d÷×\x09¶ŠFD\x0a\x12\x12Pà\x0FÇÕ}E©À~â:pOôŒ\x0D­pwìR{\x19M‡",
-"MHASH_TIGER"     => "gêÉ{Ê\nG±ö&/3däÎ#7`ş2UöBQ/Óy)ºÌñçX#k'h¤ÂÀÀn‹ä/¥÷E‚¸©›ÛÀ˜p*M1 VÄÉKÚyºO`Õ	×ø•M¨¢——6Ô|\"ª",
-"MHASH_CRC32"     => "H@Œ&_šYïèoQÅÒĞ1[Fq\"®\x08ÁÌİfŸéVÈ8\x08ã¥EöîE<¤™M¼:Èº…¥r„ğk*±HœÚu±è/}›ßÛh3iW»ñJ?vu
-i…¥=ÕW\"üó",
-"MHASH_CRC32B"    => "µl«e¦>}û*©]¶F×›6\x13ŠbCÍË.	I¯\x0F–jœÎ¥0ĞÛ\x0D\x1F<˜Æ.Qyç–¾¶tiı°xbØ\$}ƒ\x0Bõ˜È´“	×Ï¬ÈŒDÅDK…\x13é1uLğİ6§¡`÷æÉ|Ecñ\x04°",
+"MHASH_MD5"        => "8690154eaf9432cde9347aa15094b9c046eb06e6a0940c5479aa7a6367ae68b5e0e0745e5709fede2d9fe9739d9aad413759faa73acced821077b4ddb2788064e371eb53b3a9d55ed2839aab2655c82cfedbe83a208461c799d9d77ae481061c81539b01",
+"MHASH_SHA1"       => "dd315c70061d07455d53c2fb0b08df0c61aa665c1ab1a701fa10955423248ba832a5ade406b39b78630aba3d1688e622494a0eae279d4ece9ad4bdf76e878fcb084a33c9153c2b48131d30a75b00a7c05b91f1ffeabf59bb1271c4d8a11990b84baf6d49",
+"MHASH_HAVAL256"   => "0ede47009f87d5e9a24ecf5077d60c483657a5d98404ab2bb780f5872c90caf61c0d67645a848e55fee107296f4169c95b4e61f0aeeefab2648554c1171fb0a2fc32aa5aeed3d5c155d334367d4959622cdadefe43ae17bd1a75f9d4fef77bf192be5b78",
+"MHASH_HAVAL224"   => "5c4aff3d825ad608f608c8eae779ee3868610bc60a98f3d770b311a6677c797fc2dadcab71dde0c0191e068397ab297f0de5cbbc6cbcd0c78ca8470c42401f6b77e81dc2ba8d51930ff982760335324fb850ac2d30b73514004c096d60472d320e0ec349",
+"MHASH_HAVAL192"   => "22e0c27126023c852ef94107bb2f1ee132b064178b9dcbfb1c32e658760b8f70bdc5b1c52599031628c2433bee2b0870ab7a38aeb21215134ec1088975b9a96487642971ef9eb3d987baf9765fd9e6d64d494e1719aa84afe7e0a0784c74979ebab1c787",
+"MHASH_HAVAL160"   => "d6e5f0ef07f3facced646eedb6364758ecde6dc6fb061e00a496f5ceb723f78ea135884d9682226ded69c11d8431240ef97cad583c4f29593bbf3dd3cab0b8792eb3d86022ca6002ebd0d9b4429909d4af85bed2b5a96b3e47b9b8cac919c1177ec40d7e",
+"MHASH_RIPEMD160"  => "e4d5db469af29f78e2b90dc735c9cf020a1d5b19a6674458677794d4dca144d426c562aff98d8e866a8a924299ebf6b0ea9a1637f987a1fb5de9b647edc35b1447605e1babc3084be7a003931117eb33432d4142e225df044b033f3ff64bb4a18682a4f9",
+"MHASH_GOST"       => "c044f669bd7e8643953d77c682fd179242d9df157dadf873be4d9601e4647c018234689359e7220ab0492a6240d184c478634073dea87f79be7f86fd4e2564f7d709b68a46440a121250e00fc7d57d45a9c07ee23a704ff4148c0dad7077ec527b194d87",
+"MHASH_TIGER"      => "67eac97b9dca0a47b1f6262f330264e4ce1c233760fe3255f642512fd3127929baccf1e758236b2768a4c2c0c06e118b19e40e2f04a5f745820fb8a99bdbc00698702a4d3120171856c4c94bda79ba1b4f60d509d7f8954da818a29797368dd47c1122aa",
+"MHASH_CRC32"      => "481c40148c26185f9a59ef18e86f51c5d2d0315b46711d22ae08c1ccdd669fe956c817380815e3a545f6ee453c9da48d1d994dbc3ac8ba85a572108412f06b2a16b1489cda75b118e82f7d9bdfdb68336957bbf19e4a3f76750d6985a53dd557229dfcf3",
+"MHASH_CRC32B"     => "b56cab65a63e7dfb2aa95d7fb646d79b36138a6243cdcb8f2e0949af0f966a9ccea530d0db0d1f3c98c62e5179e796beb68d7469fdb07862d8247d830bf598c8b49309d7cfacc88c44c5444b8513e931754cf0dd36a7a160f7e6c98f907c4563f1047fb0"
 );
 
 foreach ($supported_hash_al as $hash=>$wanted) {
 	$passwd = str_repeat($hash, 10);
 	$salt = str_repeat($hash, 2);
 	$result = mhash_keygen_s2k(constant($hash), $passwd, $salt, 100);
-	if (!strcmp($result, $wanted)) {
+	if (!strcmp(bin2hex($result), $wanted)) {
 		echo "$hash\nok\n";
 	} else {
 		echo "$hash: ";
-		var_dump(bin2hex($wanted));
+		var_dump($wanted);
 		echo "$hash: ";
 		var_dump(bin2hex($result));
 	}

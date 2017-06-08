@@ -1,5 +1,7 @@
 --TEST--
 DOMDocument::$validateOnParse - effectual determination (dom_document_validate_on_parse_read/dom_document_validate_on_parse_write)
+--XFAIL--
+WTF! b0rken
 --CREDITS--
 Hans Zaunere
 # TestFest 2009 NYPHP

@@ -2,6 +2,7 @@
 Bug #41125 (PDO mysql + quote() + prepare() can result in seg fault)
 --SKIPIF--
 <?php
+if (!extension_loaded('pdo') || !extension_loaded('pdo_mysql')) die('skip not loaded');
 require dirname(__FILE__) . '/config.inc';
 require dirname(__FILE__) . '/../../../ext/pdo/tests/pdo_test.inc';
 MySQLPDOTest::skip();

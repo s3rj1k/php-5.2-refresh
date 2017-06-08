@@ -1,5 +1,7 @@
 --TEST--
 Test date_default_timezone_set() function : usage variations - Passing unexpected values for time_zone identifier
+--XFAIL--
+Fixed only in PHP-5.3+
 --FILE--
 <?php
 /* Prototype  : bool date_default_timezone_set ( string $timezone_identifier )

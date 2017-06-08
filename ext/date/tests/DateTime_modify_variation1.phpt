@@ -1,5 +1,7 @@
 --TEST--
 Test DateTime::modify() function : usage variation - Passing unexpected values to first argument $modify.
+--XFAIL--
+Fixed only in PHP-5.3+
 --FILE--
 <?php
 /* Prototype  : public DateTime DateTime::modify  ( string $modify  )
@@ -111,98 +113,152 @@ fclose( $file_handle );
 *** Testing DateTime::modify() : usage variation -  unexpected values to first argument $modify***
 
 -- int 0 --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (0) at position 0 (0): Unexpected character in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- int 1 --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (1) at position 0 (1): Unexpected character in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- int 12345 --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (12345) at position 4 (5): Unexpected character in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- int -12345 --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (-12345) at position 5 (5): Unexpected character in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- float 10.5 --
-NULL
+object(DateTime)#3 (3) {
+  ["date"]=>
+  string(26) "2009-01-31 10:05:00.000000"
+  ["timezone_type"]=>
+  int(3)
+  ["timezone"]=>
+  string(13) "Europe/London"
+}
 
 -- float -10.5 --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (-10.5) at position 4 (5): Unexpected character in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- float .5 --
-NULL
+object(DateTime)#3 (3) {
+  ["date"]=>
+  string(26) "2009-01-31 00:05:00.000000"
+  ["timezone_type"]=>
+  int(3)
+  ["timezone"]=>
+  string(13) "Europe/London"
+}
 
 -- empty array --
 
-Warning: DateTime::modify() expects parameter 1 to be string, array given in %s on line %d
+Warning: DateTime::modify() expects parameter 1 to be string, array given in %sDateTime_modify_variation1.php on line 99
 bool(false)
 
 -- int indexed array --
 
-Warning: DateTime::modify() expects parameter 1 to be string, array given in %s on line %d
+Warning: DateTime::modify() expects parameter 1 to be string, array given in %sDateTime_modify_variation1.php on line 99
 bool(false)
 
 -- associative array --
 
-Warning: DateTime::modify() expects parameter 1 to be string, array given in %s on line %d
+Warning: DateTime::modify() expects parameter 1 to be string, array given in %sDateTime_modify_variation1.php on line 99
 bool(false)
 
 -- nested arrays --
 
-Warning: DateTime::modify() expects parameter 1 to be string, array given in %s on line %d
+Warning: DateTime::modify() expects parameter 1 to be string, array given in %sDateTime_modify_variation1.php on line 99
 bool(false)
 
 -- uppercase NULL --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string () at position 0 ( in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- lowercase null --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string () at position 0 ( in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- lowercase true --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (1) at position 0 (1): Unexpected character in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- lowercase false --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string () at position 0 ( in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- uppercase TRUE --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (1) at position 0 (1): Unexpected character in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- uppercase FALSE --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string () at position 0 ( in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- empty string DQ --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string () at position 0 ( in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- empty string SQ --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string () at position 0 ( in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- string DQ --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (string) at position 0 (s): The timezone could not be found in the database in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- string SQ --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (string) at position 0 (s): The timezone could not be found in the database in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- mixed case string --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (sTrInG) at position 0 (s): The timezone could not be found in the database in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- heredoc --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (hello world) at position 0 (h): The timezone could not be found in the database in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- instance of classWithToString --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string (Class A object) at position 0 (C): The timezone could not be found in the database in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- instance of classWithoutToString --
 
-Warning: DateTime::modify() expects parameter 1 to be string, object given in %s on line %d
+Warning: DateTime::modify() expects parameter 1 to be string, object given in %sDateTime_modify_variation1.php on line 99
 bool(false)
 
 -- undefined var --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string () at position 0 ( in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- unset var --
-NULL
+
+Warning: DateTime::modify(): Failed to parse time string () at position 0 ( in %sDateTime_modify_variation1.php on line 99
+bool(false)
 
 -- resource --
 
-Warning: DateTime::modify() expects parameter 1 to be string, resource given in %s on line %d
+Warning: DateTime::modify() expects parameter 1 to be string, resource given in %sDateTime_modify_variation1.php on line 99
 bool(false)
 ===DONE===

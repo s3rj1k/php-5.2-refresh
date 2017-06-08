@@ -19,7 +19,10 @@ if (substr(PHP_OS, 0, 3) == 'WIN') {
 echo "*** Testing setlocale() : usage variations ***\n";
 
 function good_locale($locale) {
-	return $locale !== 'tt_RU@iqtelif.UTF-8';
+  $exclude_list = array('tt_RU@iqtelif.UTF-8', 'hy_AM.armscii8');
+  if(!in_array($locale, $exclude_list)){
+    return $locale;
+  }
 }
 
 /* Prototype  : array list_system_locales( void )

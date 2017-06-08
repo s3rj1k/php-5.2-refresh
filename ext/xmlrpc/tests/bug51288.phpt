@@ -10,5 +10,5 @@ echo "Done\n";
 ?>
 --EXPECT--
 NULL
-NULL
+string(0) ""
 Done

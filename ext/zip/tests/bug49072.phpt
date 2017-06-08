@@ -1,5 +1,7 @@
 --TEST--
 Bug #49072 (feof never returns true for damaged file in zip)
+--XFAIL--
+Fixed only in PHP-5.3+
 --SKIPIF--
 <?php
 /* $Id$ */

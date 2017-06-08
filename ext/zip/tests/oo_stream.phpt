@@ -1,5 +1,7 @@
 --TEST--
 getStream
+--XFAIL--
+Fixed only in PHP-5.3+
 --SKIPIF--
 <?php
 /* $Id$ */

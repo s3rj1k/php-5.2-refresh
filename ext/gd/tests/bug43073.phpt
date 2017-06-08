@@ -1,5 +1,7 @@
 --TEST--
 Bug #43073 (TrueType bounding box is wrong for angle<>0)
+--XFAIL--
+Fixed in upstream, PHP-5.2.10
 --SKIPIF--
 <?php
 	if(!extension_loaded('gd')){ die('skip gd extension not available'); }

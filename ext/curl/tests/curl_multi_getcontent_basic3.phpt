@@ -51,10 +51,12 @@ User-agent: *
 Disallow: /backend/
 Disallow: /distributions/
 Disallow: /stats/
+Disallow: /server-status/
 Disallow: /source.php
 Disallow: /search.php
 Disallow: /mod.php
 Disallow: /manual/add-note.php
+Disallow: /manual/vote-note.php
 
 Disallow: /harming/humans
 Disallow: /ignoring/human/orders

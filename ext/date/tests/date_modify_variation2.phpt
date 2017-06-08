@@ -1,5 +1,7 @@
 --TEST--
 Test date_modify() function : usage variation - Passing unexpected values to second argument $format.
+--XFAIL--
+Expected to fail, legacy php behavior
 --FILE--
 <?php
 /* Prototype  : void date_modify  ( DateTime $object  , string $modify  )

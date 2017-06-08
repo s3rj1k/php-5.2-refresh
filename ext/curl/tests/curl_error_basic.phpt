@@ -30,4 +30,4 @@ curl_close($ch);
 ?>
 --EXPECT--
 == Testing curl_error with a fake URL ==
-Error: Couldn't resolve host 'fakeURL'
+Error: Could not resolve host: fakeURL

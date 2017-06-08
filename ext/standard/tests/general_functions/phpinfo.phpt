@@ -27,6 +27,7 @@ Virtual Directory Support => %s
 Configuration File (php.ini) Path => %s
 Loaded Configuration File => %a
 Scan this dir for additional .ini files => %s
+additional .ini files parsed => %s
 PHP API => %d
 PHP Extension => %d
 Zend Extension => %d

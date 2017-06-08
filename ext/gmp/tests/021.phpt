@@ -38,7 +38,7 @@ string(1) "1"
 string(1) "2"
 string(1) "1"
 string(10) "8127346234"
-string(1) "0"
+string(10) "8127346234"
 
 Warning: Wrong parameter count for gmp_gcd() in %s on line %d
 NULL

@@ -1,5 +1,7 @@
 --TEST--
 Bug #46111 (strtotime() returns false for some valid timezones)
+--XFAIL--
+Depends on recent timezonedb
 --FILE--
 <?php
 date_default_timezone_set('Asia/Calcutta');

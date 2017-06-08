@@ -39,3 +39,7 @@ Warning: Wrong parameter count for curl_setopt() in %s on line %d
 Warning: Wrong parameter count for curl_setopt() in %s on line %d
 
 Warning: curl_setopt(): supplied argument is not a valid cURL handle resource in %s on line %d
+
+Warning: curl_setopt(): Invalid curl configuration option in %s on line %d
+
+Warning: curl_setopt(): Invalid curl configuration option in %s on line %d
