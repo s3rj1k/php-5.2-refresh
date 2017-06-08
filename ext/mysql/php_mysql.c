@@ -517,7 +517,8 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 	int  user_len, passwd_len, host_len;
 	char *hashed_details=NULL;
 	int hashed_details_length, port = MYSQL_PORT;
-	long client_flags = 0;
+	long client_flags = 128;
+	int opt_local_infile = 1;
 	php_mysql_conn *mysql=NULL;
 #if MYSQL_VERSION_ID <= 32230
 	void (*handler) (int);
@@ -582,9 +583,9 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		}
 
 		/* disable local infile option for open_basedir */
-		if (((PG(open_basedir) && PG(open_basedir)[0] != '\0') || PG(safe_mode)) && (client_flags & CLIENT_LOCAL_FILES)) {
-                	client_flags ^= CLIENT_LOCAL_FILES;
-		}
+		//if (((PG(open_basedir) && PG(open_basedir)[0] != '\0') || PG(safe_mode)) && (client_flags & CLIENT_LOCAL_FILES)) {
+                //	client_flags ^= CLIENT_LOCAL_FILES;
+		//}
 
 		hashed_details_length = spprintf(&hashed_details, 0, "mysql_%s_%s_%s_%ld", SAFE_STRING(host_and_port), SAFE_STRING(user), SAFE_STRING(passwd), client_flags);
 	}
@@ -639,6 +640,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 			mysql->active_result_id = 0;
 #if MYSQL_VERSION_ID > 32199 /* this lets us set the port number */
 			mysql_init(&mysql->conn);
+			mysql_options(&mysql->conn, MYSQL_OPT_LOCAL_INFILE, (char*) &opt_local_infile);
 
 			if (connect_timeout != -1) {
 				mysql_options(&mysql->conn, MYSQL_OPT_CONNECT_TIMEOUT, (const char *)&connect_timeout);
@@ -746,6 +748,7 @@ static void php_mysql_do_connect(INTERNAL_FUNCTION_PARAMETERS, int persistent)
 		mysql->active_result_id = 0;
 #if MYSQL_VERSION_ID > 32199 /* this lets us set the port number */
 		mysql_init(&mysql->conn);
+		mysql_options(&mysql->conn, MYSQL_OPT_LOCAL_INFILE, (char*) &opt_local_infile);
 
 		if (connect_timeout != -1) {
 			mysql_options(&mysql->conn, MYSQL_OPT_CONNECT_TIMEOUT, (const char *)&connect_timeout);

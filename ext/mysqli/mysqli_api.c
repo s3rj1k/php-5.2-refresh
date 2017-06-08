@@ -1312,11 +1312,11 @@ PHP_FUNCTION(mysqli_options)
 	}
 	MYSQLI_FETCH_RESOURCE(mysql, MY_MYSQL *, &mysql_link, "mysqli_link", MYSQLI_STATUS_INITIALIZED);
 
-	if ((PG(open_basedir) && PG(open_basedir)[0] != '\0') || PG(safe_mode)) {
-		if(mysql_option == MYSQL_OPT_LOCAL_INFILE) {
-			RETURN_FALSE;
-		}
-	}
+	//if ((PG(open_basedir) && PG(open_basedir)[0] != '\0') || PG(safe_mode)) {
+	//	if(mysql_option == MYSQL_OPT_LOCAL_INFILE) {
+	//		RETURN_FALSE;
+	//	}
+	//}
 
 	switch (Z_TYPE_PP(mysql_value)) {
 		case IS_STRING:
