@@ -26,7 +26,7 @@ dnl  fi
   if test "$PHP_EMBEDDED_MYSQLI" = "yes"; then
     AC_DEFINE(HAVE_EMBEDDED_MYSQLI, 1, [embedded MySQL support enabled])
     MYSQL_LIB_CFG='--libmysqld-libs'
-  elif test "$enable_maintainer_zts" = "yes"; then
+  elif true || test "$enable_maintainer_zts" = "yes"; then
     MYSQL_LIB_CFG='--libs_r'
     MYSQL_LIB_NAME='mysqlclient_r'
   else
