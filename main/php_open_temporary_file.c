@@ -175,11 +175,26 @@ PHPAPI void php_shutdown_temporary_directory(void)
 /*
  *  Determine where to place temporary files.
  */
-PHPAPI const char* php_get_temporary_directory(void)
+PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 {
 	/* Did we determine the temporary directory already? */
 	if (temporary_directory) {
 		return temporary_directory;
+	}
+
+	/* Specify temporary directory by "sys_tmp_dir" in .ini? */
+	{
+		char *sys_tmp_dir = PG(sys_tmp_dir);
+		if(sys_tmp_dir){
+			int len = strlen(sys_tmp_dir);
+			if (len >= 2 && sys_tmp_dir[len - 1] == DEFAULT_SLASH) {
+				temporary_directory = zend_strndup(sys_tmp_dir, len - 1);
+				return temporary_directory;
+			} else if (len >= 1 && sys_tmp_dir[len - 1] != DEFAULT_SLASH) {
+				temporary_directory = zend_strndup(sys_tmp_dir, len);
+				return temporary_directory;
+			}
+		}
 	}
 
 #ifdef PHP_WIN32
@@ -245,7 +260,7 @@ PHPAPI int php_open_temporary_fd_ex(const char *dir, const char *pfx, char **ope
 
 	if (!dir || *dir == '\0') {
 def_tmp:
-		temp_dir = php_get_temporary_directory();
+		temp_dir = php_get_temporary_directory(TSRMLS_C);
 
 		if (temp_dir && *temp_dir != '\0' && (!open_basedir_check || !php_check_open_basedir(temp_dir TSRMLS_CC))) {
 			return php_do_open_temporary_file(temp_dir, pfx, opened_path_p TSRMLS_CC);

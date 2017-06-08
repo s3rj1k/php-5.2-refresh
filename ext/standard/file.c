@@ -2565,7 +2565,7 @@ PHP_FUNCTION(fnmatch)
    Returns directory path used for temporary files */
 PHP_FUNCTION(sys_get_temp_dir)
 {
-	RETURN_STRING((char *)php_get_temporary_directory(), 1);
+	RETURN_STRING((char *)php_get_temporary_directory(TSRMLS_C), 1);
 }
 /* }}} */
 

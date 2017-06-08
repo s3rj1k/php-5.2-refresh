@@ -95,10 +95,11 @@ struct _php_core_globals {
 	char *include_path;
 	char *open_basedir;
 	char *extension_dir;
+	char *sys_tmp_dir;
 
 	char *upload_tmp_dir;
 	long upload_max_filesize;
-	
+
 	char *error_append_string;
 	char *error_prepend_string;
 
