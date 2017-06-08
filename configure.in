@@ -93,7 +93,7 @@ if test -n "$with_apxs2filter" && test -n "$with_apxs2"; then
   AC_MSG_ERROR([--with-apxs2filter and --with-apxs2 cannot be used together])
 fi
 
-  
+
 dnl Settings we want to make before the checks.
 dnl -------------------------------------------------------------------------
 
@@ -595,50 +595,50 @@ AC_CACHE_CHECK([for nanosleep], ac_cv_func_nanosleep, [PHP_CHECK_FUNC_LIB(nanosl
 
 dnl Check for getaddrinfo, should be a better way, but...
 dnl Also check for working getaddrinfo
-AC_CACHE_CHECK([for getaddrinfo], ac_cv_func_getaddrinfo,
-[AC_TRY_LINK([#include <netdb.h>],
-                [struct addrinfo *g,h;g=&h;getaddrinfo("","",g,&g);], 
-  AC_TRY_RUN([
-#include <netdb.h>
-#include <sys/types.h>
-#ifndef AF_INET
-# include <sys/socket.h>
-#endif
-int main(void) {
-  struct addrinfo *ai, *pai, hints;
-
-  memset(&hints, 0, sizeof(hints));
-  hints.ai_flags = AI_NUMERICHOST;
-
-  if (getaddrinfo("127.0.0.1", 0, &hints, &ai) < 0) {
-    exit(1);
-  }
-
-  if (ai == 0) {
-    exit(1);
-  }
-
-  pai = ai;
-  
-  while (pai) {
-    if (pai->ai_family != AF_INET) {
-      /* 127.0.0.1/NUMERICHOST should only resolve ONE way */
-      exit(1);
-    }
-    if (pai->ai_addr->sa_family != AF_INET) {
-      /* 127.0.0.1/NUMERICHOST should only resolve ONE way */
-      exit(1);
-    }
-    pai = pai->ai_next;
-  }
-  freeaddrinfo(ai);
-  exit(0);
-}
-  ],ac_cv_func_getaddrinfo=yes, ac_cv_func_getaddrinfo=no, ac_cv_func_getaddrinfo=no),
-ac_cv_func_getaddrinfo=no)])
-if test "$ac_cv_func_getaddrinfo" = yes; then
+dnl AC_CACHE_CHECK([for getaddrinfo], ac_cv_func_getaddrinfo,
+dnl [AC_TRY_LINK([#include <netdb.h>],
+dnl                 [struct addrinfo *g,h;g=&h;getaddrinfo("","",g,&g);],
+dnl   AC_TRY_RUN([
+dnl #include <netdb.h>
+dnl #include <sys/types.h>
+dnl #ifndef AF_INET
+dnl # include <sys/socket.h>
+dnl #endif
+dnl int main(void) {
+dnl   struct addrinfo *ai, *pai, hints;
+dnl
+dnl   memset(&hints, 0, sizeof(hints));
+dnl   hints.ai_flags = AI_NUMERICHOST;
+dnl
+dnl   if (getaddrinfo("127.0.0.1", 0, &hints, &ai) < 0) {
+dnl     exit(1);
+dnl   }
+dnl
+dnl   if (ai == 0) {
+dnl     exit(1);
+dnl   }
+dnl
+dnl   pai = ai;
+dnl
+dnl   while (pai) {
+dnl     if (pai->ai_family != AF_INET) {
+dnl       /* 127.0.0.1/NUMERICHOST should only resolve ONE way */
+dnl       exit(1);
+dnl     }
+dnl     if (pai->ai_addr->sa_family != AF_INET) {
+dnl       /* 127.0.0.1/NUMERICHOST should only resolve ONE way */
+dnl       exit(1);
+dnl     }
+dnl     pai = pai->ai_next;
+dnl   }
+dnl   freeaddrinfo(ai);
+dnl   exit(0);
+dnl }
+dnl   ],ac_cv_func_getaddrinfo=yes, ac_cv_func_getaddrinfo=no, ac_cv_func_getaddrinfo=no),
+dnl ac_cv_func_getaddrinfo=no)])
+dnl if test "$ac_cv_func_getaddrinfo" = yes; then
   AC_DEFINE(HAVE_GETADDRINFO,1,[Define if you have the getaddrinfo function])
-fi
+dnl fi
 
 AC_REPLACE_FUNCS(strlcat strlcpy getopt)
 AC_FUNC_UTIME_NULL
@@ -673,7 +673,7 @@ if test "$PHP_GCOV" = "yes"; then
   if test "$GCC" != "yes"; then
     AC_MSG_ERROR([GCC is required for --enable-gcov])
   fi
-  
+
   dnl Check if ccache is being used
   case `$php_shtool path $CC` in
     *ccache*[)] gcc_ccache=yes;;
@@ -683,7 +683,7 @@ if test "$PHP_GCOV" = "yes"; then
   if test "$gcc_ccache" = "yes" && (test -z "$CCACHE_DISABLE" || test "$CCACHE_DISABLE" != "1"); then
     AC_MSG_ERROR([ccache must be disabled when --enable-gcov option is used. You can disable ccache by setting environment variable CCACHE_DISABLE=1.])
   fi
-  
+
   ltp_version_list="1.5 1.6 1.7"
 
   AC_CHECK_PROG(LTP, lcov, lcov)
@@ -702,7 +702,7 @@ if test "$PHP_GCOV" = "yes"; then
       done
     ])
   else
-    ltp_msg="To enable code coverage reporting you must have one of the following LTP versions installed: $ltp_version_list"      
+    ltp_msg="To enable code coverage reporting you must have one of the following LTP versions installed: $ltp_version_list"
     AC_MSG_ERROR([$ltp_msg])
   fi
 
@@ -792,7 +792,7 @@ fi
 AC_MSG_CHECKING([where to scan for configuration files])
 PHP_ARG_WITH(config-file-scan-dir,,
 [  --with-config-file-scan-dir=PATH
-                          Set the path where to scan for configuration files], DEFAULT, no) 
+                          Set the path where to scan for configuration files], DEFAULT, no)
 if test "$PHP_CONFIG_FILE_SCAN_DIR" = "DEFAULT"; then
   PHP_CONFIG_FILE_SCAN_DIR=
 fi
@@ -907,7 +907,7 @@ dnl -------------------------------------------------------------------------
 PHP_HELP_SEPARATOR([Extensions:
 
   --with-EXTENSION=[shared[,PATH]]
-  
+
     NOTE: Not all extensions can be build as 'shared'.
 
     Example: --with-foobar=shared,/usr/local/foobar/
@@ -994,17 +994,17 @@ if test "$PHP_PEAR" != "no"; then
   dnl PEAR dependancies
   dnl
   if test "$PHP_PCRE_REGEX" = "no"; then
-    pear_error_msg="$pear_error_msg 
+    pear_error_msg="$pear_error_msg
                     PEAR requires PCRE to be enabled.    Add --with-pcre-regex to the configure line. (or --without-pear)"
   fi
   if test "$PHP_XML" = "no"; then
-    pear_error_msg="$pear_error_msg 
+    pear_error_msg="$pear_error_msg
                     PEAR requires XML to be enabled.     Add --enable-xml to the configure line. (or --without-pear)"
   fi
 
 dnl
 dnl  if test "$PHP_XMLRPC" = "no"; then
-dnl    pear_error_msg="$pear_error_msg 
+dnl    pear_error_msg="$pear_error_msg
 dnl                    PEAR requires XML-RPC to be enabled. Add --with-xmlrpc to the configure line. (or --without-pear)"
 dnl  fi
 dnl
@@ -1117,7 +1117,7 @@ if test -z "$EXTENSION_DIR"; then
     if test "$enable_maintainer_zts" = "yes"; then
       extbasedir=$extbasedir-zts
     fi
-    
+
     if test "$PHP_DEBUG" = "1"; then
       extbasedir=$extbasedir-debug
     fi
