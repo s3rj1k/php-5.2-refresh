@@ -96,14 +96,21 @@ zip_fread(struct zip_file *zf, void *outbuf, size_t toread)
 	    /* fallthrough */
 
 	case Z_OK:
-	    len = zf->zstr->total_out - out_before;
-	    if (len >= zf->bytes_left || len >= toread) {
-		if (zf->flags & ZIP_ZF_CRC)
-		    zf->crc = crc32(zf->crc, (Bytef *)outbuf, len);
+		len = zf->zstr->total_out - out_before;
+		if (len >= zf->bytes_left || len >= toread) {
+		if (zf->flags & ZIP_ZF_CRC) {
+			zf->crc = crc32(zf->crc, (Bytef *)outbuf, len);
+			if (zf->flags & ZIP_ZF_EOF == 1) {
+				if (zf->crc != zf->crc_orig) {
+					_zip_error_set(&zf->error, ZIP_ER_CRC, 0);
+					return -1;
+				}
+			}
+		}
 		zf->bytes_left -= len;
-	        return len;
-	    }
-	    break;
+			return len;
+		}
+		break;
 
 	case Z_BUF_ERROR:
 	    if (zf->zstr->avail_in == 0) {
