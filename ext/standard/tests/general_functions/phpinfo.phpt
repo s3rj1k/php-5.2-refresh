@@ -20,7 +20,6 @@ PHP Version => %s
 
 System => %s
 Build Date => %s
-Configure Command => %s
 Server API => Command Line Interface
 Virtual Directory Support => %s
 Configuration File (php.ini) Path => %s
