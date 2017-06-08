@@ -776,7 +776,7 @@ static char *date_format(char *format, int format_len, timelib_time *t, int loca
 			offset->offset = (t->z) * -60;
 			offset->leap_secs = 0;
 			offset->is_dst = 0;
-			offset->abbr = malloc(9); /* GMTÂ±xxxx\0 */
+			offset->abbr = malloc(9); /* GMT±xxxx\0 */
 			snprintf(offset->abbr, 9, "GMT%c%02d%02d", 
 			                          localtime ? ((offset->offset < 0) ? '-' : '+') : '+',
 			                          localtime ? abs(offset->offset / 3600) : 0,
@@ -985,7 +985,7 @@ PHPAPI int php_idate(char format, time_t ts, int localtime)
 			offset->offset = (t->z - (t->dst * 60)) * -60;
 			offset->leap_secs = 0;
 			offset->is_dst = t->dst;
-			offset->abbr = malloc(9); /* GMTÂ±xxxx\0 */
+			offset->abbr = malloc(9); /* GMT±xxxx\0 */
 			snprintf(offset->abbr, 9, "GMT%c%02d%02d", 
 			                          !localtime ? ((offset->offset < 0) ? '-' : '+') : '+',
 			                          !localtime ? abs(offset->offset / 3600) : 0,
@@ -1110,10 +1110,16 @@ PHPAPI void php_date_set_tzdb(timelib_tzdb *tzdb)
 PHPAPI signed long php_parse_date(char *string, signed long *now)
 {
 	timelib_time *parsed_time;
+	timelib_error_container *error = NULL;
 	int           error2;
 	signed long   retval;
 
-	parsed_time = timelib_strtotime(string, strlen(string), NULL, DATE_TIMEZONEDB);
+	parsed_time = timelib_strtotime(string, strlen(string), &error, DATE_TIMEZONEDB);
+	if (error->error_count) {
+		timelib_error_container_dtor(error);
+		return -1;
+	}
+	timelib_error_container_dtor(error);
 	timelib_update_ts(parsed_time, NULL);
 	retval = timelib_date_to_int(parsed_time, &error2);
 	timelib_time_dtor(parsed_time);
