@@ -72,6 +72,7 @@ zend_function_entry sysvmsg_functions[] = {
 	PHP_FE(msg_remove_queue,			NULL)
 	PHP_FE(msg_stat_queue,				NULL)
 	PHP_FE(msg_set_queue,				NULL)
+	PHP_FE(msg_queue_exists,			NULL)
 	{NULL, NULL, NULL}	/* Must be the last line in sysvmsg_functions[] */
 };
 /* }}} */
@@ -203,6 +204,24 @@ PHP_FUNCTION(msg_stat_queue)
 		add_assoc_long(return_value, "msg_lspid",  stat.msg_lspid);
 		add_assoc_long(return_value, "msg_lrpid",  stat.msg_lrpid);
 	}
+}
+/* }}} */
+
+/* {{{ proto bool msg_queue_exists(int key)
+   Check wether a message queue exists */
+PHP_FUNCTION(msg_queue_exists)
+{
+	long key;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &key) == FAILURE)	{
+		return;
+	}
+
+	if (msgget(key, 0) < 0) {
+		RETURN_FALSE;
+	}
+
+	RETURN_TRUE;
 }
 /* }}} */
 
