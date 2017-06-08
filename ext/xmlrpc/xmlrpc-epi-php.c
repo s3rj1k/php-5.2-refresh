@@ -736,10 +736,15 @@ zval* decode_request_worker (zval* xml_in, zval* encoding_in, zval* method_name_
 			if(method_name_out) {
 				method_name = XMLRPC_RequestGetMethodName(response);
 				if (method_name) {
-					zval_dtor(method_name_out);
-					Z_TYPE_P(method_name_out) = IS_STRING;
-					Z_STRVAL_P(method_name_out) = estrdup(method_name);
-					Z_STRLEN_P(method_name_out) = strlen(Z_STRVAL_P(method_name_out));
+					method_name = XMLRPC_RequestGetMethodName(response);
+					if (method_name) {
+						zval_dtor(method_name_out);
+						Z_TYPE_P(method_name_out) = IS_STRING;
+						Z_STRVAL_P(method_name_out) = estrdup(method_name);
+						Z_STRLEN_P(method_name_out) = strlen(Z_STRVAL_P(method_name_out));
+					} else {
+						retval = NULL;
+					}
 				} else if (retval) {
 					zval_ptr_dtor(&retval);
 					retval = NULL;
