@@ -182,16 +182,16 @@ PHPAPI const char* php_get_temporary_directory(TSRMLS_D)
 		return temporary_directory;
 	}
 
-	/* Specify temporary directory by "sys_tmp_dir" in .ini? */
+	/* Specify temporary directory by "sys_temp_dir" in .ini? */
 	{
-		char *sys_tmp_dir = PG(sys_tmp_dir);
-		if(sys_tmp_dir){
-			int len = strlen(sys_tmp_dir);
-			if (len >= 2 && sys_tmp_dir[len - 1] == DEFAULT_SLASH) {
-				temporary_directory = zend_strndup(sys_tmp_dir, len - 1);
+		char *sys_temp_dir = PG(sys_temp_dir);
+		if(sys_temp_dir){
+			int len = strlen(sys_temp_dir);
+			if (len >= 2 && sys_temp_dir[len - 1] == DEFAULT_SLASH) {
+				temporary_directory = zend_strndup(sys_temp_dir, len - 1);
 				return temporary_directory;
-			} else if (len >= 1 && sys_tmp_dir[len - 1] != DEFAULT_SLASH) {
-				temporary_directory = zend_strndup(sys_tmp_dir, len);
+			} else if (len >= 1 && sys_temp_dir[len - 1] != DEFAULT_SLASH) {
+				temporary_directory = zend_strndup(sys_temp_dir, len);
 				return temporary_directory;
 			}
 		}
