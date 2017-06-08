@@ -32,6 +32,10 @@
 
 #define TIMELIB_SPECIAL_WEEKDAY  0x01
 
+#ifdef HAVE_SYSTEM_TZDATA
+#define TIMELIB_SYSTEM_TZID "System/Localtime"
+#endif
+
 #ifndef LONG_MAX
 #define LONG_MAX 2147483647L
 #endif

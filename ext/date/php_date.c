@@ -606,6 +606,11 @@ static char* guess_timezone(const timelib_tzdb *tzdb TSRMLS_DC)
 	} else if (*DATEG(default_timezone) && timelib_timezone_id_is_valid(DATEG(default_timezone), tzdb)) {
 		return DATEG(default_timezone);
 	}
+#ifdef TIMELIB_SYSTEM_TZID
+	if (timelib_timezone_id_is_valid(TIMELIB_SYSTEM_TZID, tzdb)) {
+		return TIMELIB_SYSTEM_TZID;
+	}
+#endif
 #if HAVE_TM_ZONE
 	/* Try to guess timezone from system information */
 	{
