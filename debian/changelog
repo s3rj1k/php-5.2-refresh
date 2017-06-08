@@ -1,0 +1,7 @@
+php5.2 (5.2.17+u1) unstable; urgency=low
+
+  * Repackaged
+
+  Repackaged PHP-5.2.17 for Debian Jessie with additional patches.
+
+ -- s3rj1k <evasive.gyron@gmail.com>  Mon, 02 Jan 2017 14:00:00 +0200

@@ -1,0 +1,5 @@
+libapache2-mod-php5.2: apache2-module-does-not-ship-load-file libphp5.2
+libapache2-mod-php5.2: apache2-reverse-dependency-calls-wrapper-script postinst a2enmod
+libapache2-mod-php5.2: apache2-reverse-dependency-calls-wrapper-script prerm a2dismod
+libapache2-mod-php5.2: embedded-library usr/lib/apache2/modules/libphp5.so: file
+libapache2-mod-php5.2: non-standard-apache2-module-package-name libapache2-mod-php5.2 != libapache2-libphp5.2

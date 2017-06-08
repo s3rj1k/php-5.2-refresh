@@ -304,7 +304,7 @@ expose_php = On
 max_execution_time = 30     ; Maximum execution time of each script, in seconds
 max_input_time = 60	; Maximum amount of time each script may spend parsing request data
 ;max_input_nesting_level = 64 ; Maximum input variable nesting level
-max_input_vars = 1000 ; How many GET/POST/COOKIE input variables may be accepted
+;max_input_vars = 1000 ; How many GET/POST/COOKIE input variables may be accepted
 memory_limit = 128M      ; Maximum amount of memory a script may consume (128MB)
 
 
@@ -523,7 +523,7 @@ default_mimetype = "text/html"
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; UNIX: "/path1:/path2"
-;include_path = ".:/php/includes"
+;include_path = ".:/usr/share/php"
 ;
 ; Windows: "\path1;\path2"
 ;include_path = ".;c:\php\includes"
@@ -540,7 +540,7 @@ doc_root =
 user_dir =
 
 ; Directory in which the loadable extensions (modules) reside.
-extension_dir = "./"
+;extension_dir = "./"
 
 ; Directory where the temporary files should be placed.
 ; Defaults to the system defaut (see sys_get_temp_dir)
@@ -549,7 +549,8 @@ extension_dir = "./"
 ; Whether or not to enable the dl() function.  The dl() function does NOT work
 ; properly in multithreaded servers, such as IIS or Zeus, and is automatically
 ; disabled on them.
-enable_dl = On
+; NOTE: this is a potential security hole and is disabled by default in debian
+enable_dl = Off
 
 ; cgi.force_redirect is necessary to provide security running PHP as a CGI under
 ; most web servers.  Left undefined, PHP turns this on by default.  You can
@@ -1048,7 +1049,7 @@ session.save_handler = files
 ;
 ; where MODE is the octal representation of the mode. Note that this
 ; does not overwrite the process's umask.
-;session.save_path = "/tmp"
+;session.save_path = /var/lib/php/sessions/5.2
 
 ; Whether to use cookies.
 session.use_cookies = 1
@@ -1086,7 +1087,12 @@ session.serialize_handler = php
 ; e.g. 1/100 means there is a 1% chance that the GC process starts
 ; on each request.
 
-session.gc_probability = 1
+; This is disabled in the Debian packages, due to the strict permissions
+; on /var/lib/php5.  Instead of setting this here, see the cronjob at
+; /etc/cron.d/php5, which uses the session.gc_maxlifetime setting below.
+; php scripts using their own session.save_path should make sure garbage
+; collection is enabled by setting session.gc_probability
+;session.gc_probability = 0
 session.gc_divisor     = 1000
 
 ; After this number of seconds, stored data will be seen as 'garbage' and

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+if [ "$1" != "configure" ]; then
+	exit 0
+fi
+
+phpini="/etc/php/5.2/apache2/php.ini"
+
+ucf /usr/share/php/5.2/php.ini-dist $phpini
+
+echo 'To enable this module, do "a2enmod php5.2" and "service apache2 restart"'
+
+exit 0

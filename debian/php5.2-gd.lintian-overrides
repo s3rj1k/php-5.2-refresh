@@ -1,0 +1,2 @@
+php5.2-gd: embedded-library usr/lib/php/20060613/gd.so: libgd
+php5.2-gd: maintainer-script-empty preinst

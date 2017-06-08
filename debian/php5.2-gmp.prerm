@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+if [ "$1" = "remove" ]; then
+	for dsoname in gmp; do
+		inifile=${dsoname}.ini
+		priority=$(sed -ne "s/^; priority=\([0-9]\+\)$/\\1/p" /usr/share/php/5.2/gmp/${inifile})
+		rm -f /etc/php/5.2/conf.d/$priority-${inifile}
+	done
+fi
+
+exit 0

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+inidir=/etc/php/5.2/mods-available
+if [ "$1" = "configure" ]; then
+	for dsoname in pdo; do
+		inifile=${dsoname}.ini
+		priority=$(sed -ne "s/^; priority=\([0-9]\+\)$/\\1/p" /usr/share/php/5.2/pdo/${inifile})
+
+		# Register new conffile with UCF
+		ucf /usr/share/php/5.2/pdo/${inifile} ${inidir}/${inifile}
+		ucfr --force php5.2-common ${inidir}/${inifile}
+
+		# Enable the module
+		ln -fs "/etc/php/5.2/mods-available/${inifile}" "/etc/php/5.2/conf.d/$priority-${inifile}"
+	done
+fi
+
+exit 0

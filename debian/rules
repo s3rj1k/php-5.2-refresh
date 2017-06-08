@@ -1,0 +1,525 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+# Set this flag to 'yes' if you want to disable all modifications breaking abi
+# compatibility to upstream
+PHP5_COMPAT=no
+
+# enable dpkg build flags
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+DEB_HOST_GNU_TYPE    ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+DEB_HOST_ARCH        ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_HOST_ARCH_OS     ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
+DEB_HOST_MULTIARCH   ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+export DEB_HOST_MULTIARCH
+PHP5_SOURCE_VERSION   = $(shell dpkg-parsechangelog | grep ^Version | sed "s/Version: /")
+PHP5_UPSTREAM_VERSION = $(shell echo $(PHP5_SOURCE_VERSION) | sed -e "s/-.*/" -e "s/.*:/")
+PHP5_DEBIAN_REVISION  = $(shell echo $(PHP5_SOURCE_VERSION) | sed "s/.*-/")
+
+# RUN_TESTS = no
+ifeq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
+  $(warning Disabling checks due DEB_BUILD_OPTIONS)
+  RUN_TESTS = no
+endif
+RUN_TESTS = yes
+
+ifeq (yes,$(RUN_TESTS))
+  MYSQL_PORT := $(shell for i in $$(seq 1025 3600 | sort -R); do nc -z localhost $$i || { echo $$i; exit; } ; done)
+#  MYSQL_DATA_DIR ?= $(shell readlink -f mysql_db)
+  MYSQL_DATA_DIR = /tmp/mysql_db
+  ifeq (,$(MYSQL_PORT))
+      $(error Could not find available port for mysql server)
+  endif
+  MYSQL_SOCKET = $(MYSQL_DATA_DIR)/mysql.sock
+endif
+
+PROG_SENDMAIL = /usr/sbin/sendmail
+ifeq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+  CFLAGS += -O2
+else
+  CFLAGS += -O0
+endif
+CFLAGS += -Wall -fsigned-char -fno-strict-aliasing
+# LFS support
+ifneq (yes,$(PHP5_COMPAT))
+  CFLAGS += $(shell getconf LFS_CFLAGS)
+endif
+
+# Enable IEEE-conformant floating point math on alphas (not the default)
+ifeq (alpha-linux-gnu,$(DEB_HOST_GNU_TYPE))
+  CFLAGS += -mieee
+endif
+
+# Enable producing of debugging information
+CFLAGS += -g
+
+# some other helpful (for readability at least) shorthand variables
+PHPIZE_BUILDDIR = debian/php5.2-dev/usr/lib/php/5.2
+
+# support new (>= 2.2) and older versions of libtool for backporting ease
+LIBTOOL_DIRS = /usr/share/libtool/config /usr/share/libtool
+LTMAIN = $(firstword $(wildcard $(foreach d,$(LIBTOOL_DIRS),$d/ltmain.sh)))
+LTMAIN_DIR = $(dir $(LTMAIN))
+
+ifeq ($(LTMAIN_DIR), /usr/share/libtool/)
+LIBTOOL_CONFLICTS:=libtool (>= 2.2)
+else ifeq ($(LTMAIN_DIR), /usr/share/libtool/config/)
+LIBTOOL_CONFLICTS:=libtool (<< 2.2)
+else
+LIBTOOL_CONFLICTS:=$(error "could not resolve path to ltmain.sh")
+endif
+
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+    NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+    MAKEFLAGS += -j$(NUMJOBS)
+endif
+
+COMMON_CONFIG=--build=$(DEB_BUILD_GNU_TYPE) \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--disable-debug \
+		--with-regex=php \
+		--disable-rpath \
+		--disable-static \
+		--with-pic \
+		--with-layout=GNU \
+		--without-pear \
+		--enable-calendar \
+		--enable-json \
+		--enable-sysvsem \
+		--enable-sysvshm \
+		--enable-sysvmsg \
+		--enable-bcmath \
+		--with-bz2 \
+		--enable-ctype \
+		--without-db4 \
+		--without-gdbm \
+		--with-iconv \
+		--enable-exif \
+		--enable-ftp \
+		--enable-dbase \
+		--with-gettext \
+		--enable-mbstring \
+		--with-pcre-regex=/usr \
+		--enable-shmop \
+		--enable-sockets \
+		--enable-simplexml \
+		--enable-dom=/usr \
+		--enable-wddx \
+		--with-libxml-dir=/usr \
+		--enable-tokenizer \
+		--with-zlib \
+		--with-kerberos=/usr \
+		--with-openssl=/usr \
+		--enable-soap \
+		--enable-zip \
+		--without-mime-magic \
+		--with-exec-dir=/usr/lib/php/5.2/libexec \
+		--with-system-tzdata \
+		--datadir=/etc/share/php/5.2 \
+		--program-suffix=5.2 \
+		--with-libdir=lib/x86_64-linux-gnu \
+		$(CONFIGURE_DTRACE_ARGS)
+
+prepared: prepared-stamp
+prepared-stamp:
+	dh_testdir
+	./buildconf --force
+	touch prepared-stamp
+
+unprepared:
+	dh_testdir
+	rm -f prepared-stamp
+
+test-results.txt: build-apache2-stamp build-cli-stamp
+ifeq (yes,$(RUN_TESTS))
+	mkdir -p temp_session_store
+	# start our own mysql server for the tests
+	$(SHELL) -x debian/setup-mysql.sh $(MYSQL_PORT) $(MYSQL_DATA_DIR)
+	extensions=""; \
+	for f in $(CURDIR)/apache2-build/modules/*.so; do \
+	    ext=`basename "$$f"`; \
+	    test -d "$(CURDIR)/ext/$${ext%.so}/tests" || continue; \
+	    test "$$ext" != "imap.so" || continue; \
+	    test "$$ext" != "interbase.so" || continue; \
+	    test "$$ext" != "ldap.so" || continue; \
+	    test "$$ext" != "odbc.so" || continue; \
+	    test "$$ext" != "pgsql.so" || continue; \
+	    test "$$ext" != "pdo_dblib.so" || continue; \
+	    test "$$ext" != "pdo_firebird.so" || continue; \
+	    test "$$ext" != "pdo_odbc.so" || continue; \
+	    test "$$ext" != "pdo_pgsql.so" || continue; \
+	    test "$$ext" != "snmp.so" || continue; \
+	    extensions="$$extensions -d extension=$$ext"; \
+	done; \
+	[ "$$extensions" ] || { echo "extensions list is empty"; exit 1; }; \
+	env MYSQL_TEST_HOST=127.0.0.1 MYSQL_TEST_PORT=$(MYSQL_PORT) MYSQL_TEST_SOCKET=$(MYSQL_SOCKET) PDO_MYSQL_TEST_HOST=127.0.0.1 PDO_MYSQL_TEST_PORT=$(MYSQL_PORT) PDO_MYSQL_TEST_SOCKET=$(MYSQL_SOCKET) NO_INTERACTION=1 TEST_PHP_EXECUTABLE=$(CURDIR)/cli-build/sapi/cli/php \
+	$(CURDIR)/cli-build/sapi/cli/php run-tests.php -d mysql.default_host=127.0.0.1 -d mysql.default_socket=$(MYSQL_SOCKET) -d mysqli.default_socket=$(MYSQL_SOCKET) -d extension_dir=$(CURDIR)/apache2-build/modules/ $$extensions| tee test-results.txt
+	rm -rf temp_session_store
+	@for test in `find . -name '*.log' -a '!' -name 'config.log' -a '!' -name 'bootstrap.log' -a '!' -name 'run.log'`; do \
+	    echo; \
+	    echo -n "$${test#./}:"; \
+	    cat $$test; \
+	    echo; \
+	done | tee -a test-results.txt
+	$(SHELL) -x debian/setup-mysql.sh $(MYSQL_PORT) $(MYSQL_DATA_DIR) stop
+else
+	echo 'nocheck found in DEB_BUILD_OPTIONS or unsupported architecture' | tee test-results.txt
+endif
+
+build: build-apache2-stamp build-cli-stamp test-results.txt
+
+build-apache2-stamp: configure-apache2-stamp
+	dh_testdir
+	cd apache2-build && $(MAKE)
+
+	touch build-apache2-stamp
+
+build-cli-stamp: configure-cli-stamp
+	dh_testdir
+	cd cli-build && $(MAKE)
+
+	touch build-cli-stamp
+
+configure: configure-apache2-stamp configure-cli-stamp
+
+configure-apache2-stamp: prepared-stamp
+	dh_testdir
+	if [ -d apache2-build ]; then rm -rf apache2-build; fi
+	-mkdir apache2-build
+	cd apache2-build && \
+        CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
+		--prefix=/usr --with-apxs2=/usr/bin/apxs2 \
+		--with-config-file-path=/etc/php/5.2/apache2 \
+		--with-config-file-scan-dir=/etc/php/5.2/apache2/conf.d \
+		$(COMMON_CONFIG) \
+		--without-mm \
+		--with-curl=shared,/usr \
+		--with-zlib-dir=/usr \
+		--with-jpeg-dir=shared,/usr \
+		--with-png-dir=shared,/usr \
+		--with-gmp=shared,/usr \
+		--with-xpm-dir=shared,/usr/X11R6 \
+		--with-gd=shared --enable-gd-native-ttf \
+		--with-freetype-dir=/usr \
+		--with-imap=shared,/usr \
+		--with-imap-ssl \
+		--without-ttf \
+		--without-t1lib \
+		--with-ldap=shared,/usr \
+		--with-ldap-sasl=/usr \
+		--with-mcrypt=shared,/usr \
+		--with-mhash=shared,/usr \
+		--with-mysql=shared,/usr \
+		--with-mysql-sock=/var/run/mysqld/mysqld.sock \
+		--with-mysqli=shared,/usr/bin/mysql_config \
+		--without-ming \
+		--with-pspell=shared,/usr \
+		--with-unixODBC=shared,/usr \
+		--with-recode=shared,/usr \
+		--with-xsl=shared,/usr \
+		--without-snmp \
+		--with-sqlite3=shared,/usr \
+		--with-mssql=shared,/usr \
+		--with-tidy=shared,/usr \
+		--with-xmlrpc=shared \
+		--without-pgsql \
+		--enable-pdo=shared \
+		--without-pdo-dblib \
+		--with-pdo-mysql=shared,/usr \
+		--with-pdo-odbc=shared,unixODBC,/usr \
+		--without-pdo-pgsql \
+		--with-pdo-sqlite=shared,/usr \
+		--with-pdo-dblib=shared,/usr \
+		--with-interbase=shared,/usr \
+		--with-pdo-firebird=shared,/usr
+	cd apache2-build && \
+	cp ../Zend/zend_ini_scanner.c ../Zend/zend_language_scanner.c \
+	   ../Zend/zend_ini_parser.h ../Zend/zend_language_parser.h \
+	   ../Zend/zend_ini_parser.c ../Zend/zend_language_parser.c \
+	   Zend/
+	touch configure-apache2-stamp
+
+configure-cli-stamp: prepared-stamp
+	dh_testdir
+	if [ -d cli-build ]; then rm -rf cli-build; fi
+	-mkdir cli-build
+	cd cli-build && \
+        CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
+		--prefix=/usr --disable-cgi \
+		--with-config-file-path=/etc/php/5.2/cli \
+		--with-config-file-scan-dir=/etc/php/5.2/cli/conf.d \
+		$(COMMON_CONFIG) \
+		--without-mm \
+		--disable-pdo \
+		--with-readline=/usr \
+		--without-mysql \
+		--without-sybase-ct \
+		--without-mssql \
+		--without-sqlite3 \
+		--enable-pcntl \
+		--with-ncurses=/usr
+	cd cli-build && \
+	cp ../Zend/zend_ini_scanner.c ../Zend/zend_language_scanner.c \
+	   ../Zend/zend_ini_parser.h ../Zend/zend_language_parser.h \
+	   ../Zend/zend_ini_parser.c ../Zend/zend_language_parser.c \
+	   Zend/
+	touch configure-cli-stamp
+
+clean: unprepared
+	dh_testdir
+	dh_testroot
+	dh_clean -Xorig
+	git reset --hard
+	git clean -xfd
+
+install: DH_OPTIONS=
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+
+ifeq (yes,$(RUN_TESTS))
+	cp test-results.txt debian/php5.2-common/usr/share/doc/php5.2-common/
+endif
+
+	# php5.2-common
+	install -m644 apache2-build/ext/pdo/.libs/pdo.so debian/php5.2-common/usr/lib/php/20060613/pdo.so
+	install -m644 debian/modules/pdo.ini debian/php5.2-common/usr/share/php/5.2/pdo/pdo.ini
+
+	chmod 01733 debian/php5.2-common/var/lib/php/sessions/5.2
+	install -m644 php.ini-dist debian/php5.2-common/usr/share/php/5.2/php.ini-dist
+	install -m644 debian/copyright debian/php5.2-common/usr/share/doc/php5.2-common/copyright
+	install -m644 debian/php5.2-common.lintian-overrides \
+		debian/php5.2-common/usr/share/lintian/overrides/php5.2-common
+
+	# libapache2-mod-php5.2
+	install -m644 apache2-build/.libs/libphp5.so debian/libapache2-mod-php5.2/usr/lib/apache2/modules/libphp5.2.so
+	install -m644 debian/libapache2-mod-php5.2.load debian/libapache2-mod-php5.2/etc/apache2/mods-available/php5.2.load
+	install -m644 debian/libapache2-mod-php5.2.conf debian/libapache2-mod-php5.2/etc/apache2/mods-available/php5.2.conf
+	install -m644 debian/libapache2-mod-php5.2.lintian-overrides \
+		debian/libapache2-mod-php5.2/usr/share/lintian/overrides/libapache2-mod-php5.2
+
+	## install the apache module files
+	cd apache2-build && $(MAKE) install-headers install-build install-modules install-programs INSTALL_ROOT=$(CURDIR)/debian/libapache2-mod-php5.2
+
+	## remove netware and win32 headers that we don't want
+	for i in config.nw.h config.w32.h readdir.h tsrm_config.nw.h tsrm_config.w32.h tsrm_nw.h tsrm_win32.h win95nt.h zend_config.nw.h zend_config.w32.h; do \
+		find debian/libapache2-mod-php5.2/usr/include -type f -name $$i -delete; \
+	done
+
+	# php5.2-curl
+	install -m644 debian/modules/curl.ini debian/php5.2-curl/usr/share/php/5.2/curl/curl.ini
+	install -m644 apache2-build/modules/curl.so debian/php5.2-curl/usr/lib/php/20060613/curl.so
+	install -m644 debian/php5.2-curl.lintian-overrides \
+		debian/php5.2-curl/usr/share/lintian/overrides/php5.2-curl
+
+	# php5.2-gd
+	install -m644 debian/modules/gd.ini debian/php5.2-gd/usr/share/php/5.2/gd/gd.ini
+	install -m644 apache2-build/modules/gd.so debian/php5.2-gd/usr/lib/php/20060613/gd.so
+	install -m644 debian/php5.2-gd.lintian-overrides \
+		debian/php5.2-gd/usr/share/lintian/overrides/php5.2-gd
+
+	# php5.2-gmp
+	install -m644 debian/modules/gmp.ini debian/php5.2-gmp/usr/share/php/5.2/gmp/gmp.ini
+	install -m644 apache2-build/modules/gmp.so debian/php5.2-gmp/usr/lib/php/20060613/gmp.so
+	install -m644 debian/php5.2-gmp.lintian-overrides \
+		debian/php5.2-gmp/usr/share/lintian/overrides/php5.2-gmp
+
+	# php5.2-imap
+	install -m644 debian/modules/imap.ini debian/php5.2-imap/usr/share/php/5.2/imap/imap.ini
+	install -m644 apache2-build/modules/imap.so debian/php5.2-imap/usr/lib/php/20060613/imap.so
+	install -m644 debian/php5.2-imap.lintian-overrides \
+		debian/php5.2-imap/usr/share/lintian/overrides/php5.2-imap
+
+	# php5.2-ldap
+	install -m644 debian/modules/ldap.ini debian/php5.2-ldap/usr/share/php/5.2/ldap/ldap.ini
+	install -m644 apache2-build/modules/ldap.so debian/php5.2-ldap/usr/lib/php/20060613/ldap.so
+	install -m644 debian/php5.2-ldap.lintian-overrides \
+		debian/php5.2-ldap/usr/share/lintian/overrides/php5.2-ldap
+
+	# php5.2-mcrypt
+	install -m644 debian/modules/mcrypt.ini debian/php5.2-mcrypt/usr/share/php/5.2/mcrypt/mcrypt.ini
+	install -m644 apache2-build/modules/mcrypt.so debian/php5.2-mcrypt/usr/lib/php/20060613/mcrypt.so
+	install -m644 debian/php5.2-mcrypt.lintian-overrides \
+		debian/php5.2-mcrypt/usr/share/lintian/overrides/php5.2-mcrypt
+
+	# php5.2-mhash
+	install -m644 debian/modules/mhash.ini debian/php5.2-mhash/usr/share/php/5.2/mhash/mhash.ini
+	install -m644 apache2-build/modules/mhash.so debian/php5.2-mhash/usr/lib/php/20060613/mhash.so
+	install -m644 debian/php5.2-mhash.lintian-overrides \
+		debian/php5.2-mhash/usr/share/lintian/overrides/php5.2-mhash
+
+	# php5.2-pspell
+	install -m644 debian/modules/pspell.ini debian/php5.2-pspell/usr/share/php/5.2/pspell/pspell.ini
+	install -m644 apache2-build/modules/pspell.so debian/php5.2-pspell/usr/lib/php/20060613/pspell.so
+	install -m644 debian/php5.2-pspell.lintian-overrides \
+		debian/php5.2-pspell/usr/share/lintian/overrides/php5.2-pspell
+
+	# php5.2-recode
+	install -m644 debian/modules/recode.ini debian/php5.2-recode/usr/share/php/5.2/recode/recode.ini
+	install -m644 apache2-build/modules/recode.so debian/php5.2-recode/usr/lib/php/20060613/recode.so
+	install -m644 debian/php5.2-recode.lintian-overrides \
+		debian/php5.2-recode/usr/share/lintian/overrides/php5.2-recode
+
+	# php5.2-tidy
+	install -m644 debian/modules/tidy.ini debian/php5.2-tidy/usr/share/php/5.2/tidy/tidy.ini
+	install -m644 apache2-build/modules/tidy.so debian/php5.2-tidy/usr/lib/php/20060613/tidy.so
+	install -m644 debian/php5.2-tidy.lintian-overrides \
+		debian/php5.2-tidy/usr/share/lintian/overrides/php5.2-tidy
+
+	# php5.2-xmlrpc
+	install -m644 debian/modules/xmlrpc.ini debian/php5.2-xmlrpc/usr/share/php/5.2/xmlrpc/xmlrpc.ini
+	install -m644 apache2-build/modules/xmlrpc.so debian/php5.2-xmlrpc/usr/lib/php/20060613/xmlrpc.so
+	install -m644 debian/php5.2-xmlrpc.lintian-overrides \
+		debian/php5.2-xmlrpc/usr/share/lintian/overrides/php5.2-xmlrpc
+
+	# php5.2-xsl
+	install -m644 debian/modules/xsl.ini debian/php5.2-xsl/usr/share/php/5.2/xsl/xsl.ini
+	install -m644 apache2-build/modules/xsl.so debian/php5.2-xsl/usr/lib/php/20060613/xsl.so
+	install -m644 debian/php5.2-xsl.lintian-overrides \
+		debian/php5.2-xsl/usr/share/lintian/overrides/php5.2-xsl
+
+	# php5.2-interbase
+	install -m644 debian/modules/interbase.ini debian/php5.2-interbase/usr/share/php/5.2/interbase/interbase.ini
+	install -m644 debian/modules/pdo_firebird.ini debian/php5.2-interbase/usr/share/php/5.2/interbase/pdo_firebird.ini
+	install -m644 apache2-build/modules/interbase.so debian/php5.2-interbase/usr/lib/php/20060613/interbase.so
+	install -m644 apache2-build/modules/pdo_firebird.so debian/php5.2-interbase/usr/lib/php/20060613/pdo_firebird.so
+	install -m644 debian/php5.2-interbase.lintian-overrides \
+		debian/php5.2-interbase/usr/share/lintian/overrides/php5.2-interbase
+
+	# php5.2-sybase
+	install -m644 debian/modules/mssql.ini debian/php5.2-sybase/usr/share/php/5.2/sybase/mssql.ini
+	install -m644 debian/modules/pdo_dblib.ini debian/php5.2-sybase/usr/share/php/5.2/sybase/pdo_dblib.ini
+	install -m644 apache2-build/modules/mssql.so debian/php5.2-sybase/usr/lib/php/20060613/mssql.so
+	install -m644 apache2-build/modules/pdo_dblib.so debian/php5.2-sybase/usr/lib/php/20060613/pdo_dblib.so
+	install -m644 debian/php5.2-sybase.lintian-overrides \
+		debian/php5.2-sybase/usr/share/lintian/overrides/php5.2-sybase
+
+	# php5.2-mysql
+	install -m644 debian/modules/mysqli.ini debian/php5.2-mysql/usr/share/php/5.2/mysql/mysqli.ini
+	install -m644 debian/modules/mysql.ini debian/php5.2-mysql/usr/share/php/5.2/mysql/mysql.ini
+	install -m644 debian/modules/pdo_mysql.ini debian/php5.2-mysql/usr/share/php/5.2/mysql/pdo_mysql.ini
+	install -m644 apache2-build/modules/mysqli.so debian/php5.2-mysql/usr/lib/php/20060613/mysqli.so
+	install -m644 apache2-build/modules/mysql.so debian/php5.2-mysql/usr/lib/php/20060613/mysql.so
+	install -m644 apache2-build/modules/pdo_mysql.so debian/php5.2-mysql/usr/lib/php/20060613/pdo_mysql.so
+	install -m644 debian/php5.2-mysql.lintian-overrides \
+		debian/php5.2-mysql/usr/share/lintian/overrides/php5.2-mysql
+
+	# php5.2-odbc
+	install -m644 debian/modules/odbc.ini debian/php5.2-odbc/usr/share/php/5.2/odbc/odbc.ini
+	install -m644 debian/modules/pdo_odbc.ini debian/php5.2-odbc/usr/share/php/5.2/odbc/pdo_odbc.ini
+	install -m644 apache2-build/modules/odbc.so debian/php5.2-odbc/usr/lib/php/20060613/odbc.so
+	install -m644 apache2-build/modules/pdo_odbc.so debian/php5.2-odbc/usr/lib/php/20060613/pdo_odbc.so
+	install -m644 debian/php5.2-odbc.lintian-overrides \
+		debian/php5.2-odbc/usr/share/lintian/overrides/php5.2-odbc
+
+	# php5.2-sqlite3
+	install -m644 debian/modules/sqlite3.ini debian/php5.2-sqlite3/usr/share/php/5.2/sqlite3/sqlite3.ini
+	install -m644 debian/modules/pdo_sqlite.ini debian/php5.2-sqlite3/usr/share/php/5.2/sqlite3/pdo_sqlite.ini
+	install -m644 apache2-build/modules/sqlite3.so debian/php5.2-sqlite3/usr/lib/php/20060613/sqlite3.so
+	install -m644 apache2-build/modules/pdo_sqlite.so debian/php5.2-sqlite3/usr/lib/php/20060613/pdo_sqlite.so
+	install -m644 debian/php5.2-sqlite3.lintian-overrides \
+		debian/php5.2-sqlite3/usr/share/lintian/overrides/php5.2-sqlite3
+
+	# php5.2-cli
+	install -m755 cli-build/sapi/cli/php debian/php5.2-cli/usr/bin/php5.2
+	install -m644 cli-build/sapi/cli/php.1 debian/php5.2-cli/usr/share/man/man1/php5.2.1
+	install -m644 debian/php5.2-cli.lintian-overrides \
+		debian/php5.2-cli/usr/share/lintian/overrides/php5.2-cli
+
+	# php5.2-dev
+	mv debian/libapache2-mod-php5.2/usr/lib/php/5.2 debian/php5.2-dev/usr/lib/php/5.2
+	mv debian/libapache2-mod-php5.2/usr/include/x86_64-linux-gnu/php/5.2 debian/php5.2-dev/usr/include/php
+
+	install -m755 debian/libapache2-mod-php5.2/usr/bin/php-config5.2 debian/php5.2-dev/usr/bin/php-config5.2
+	install -m755 debian/libapache2-mod-php5.2/usr/bin/phpize5.2 debian/php5.2-dev/usr/bin/phpize5.2
+	install -m644 debian/libapache2-mod-php5.2/usr/share/man/man1/php-config5.2.1 debian/php5.2-dev/usr/share/man/man1/php-config5.2.1
+	install -m644 debian/libapache2-mod-php5.2/usr/share/man/man1/phpize5.2.1 debian/php5.2-dev/usr/share/man/man1/phpize5.2.1
+
+	install -m644 debian/php5.2-dev.lintian-overrides \
+		debian/php5.2-dev/usr/share/lintian/overrides/php5.2-dev
+
+	chmod +x debian/php5.2-dev/usr/lib/php/5.2/run-tests.php
+	for i in Makefile.global acinclude.m4 mkdep.awk phpize.m4 scan_makefile_in.awk; do \
+		chmod 644 debian/php5.2-dev/usr/lib/php/5.2/$$i; \
+	done
+
+	cp -a ext/skeleton ext/ext_skel debian/php5.2-dev/usr/share/php/5.2
+	sed -i 's/skel_dir="skeleton"/skel_dir="\/usr\/share\/php5.2\/skeleton"/' \
+	    debian/php5.2-dev/usr/share/php/5.2/ext_skel
+
+	## shipping duplicate files from other packages is hell for security audits
+	ln -sf /usr/share/misc/config.guess $(PHPIZE_BUILDDIR)/config.guess
+	ln -sf /usr/share/misc/config.sub $(PHPIZE_BUILDDIR)/config.sub
+	ln -sf /usr/share/aclocal/libtool.m4 $(PHPIZE_BUILDDIR)/libtool.m4
+	ln -sf $(LTMAIN_DIR)ltmain.sh $(PHPIZE_BUILDDIR)/ltmain.sh
+	ln -sf /usr/bin/shtool $(PHPIZE_BUILDDIR)/shtool
+
+	# cleanup
+	rm -f apache2-build/modules/*.so
+	rm -rf debian/libapache2-mod-php5.2/usr/lib/php/20060613
+	rm -rf debian/libapache2-mod-php5.2/usr/include
+	rm -rf debian/libapache2-mod-php5.2/usr/share/man
+	rm -rf debian/libapache2-mod-php5.2/usr/bin/
+	rm -f debian/php5.2-dev/usr/share/php/5.2/skeleton/skeleton.dsp
+
+	touch install-stamp
+
+# Build architecture-independent files here.
+# Pass -i to all debhelper commands in this target to reduce clutter.
+binary-indep: DH_OPTIONS=-i
+binary-indep: build install
+	# Need this version of debhelper for DH_OPTIONS to work.
+	dh_testdir
+	dh_testroot
+	dh_link
+	dh_compress -Xphp.ini
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	# Need this version of debhelper for DH_OPTIONS to work.
+	dh_testdir
+	dh_testroot
+
+#	dh_installdocs -s -pphp5.2-common --name=php5.2
+	install -g 0 -o 0 -m 644 -p debian/copyright debian/php5.2-common/usr/share/doc/php5.2-common/copyright
+
+	dh_perl
+	dh_installcron -pphp5.2-common --name=php5.2
+	dh_installchangelogs -pphp5.2-common NEWS
+	dh_systemd_enable
+	dh_installinit
+	dh_systemd_start
+	dh_link -s
+	dh_compress -s -Xphp.ini
+	dh_fixperms -s -X/var/lib/php/5.2
+	dh_strip -s --dbg-package=php5.2-dbg
+	dh_shlibdeps -s
+	dh_installdeb -s
+
+	echo "libtool:Conflicts=$(LIBTOOL_CONFLICTS)" >>debian/php5.2-dev.substvars
+
+	dh_gencontrol -s
+	dh_md5sums -s
+	dh_builddeb -s
+
+binary: binary-arch binary-indep
+build-arch: build
+
+.PHONY: build binary-indep build-arch clean binary-arch binary install configure

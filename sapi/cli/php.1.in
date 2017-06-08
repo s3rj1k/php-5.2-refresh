@@ -336,7 +336,7 @@ Shows configuration for extension
 Show configuration file names
 .SH FILES
 .TP 15
-.B php\-cli.ini
+.B /etc/php/5.2/cli/php.ini
 The configuration file for the CLI version of PHP.
 .TP
 .B php.ini
