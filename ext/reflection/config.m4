@@ -2,7 +2,7 @@ dnl $Id$
 dnl config.m4 for extension reflection
 
 PHP_ARG_ENABLE(reflection, whether to enable reflection support,
-[  --disable-reflection    Disable reflection support], yes, no)
+[  --disable-reflection    Disable reflection support], yes)
 
 if test "$PHP_REFLECTION" != "no"; then
   AC_DEFINE(HAVE_REFLECTION, 1, [Whether Reflection is enabled])
