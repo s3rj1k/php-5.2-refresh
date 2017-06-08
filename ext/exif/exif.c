@@ -99,7 +99,7 @@ typedef unsigned char uchar;
 
 #define EFREE_IF(ptr)	if (ptr) efree(ptr)
 
-#define MAX_IFD_NESTING_LEVEL 100
+#define MAX_IFD_NESTING_LEVEL 250
 
 /* {{{ arginfo */
 static
