@@ -114,6 +114,9 @@ typedef struct _fcgi_request {
 int fcgi_init(void);
 void fcgi_shutdown(void);
 int fcgi_is_fastcgi(void);
+void fcgi_set_is_fastcgi(int);
+void fcgi_set_in_shutdown(int);
+void fcgi_set_allowed_clients(char *);
 int fcgi_in_shutdown(void);
 int fcgi_listen(const char *path, int backlog);
 void fcgi_init_request(fcgi_request *req, int listen_socket);
@@ -127,6 +130,8 @@ int fcgi_read(fcgi_request *req, char *str, int len);
 
 int fcgi_write(fcgi_request *req, fcgi_request_type type, const char *str, int len);
 int fcgi_flush(fcgi_request *req, int close);
+
+void fcgi_close(fcgi_request *req, int force, int destroy);
 
 #ifdef PHP_WIN32
 void fcgi_impersonate(void);

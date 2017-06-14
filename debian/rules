@@ -31,6 +31,12 @@ ifeq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
 endif
 RUN_TESTS = yes
 
+ifeq (linux,$(DEB_HOST_ARCH_OS))
+  CONFIGURE_SYSTEMD = --with-fpm-systemd
+else
+  CONFIGURE_SYSTEMD = --without-fpm-systemd
+endif
+
 ifeq (yes,$(RUN_TESTS))
   MYSQL_PORT := $(shell for i in $$(seq 1025 3600 | sort -R); do nc -z localhost $$i || { echo $$i; exit; } ; done)
 #  MYSQL_DATA_DIR ?= $(shell readlink -f mysql_db)
@@ -176,7 +182,7 @@ else
 	echo 'nocheck found in DEB_BUILD_OPTIONS or unsupported architecture' | tee test-results.txt
 endif
 
-build: build-apache2-stamp build-cli-stamp test-results.txt
+build: build-apache2-stamp build-cli-stamp build-fpm-stamp test-results.txt
 
 build-apache2-stamp: configure-apache2-stamp
 	dh_testdir
@@ -190,7 +196,13 @@ build-cli-stamp: configure-cli-stamp
 
 	touch build-cli-stamp
 
-configure: configure-apache2-stamp configure-cli-stamp
+build-fpm-stamp: configure-fpm-stamp
+	dh_testdir
+	cd fpm-build && $(MAKE)
+
+	touch build-fpm-stamp
+
+configure: configure-apache2-stamp configure-cli-stamp configure-fpm-stamp
 
 configure-apache2-stamp: prepared-stamp
 	dh_testdir
@@ -274,6 +286,30 @@ configure-cli-stamp: prepared-stamp
 	   ../Zend/zend_ini_parser.c ../Zend/zend_language_parser.c \
 	   Zend/
 	touch configure-cli-stamp
+
+configure-fpm-stamp: prepared-stamp
+	dh_testdir
+	if [ -d fpm-build ]; then rm -rf fpm-build; fi
+	-mkdir fpm-build
+	cd fpm-build && \
+        CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
+		--prefix=/usr --enable-fpm --enable-fastcgi --enable-force-cgi-redirect \
+		--with-fpm-user=apache --with-fpm-group=apache \
+		--with-config-file-path=/etc/php/5.2/fpm \
+		--with-config-file-scan-dir=/etc/php/5.2/fpm/conf.d \
+		$(COMMON_CONFIG) \
+		--with-libevent-dir=/usr \
+		--without-mm \
+		--disable-pdo \
+		--without-mysql --without-sybase-ct \
+		--without-mssql --without-sqlite3 \
+		$(CONFIGURE_SYSTEMD)
+	cd fpm-build && \
+	cp ../Zend/zend_ini_scanner.c ../Zend/zend_language_scanner.c \
+	   ../Zend/zend_ini_parser.h ../Zend/zend_language_parser.h \
+	   ../Zend/zend_ini_parser.c ../Zend/zend_language_parser.c \
+	   Zend/
+	touch configure-fpm-stamp
 
 clean: unprepared
 	dh_testdir
@@ -438,6 +474,17 @@ endif
 	install -m644 debian/php5.2-cli.lintian-overrides \
 		debian/php5.2-cli/usr/share/lintian/overrides/php5.2-cli
 
+	# php5.2-fpm
+	install -m755 debian/php5.2-fpm-checkconf debian/php5.2-fpm/usr/lib/php/5.2/php5.2-fpm-checkconf
+	install -m755 debian/php5.2-fpm-reopenlogs debian/php5.2-fpm/usr/lib/php/5.2/php5.2-fpm-reopenlogs
+	install -m644 debian/php5.2-fpm.logrotate debian/php5.2-fpm/etc/logrotate.d/php5.2-fpm
+	install -m644 debian/php5.2-fpm.conf debian/php5.2-fpm/usr/share/php/5.2/php-fpm.conf
+#	install -m644 debian/php5.2-fpm.www debian/php5.2-fpm/etc/php/5.2/fpm/pool.d/www.conf
+	install -m755 fpm-build/sapi/cgi/php-cgi debian/php5.2-fpm/usr/sbin/php5.2-fpm
+#	install -m644 fpm-build/sapi/cli/php.1 debian/php5.2-fpm/usr/share/man/man1/php5.2-fpm.1
+	install -m644 debian/php5.2-fpm.lintian-overrides \
+		debian/php5.2-fpm/usr/share/lintian/overrides/php5.2-fpm
+
 	# php5.2-dev
 	mv debian/libapache2-mod-php5.2/usr/lib/php/5.2 debian/php5.2-dev/usr/lib/php/5.2
 	mv debian/libapache2-mod-php5.2/usr/include/x86_64-linux-gnu/php/5.2 debian/php5.2-dev/usr/include/php
@@ -501,6 +548,7 @@ binary-arch: build install
 	install -g 0 -o 0 -m 644 -p debian/copyright debian/php5.2-common/usr/share/doc/php5.2-common/copyright
 
 	dh_perl
+	dh_installlogrotate -pphp5.2-fpm
 	dh_installcron -pphp5.2-common --name=php5.2
 	dh_installchangelogs -pphp5.2-common NEWS
 	dh_systemd_enable

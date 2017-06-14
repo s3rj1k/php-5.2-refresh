@@ -1,0 +1,6 @@
+#!/bin/sh
+CONFFILE=/etc/php/5.2/fpm/php-fpm.conf
+[ -r /etc/default/php5.2-fpm ] && . /etc/default/php5.2-fpm
+PIDFILE=/var/run/php5.2-fpm.pid
+[ -r "$PIDFILE" ] && kill -USR1 $(cat "$PIDFILE") > /dev/null
+exit 0

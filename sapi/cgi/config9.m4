@@ -14,13 +14,17 @@ PHP_ARG_ENABLE(force-cgi-redirect,,
                             redirects. Use this if you run the PHP CGI with Apache], no, no)
 
 PHP_ARG_ENABLE(discard-path,,
-[  --enable-discard-path     CGI: When this is enabled the PHP CGI binary can 
+[  --enable-discard-path     CGI: When this is enabled the PHP CGI binary can
                             safely be placed outside of the web tree and people
                             will not be able to circumvent .htaccess security], no, no)
 
 PHP_ARG_ENABLE(path-info-check,,
 [  --disable-path-info-check CGI: If this is disabled, paths such as
                             /info.php/test?a=b will fail to work], yes, no)
+
+PHP_ARG_ENABLE(fpm,,
+[  --enable-fpm              FastCGI: If this is enabled, the fastcgi support
+                            will include experimental process manager code], no, no)
 
 dnl
 dnl CGI setup
@@ -53,6 +57,20 @@ if test "$PHP_SAPI" = "default"; then
     fi
     AC_DEFINE_UNQUOTED(PHP_FASTCGI, $PHP_ENABLE_FASTCGI, [ ])
     AC_MSG_RESULT($PHP_FASTCGI)
+
+    dnl --enable-fpm
+    if test "$PHP_FASTCGI" = "yes"; then
+      AC_MSG_CHECKING(whether to enable FastCGI Process Manager)
+      if test "$PHP_FPM" = "yes"; then
+        PHP_FASTCGI_PM=1
+      else
+        PHP_FASTCGI_PM=0
+      fi
+      AC_MSG_RESULT($PHP_FPM)
+    else
+      PHP_FASTCGI_PM=0
+    fi
+    AC_DEFINE_UNQUOTED(PHP_FASTCGI_PM, $PHP_FASTCGI_PM, [Is experimental fastcgi process manager code activated])
 
     dnl --enable-force-cgi-redirect
     AC_MSG_CHECKING(whether to force Apache CGI redirect)
@@ -93,10 +111,10 @@ if test "$PHP_SAPI" = "default"; then
         BUILD_CGI="echo '\#! .' > php.sym && echo >>php.sym && nm -BCpg \`echo \$(PHP_GLOBAL_OBJS) \$(PHP_SAPI_OBJS) | sed 's/\([A-Za-z0-9_]*\)\.lo/\1.o/g'\` | \$(AWK) '{ if (((\$\$2 == \"T\") || (\$\$2 == \"D\") || (\$\$2 == \"B\")) && (substr(\$\$3,1,1) != \".\")) { print \$\$3 } }' | sort -u >> php.sym && \$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS_PROGRAM) \$(LDFLAGS) -Wl,-brtl -Wl,-bE:php.sym \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_SAPI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CGI_PATH)"
         ;;
       *darwin*)
-        BUILD_CGI="\$(CC) \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS_PROGRAM) \$(LDFLAGS) \$(NATIVE_RPATHS) \$(PHP_GLOBAL_OBJS:.lo=.o) \$(PHP_SAPI_OBJS:.lo=.o) \$(PHP_FRAMEWORKS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CGI_PATH)"
+        BUILD_CGI="\$(CC) \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS_PROGRAM) \$(LDFLAGS) \$(NATIVE_RPATHS) \$(PHP_GLOBAL_OBJS:.lo=.o) \$(PHP_SAPI_OBJS:.lo=.o) \$(PHP_FRAMEWORKS) \$(EXTRA_LIBS) \$(SAPI_EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CGI_PATH)"
       ;;
       *)
-        BUILD_CGI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS_PROGRAM) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_SAPI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CGI_PATH)"
+        BUILD_CGI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS_PROGRAM) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_SAPI_OBJS) \$(EXTRA_LIBS) \$(SAPI_EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CGI_PATH)"
       ;;
     esac
 
@@ -105,8 +123,8 @@ if test "$PHP_SAPI" = "default"; then
   elif test "$PHP_CLI" != "no"; then
     AC_MSG_RESULT(no)
     OVERALL_TARGET=
-    PHP_SAPI=cli   
+    PHP_SAPI=cli
   else
-    AC_MSG_ERROR([No SAPIs selected.])  
+    AC_MSG_ERROR([No SAPIs selected.])
   fi
 fi

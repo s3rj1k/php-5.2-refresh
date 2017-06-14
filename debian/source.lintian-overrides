@@ -3,4 +3,5 @@ php5.2 source: license-problem-json-evil ext/json/JSON_parser.c
 php5.2 source: license-problem-json-evil ext/json/utf8_decode.c
 php5.2 source: license-problem-json-evil ext/json/utf8_to_utf16.c
 php5.2 source: license-problem-json-evil README.REDIST.BINS
+php5.2 source: maintainer-script-lacks-debhelper-token debian/php5.2-fpm.postinst
 php5.2 source: no-debian-copyright

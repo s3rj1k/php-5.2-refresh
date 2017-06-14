@@ -295,6 +295,12 @@ if test "$enable_maintainer_zts" = "yes"; then
   PTHREADS_FLAGS
 fi
 
+if test "$PHP_FASTCGI" = "yes" -a "$PHP_FPM" = "yes"; then
+  PHP_CONFIGURE_PART(Running FastCGI Process Manager checks)
+  sinclude(sapi/cgi/fpm/acinclude.m4)
+  sinclude(sapi/cgi/fpm/config.m4)
+fi
+
 dnl divert(3)
 
 dnl ## In diversion 3 we check for compile-time options to the PHP
@@ -1262,6 +1268,8 @@ PHP_SUBST_OLD(EXTENSION_DIR)
 PHP_SUBST_OLD(EXTRA_LDFLAGS)
 PHP_SUBST_OLD(EXTRA_LDFLAGS_PROGRAM)
 PHP_SUBST_OLD(EXTRA_LIBS)
+PHP_SUBST_OLD(SAPI_EXTRA_LIBS)
+PHP_SUBST_OLD(SAPI_EXTRA_DEPS)
 PHP_SUBST_OLD(ZEND_EXTRA_LIBS)
 PHP_SUBST_OLD(INCLUDES)
 PHP_SUBST_OLD(EXTRA_INCLUDES)
@@ -1370,7 +1378,7 @@ case $PHP_SAPI in
     install_targets="$PHP_INSTALL_CLI_TARGET $install_targets"
     ;;
   *)
-    install_targets="install-sapi $PHP_INSTALL_CLI_TARGET $install_targets"
+    install_targets="install-sapi $install_fpm $PHP_INSTALL_CLI_TARGET $install_targets"
     ;;
 esac
 
