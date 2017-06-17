@@ -24,12 +24,11 @@ PHP5_SOURCE_VERSION   = $(shell dpkg-parsechangelog | grep ^Version | sed "s/Ver
 PHP5_UPSTREAM_VERSION = $(shell echo $(PHP5_SOURCE_VERSION) | sed -e "s/-.*/" -e "s/.*:/")
 PHP5_DEBIAN_REVISION  = $(shell echo $(PHP5_SOURCE_VERSION) | sed "s/.*-/")
 
-# RUN_TESTS = no
+RUN_TESTS = yes
 ifeq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
   $(warning Disabling checks due DEB_BUILD_OPTIONS)
   RUN_TESTS = no
 endif
-RUN_TESTS = yes
 
 ifeq (linux,$(DEB_HOST_ARCH_OS))
   CONFIGURE_SYSTEMD = --with-fpm-systemd
