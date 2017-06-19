@@ -58,6 +58,8 @@ AC_DEFUN([PHP_EXT_DIR],[ext/$1])dnl
 AC_DEFUN([PHP_EXT_SRCDIR],[$abs_srcdir/ext/$1])dnl
 AC_DEFUN([PHP_ALWAYS_SHARED],[])dnl
 
+AC_DEFINE([_GNU_SOURCE], 1, [Define to enable GNU C Library extensions])
+
 dnl Setting up the PHP version based on the information above.
 dnl -------------------------------------------------------------------------
 

@@ -112,6 +112,8 @@
 #include "zend_API.h"
 #include "zend_constants.h"
 
+#include <string.h>
+
 
 #define YYERROR_VERBOSE
 #define YYSTYPE znode
