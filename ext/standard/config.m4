@@ -1,6 +1,6 @@
 dnl $Id$ -*- autoconf -*-
 
-divert(3)dnl
+dnl divert(3)dnl
 
 dnl
 dnl Check if flush should be called explicitly after buffered io
@@ -342,7 +342,7 @@ dnl
 AC_CHECK_FUNCS(getcwd getwd asinh acosh atanh log1p hypot glob strfmon nice fpclass isinf isnan mempcpy strpncpy)
 AC_FUNC_FNMATCH	
 
-divert(5)dnl
+dnl divert(5)dnl
 
 dnl
 dnl Check if there is a support means of creating a new process
