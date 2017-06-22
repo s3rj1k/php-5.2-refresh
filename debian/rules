@@ -158,12 +158,10 @@ ifeq (yes,$(RUN_TESTS))
 	    test "$$ext" != "interbase.so" || continue; \
 	    test "$$ext" != "ldap.so" || continue; \
 	    test "$$ext" != "odbc.so" || continue; \
-	    test "$$ext" != "pgsql.so" || continue; \
 	    test "$$ext" != "pdo_dblib.so" || continue; \
 	    test "$$ext" != "pdo_firebird.so" || continue; \
 	    test "$$ext" != "pdo_odbc.so" || continue; \
 	    test "$$ext" != "pdo_pgsql.so" || continue; \
-	    test "$$ext" != "snmp.so" || continue; \
 	    extensions="$$extensions -d extension=$$ext"; \
 	done; \
 	[ "$$extensions" ] || { echo "extensions list is empty"; exit 1; }; \
