@@ -291,7 +291,7 @@ configure-fpm-stamp: prepared-stamp
 	cd fpm-build && \
         CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
 		--prefix=/usr --enable-fpm --enable-fastcgi --enable-force-cgi-redirect \
-		--with-fpm-user=apache --with-fpm-group=apache \
+		--with-fpm-user=www-data --with-fpm-group=www-data \
 		--with-config-file-path=/etc/php/5.2/fpm \
 		--with-config-file-scan-dir=/etc/php/5.2/fpm/conf.d \
 		$(COMMON_CONFIG) \
