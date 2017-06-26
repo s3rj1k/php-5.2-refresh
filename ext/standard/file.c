@@ -133,7 +133,7 @@ php_file_globals file_globals;
 
 /* {{{ ZTS-stuff / Globals / Prototypes */
 
-/* sharing globals is *evil* */		
+/* sharing globals is *evil* */
 static int le_stream_context = FAILURE;
 
 PHPAPI int php_le_stream_context(void)
@@ -871,7 +871,7 @@ PHP_FUNCTION(tempnam)
 	if (p_len > 64) {
 		p[63] = '\0';
 	}
-	
+
 	RETVAL_FALSE;
 
 	if ((fd = php_open_temporary_fd_ex(dir, p, &opened_path, 1 TSRMLS_CC)) >= 0) {
@@ -1496,13 +1496,13 @@ PHP_FUNCTION(umask)
 {
 	long arg1 = 0;
 	int oldumask;
-	
+
 	oldumask = umask(077);
 
 	if (BG(umask) == -1) {
 		BG(umask) = oldumask;
 	}
-	
+
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &arg1) == FAILURE) {
 		RETURN_FALSE;
 	}
@@ -2584,7 +2584,7 @@ PHP_FUNCTION(fnmatch)
 	if (strlen(filename) != filename_len) {
 		RETURN_FALSE;
 	}
-	
+
 	if (filename_len >= MAXPATHLEN) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Filename exceeds the maximum allowed length of %d characters", MAXPATHLEN);
 		RETURN_FALSE;
@@ -2606,7 +2606,7 @@ PHP_FUNCTION(sys_get_temp_dir)
 	if (zend_parse_parameters_none() == FAILURE) {
 		return;
 	}
-	RETURN_STRING((char *)php_get_temporary_directory(), 1);
+	RETURN_STRING((char *)php_get_temporary_directory(TSRMLS_C), 1);
 }
 /* }}} */
 

@@ -502,6 +502,7 @@ PHP_INI_BEGIN()
 	STD_PHP_INI_ENTRY("default_mimetype",		SAPI_DEFAULT_MIMETYPE,	PHP_INI_ALL,	OnUpdateString,			default_mimetype,		sapi_globals_struct,sapi_globals)
 	STD_PHP_INI_ENTRY("error_log",				NULL,		PHP_INI_ALL,		OnUpdateErrorLog,			error_log,				php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("extension_dir",			PHP_EXTENSION_DIR,		PHP_INI_SYSTEM,		OnUpdateStringUnempty,	extension_dir,			php_core_globals,	core_globals)
+	STD_PHP_INI_ENTRY("sys_temp_dir",			NULL,		PHP_INI_SYSTEM,		OnUpdateStringUnempty,		sys_temp_dir,					php_core_globals,	core_globals)
 	STD_PHP_INI_ENTRY("include_path",			PHP_INCLUDE_PATH,		PHP_INI_ALL,		OnUpdateStringUnempty,	include_path,			php_core_globals,	core_globals)
 	PHP_INI_ENTRY("max_execution_time",			"30",		PHP_INI_ALL,			OnUpdateTimeout)
 	STD_PHP_INI_ENTRY("open_basedir",			NULL,		PHP_INI_ALL,		OnUpdateBaseDir,			open_basedir,			php_core_globals,	core_globals)
@@ -816,7 +817,7 @@ PHPAPI void php_verror(const char *docref, const char *params, int type, const c
 		efree(docref_buf);
 	}
 
-	if (PG(track_errors) && module_initialized && 
+	if (PG(track_errors) && module_initialized &&
 			(!EG(user_error_handler) || !(EG(user_error_handler_error_reporting) & type))) {
 		if (!EG(active_symbol_table)) {
 			zend_rebuild_symbol_table(TSRMLS_C);
@@ -1034,7 +1035,7 @@ static void php_error_cb(int type, const char *error_filename, const uint error_
 
 		if (PG(display_errors)
 			&& ((module_initialized && !PG(during_request_startup))
-				|| (PG(display_startup_errors) 
+				|| (PG(display_startup_errors)
 					&& (OG(php_body_write)==php_default_output_func || OG(php_body_write)==php_ub_body_write_no_header || OG(php_body_write)==php_ub_body_write)
 					)
 				)
@@ -1168,7 +1169,7 @@ PHP_FUNCTION(set_time_limit)
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &new_timeout) == FAILURE) {
 		return;
 	}
-	
+
 	new_timeout_strlen = zend_spprintf(&new_timeout_str, 0, "%ld", new_timeout);
 
 	if (zend_alter_ini_entry_ex("max_execution_time", sizeof("max_execution_time"), new_timeout_str, new_timeout_strlen, PHP_INI_USER, PHP_INI_STAGE_RUNTIME, 0 TSRMLS_CC) == SUCCESS) {
@@ -1761,7 +1762,7 @@ static void core_globals_dtor(php_core_globals *core_globals TSRMLS_DC)
 PHP_MINFO_FUNCTION(php_core) { /* {{{ */
 	php_info_print_table_start();
 	php_info_print_table_row(2, "PHP Version", PHP_VERSION);
-	php_info_print_table_end(); 
+	php_info_print_table_end();
 	DISPLAY_INI_ENTRIES();
 }
 /* }}} */
@@ -2040,7 +2041,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 		return FAILURE;
 	}
 
-	/* initialize registry for images to be used in phpinfo() 
+	/* initialize registry for images to be used in phpinfo()
 	   (this uses configuration parameters from php.ini)
 	 */
 	if (php_init_info_logos() == FAILURE) {
@@ -2084,7 +2085,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 			EG(current_module) = NULL;
 		}
 	}
-	
+
 	/* disable certain classes and functions as requested by php.ini */
 	php_disable_functions(TSRMLS_C);
 	php_disable_classes(TSRMLS_C);
@@ -2114,13 +2115,13 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 	/* NOTE: If you add anything here, remember to add it also in Makefile.global! */
 	{
 		static const char *directives[] = {
-			"define_syslog_variables", 
-			"register_globals", 
-			"register_long_arrays", 
-			"safe_mode", 
-			"magic_quotes_gpc", 
-			"magic_quotes_runtime", 
-			"magic_quotes_sybase", 
+			"define_syslog_variables",
+			"register_globals",
+			"register_long_arrays",
+			"safe_mode",
+			"magic_quotes_gpc",
+			"magic_quotes_runtime",
+			"magic_quotes_sybase",
 			NULL
 		};
 		const char **p = directives;
@@ -2138,7 +2139,7 @@ int php_module_startup(sapi_module_struct *sf, zend_module_entry *additional_mod
 			zend_error(E_CORE_ERROR, "zend.ze1_compatibility_mode is no longer supported in PHP 5.3 and greater");
 		}
 	}
-	
+
 	sapi_deactivate(TSRMLS_C);
 	module_startup = 0;
 
@@ -2192,7 +2193,7 @@ void php_module_shutdown(TSRMLS_D)
 	sapi_flush(TSRMLS_C);
 
 	zend_shutdown(TSRMLS_C);
-	
+
 	/* Destroys filter & transport registries too */
 	php_shutdown_stream_wrappers(module_number TSRMLS_CC);
 
@@ -2230,7 +2231,7 @@ PHPAPI int php_execute_script(zend_file_handle *primary_file TSRMLS_DC)
 {
 	zend_file_handle *prepend_file_p, *append_file_p;
 	zend_file_handle prepend_file = {0}, append_file = {0};
-#if HAVE_BROKEN_GETCWD 
+#if HAVE_BROKEN_GETCWD
 	volatile int old_cwd_fd = -1;
 #else
 	char *old_cwd;
