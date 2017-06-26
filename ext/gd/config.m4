@@ -167,6 +167,11 @@ AC_DEFUN([PHP_GD_FREETYPE2],[
         FREETYPE2_INC_DIR=$i/include/freetype2
         break
       fi
+      if test -f "$i/include/freetype2/freetype.h"; then
+        FREETYPE2_DIR=$i
+        FREETYPE2_INC_DIR=$i/include/freetype2
+        break
+      fi
     done
 
     if test -z "$FREETYPE2_DIR"; then
