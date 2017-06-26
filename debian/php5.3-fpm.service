@@ -1,5 +1,5 @@
 [Unit]
-Description=The PHP-5.2 FastCGI Process Manager
+Description=The PHP-5.3 FastCGI Process Manager
 After=network.target
 
 [Service]
