@@ -1,0 +1,2 @@
+etc/php/5.3/conf.d etc/php/5.3/apache2/conf.d
+usr/share/doc/php5.3-common usr/share/doc/libapache2-mod-php5.3

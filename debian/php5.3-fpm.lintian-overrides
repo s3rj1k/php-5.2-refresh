@@ -1,0 +1,9 @@
+php5.3-fpm: embedded-library usr/sbin/php5.3-fpm: file
+php5.3-fpm: executable-not-elf-or-script etc/init.d/php5.3-fpm
+php5.3-fpm: init.d-script-does-not-implement-required-option etc/init.d/php5.3-fpm force-reload
+php5.3-fpm: init.d-script-does-not-implement-required-option etc/init.d/php5.3-fpm restart
+php5.3-fpm: init.d-script-does-not-source-init-functions etc/init.d/php5.3-fpm
+php5.3-fpm: init.d-script-missing-lsb-section etc/init.d/php5.3-fpm
+php5.3-fpm: postrm-contains-additional-updaterc.d-calls etc/init.d/php5.3-fpm
+php5.3-fpm: script-in-etc-init.d-not-registered-via-update-rc.d etc/init.d/php5.3-fpm
+php5.3-fpm: binary-without-manpage usr/sbin/php5.3-fpm

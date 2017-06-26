@@ -1,0 +1,6 @@
+#!/bin/sh
+CONFFILE=/etc/php/5.3/fpm/php.ini
+[ -r /etc/default/php5.3-fpm ] && . /etc/default/php5.3-fpm
+PIDFILE=/var/run/php5.3-fpm.pid
+[ -r "$PIDFILE" ] && kill -USR1 $(cat "$PIDFILE") > /dev/null
+exit 0

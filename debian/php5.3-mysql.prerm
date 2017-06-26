@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+if [ "$1" = "remove" ]; then
+	for dsoname in mysqlnd mysql mysqli pdo_mysql; do
+		inifile=${dsoname}.ini
+		priority=$(sed -ne "s/^; priority=\([0-9]\+\)$/\\1/p" /usr/share/php/5.3/mysql/${inifile})
+		rm -f /etc/php/5.3/conf.d/$priority-${inifile}
+	done
+fi
+
+exit 0

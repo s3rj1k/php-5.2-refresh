@@ -1,0 +1,11 @@
+/var/log/php5.3-fpm.log {
+	rotate 12
+	weekly
+	missingok
+	notifempty
+	compress
+	delaycompress
+	postrotate
+		/usr/lib/php/5.3/php5.3-fpm-reopenlogs
+	endscript
+}

@@ -1,0 +1,4 @@
+/etc/php/5.3/mods-available
+/usr/lib/php/20090626
+/usr/share/lintian/overrides
+/usr/share/php/5.3/curl

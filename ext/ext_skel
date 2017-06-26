@@ -70,7 +70,7 @@ if test -d "$extname" ; then
 fi
 
 if test -z "$skel_dir"; then
-  skel_dir="skeleton"
+  skel_dir="/usr/lib/php/5.3/skeleton"
 fi
 
 ## convert skel_dir to full path
@@ -152,7 +152,7 @@ if test "\$PHP_$EXTNAME" != "no"; then
 
   dnl # --with-$extname -> check for lib and symbol presence
   dnl LIBNAME=$extname # you may want to change this
-  dnl LIBSYMBOL=$extname # you most likely want to change this 
+  dnl LIBSYMBOL=$extname # you most likely want to change this
 
   dnl PHP_CHECK_LIBRARY(\$LIBNAME,\$LIBSYMBOL,
   dnl [
@@ -267,12 +267,12 @@ if test -n "$proto"; then
     warning="
 NOTE! Because some arguments to functions were resources, the code generated
 cannot yet be compiled without editing. Please consider this to be step 4.5
-in the instructions above. 
+in the instructions above.
 "
   fi
 fi
 
-find . -type f | xargs chmod 644 
+find . -type f | xargs chmod 644
 find . -type d | xargs chmod 755
 fi
 

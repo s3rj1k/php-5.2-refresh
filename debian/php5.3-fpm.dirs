@@ -1,0 +1,10 @@
+/etc/init
+/etc/init.d
+/etc/logrotate.d
+/etc/php/5.3/fpm/pool.d
+/lib/systemd/system
+/usr/lib/php/5.3
+/usr/sbin
+/usr/share/lintian/overrides
+/usr/share/man/man8/
+/usr/share/php/5.3

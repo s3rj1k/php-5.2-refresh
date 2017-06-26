@@ -11,7 +11,7 @@ dnl ## Diversion 2 is the initial checking of OS features, programs,
 dnl ## libraries and so on.
 
 dnl ## In diversion 3 we check for compile-time options to the PHP
-dnl ## core and how to deal with different system dependencies. 
+dnl ## core and how to deal with different system dependencies.
 dnl ## This includes whether debugging or short tags are enabled
 dnl ## and the default behaviour of php.ini options.
 dnl ## This is also where an SAPI interface is selected (choosing between
@@ -95,7 +95,7 @@ if test -n "$with_apxs2filter" && test -n "$with_apxs2"; then
   AC_MSG_ERROR([--with-apxs2filter and --with-apxs2 cannot be used together])
 fi
 
-  
+
 dnl Settings we want to make before the checks.
 dnl -------------------------------------------------------------------------
 
@@ -334,7 +334,7 @@ fi
 dnl divert(3)
 
 dnl ## In diversion 3 we check for compile-time options to the PHP
-dnl ## core and how to deal with different system dependencies. 
+dnl ## core and how to deal with different system dependencies.
 dnl ## This includes whether debugging or short tags are enabled
 dnl ## and the default behaviour of php.ini options.
 
@@ -620,7 +620,7 @@ dnl Check for getaddrinfo, should be a better way, but...
 dnl Also check for working getaddrinfo
 dnl AC_CACHE_CHECK([for getaddrinfo], ac_cv_func_getaddrinfo,
 dnl [AC_TRY_LINK([#include <netdb.h>],
-dnl                 [struct addrinfo *g,h;g=&h;getaddrinfo("","",g,&g);], 
+dnl                 [struct addrinfo *g,h;g=&h;getaddrinfo("","",g,&g);],
 dnl   AC_TRY_RUN([
 dnl #include <netdb.h>
 dnl #include <sys/types.h>
@@ -629,20 +629,20 @@ dnl # include <sys/socket.h>
 dnl #endif
 dnl int main(void) {
 dnl   struct addrinfo *ai, *pai, hints;
-dnl 
+dnl
 dnl   memset(&hints, 0, sizeof(hints));
 dnl   hints.ai_flags = AI_NUMERICHOST;
-dnl 
+dnl
 dnl   if (getaddrinfo("127.0.0.1", 0, &hints, &ai) < 0) {
 dnl     exit(1);
 dnl   }
-dnl 
+dnl
 dnl   if (ai == 0) {
 dnl     exit(1);
 dnl   }
-dnl 
+dnl
 dnl   pai = ai;
-dnl   
+dnl
 dnl   while (pai) {
 dnl     if (pai->ai_family != AF_INET) {
 dnl       /* 127.0.0.1/NUMERICHOST should only resolve ONE way */
@@ -703,7 +703,7 @@ if test "$PHP_GCOV" = "yes"; then
   if test "$GCC" != "yes"; then
     AC_MSG_ERROR([GCC is required for --enable-gcov])
   fi
-  
+
   dnl Check if ccache is being used
   case `$php_shtool path $CC` in
     *ccache*[)] gcc_ccache=yes;;
@@ -713,7 +713,7 @@ if test "$PHP_GCOV" = "yes"; then
   if test "$gcc_ccache" = "yes" && (test -z "$CCACHE_DISABLE" || test "$CCACHE_DISABLE" != "1"); then
     AC_MSG_ERROR([ccache must be disabled when --enable-gcov option is used. You can disable ccache by setting environment variable CCACHE_DISABLE=1.])
   fi
-  
+
   ltp_version_list="1.5 1.6 1.7 1.9 1.10"
 
   AC_CHECK_PROG(LTP, lcov, lcov)
@@ -732,7 +732,7 @@ if test "$PHP_GCOV" = "yes"; then
       done
     ])
   else
-    ltp_msg="To enable code coverage reporting you must have one of the following LTP versions installed: $ltp_version_list"      
+    ltp_msg="To enable code coverage reporting you must have one of the following LTP versions installed: $ltp_version_list"
     AC_MSG_ERROR([$ltp_msg])
   fi
 
@@ -822,7 +822,7 @@ fi
 AC_MSG_CHECKING([where to scan for configuration files])
 PHP_ARG_WITH(config-file-scan-dir,,
 [  --with-config-file-scan-dir=PATH
-                          Set the path where to scan for configuration files], DEFAULT, no) 
+                          Set the path where to scan for configuration files], DEFAULT, no)
 if test "$PHP_CONFIG_FILE_SCAN_DIR" = "DEFAULT"; then
   PHP_CONFIG_FILE_SCAN_DIR=
 fi
@@ -937,7 +937,7 @@ dnl -------------------------------------------------------------------------
 PHP_HELP_SEPARATOR([Extensions:
 
   --with-EXTENSION=[shared[,PATH]]
-  
+
     NOTE: Not all extensions can be build as 'shared'.
 
     Example: --with-foobar=shared,/usr/local/foobar/
@@ -1024,13 +1024,13 @@ if test "$PHP_PEAR" != "no"; then
   dnl PEAR dependancies
   dnl
   if test "$PHP_XML" = "no"; then
-    pear_error_msg="$pear_error_msg 
+    pear_error_msg="$pear_error_msg
                     PEAR requires XML to be enabled.     Add --enable-xml to the configure line. (or --without-pear)"
   fi
 
 dnl
 dnl  if test "$PHP_XMLRPC" = "no"; then
-dnl    pear_error_msg="$pear_error_msg 
+dnl    pear_error_msg="$pear_error_msg
 dnl                    PEAR requires XML-RPC to be enabled. Add --with-xmlrpc to the configure line. (or --without-pear)"
 dnl  fi
 dnl
@@ -1148,7 +1148,7 @@ if test -z "$EXTENSION_DIR"; then
     if test "$enable_maintainer_zts" = "yes"; then
       extbasedir=$extbasedir-zts
     fi
-    
+
     if test "$PHP_DEBUG" = "1"; then
       extbasedir=$extbasedir-debug
     fi
@@ -1177,7 +1177,7 @@ EXPANDED_SYSCONFDIR=`eval echo $sysconfdir`
 EXPANDED_DATADIR=$datadir
 EXPANDED_PHP_CONFIG_FILE_PATH=`eval echo "$PHP_CONFIG_FILE_PATH"`
 EXPANDED_PHP_CONFIG_FILE_SCAN_DIR=`eval echo "$PHP_CONFIG_FILE_SCAN_DIR"`
-INCLUDE_PATH=.:$EXPANDED_PEAR_INSTALLDIR
+INCLUDE_PATH=.:$EXPANDED_PEAR_INSTALLDIR:/usr/share/pear
 
 exec_prefix=$old_exec_prefix
 libdir=$old_libdir
