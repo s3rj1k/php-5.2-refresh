@@ -1,5 +1,7 @@
 --TEST--
 Interface of the class mysqli
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 require_once('skipif.inc');

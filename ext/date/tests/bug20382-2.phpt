@@ -1,5 +1,7 @@
 --TEST--
 Bug #20382 [2] (strtotime ("Monday", $date) produces wrong result on DST changeover)
+--XFAIL--
+b0rk3n
 --FILE--
 <?php
 

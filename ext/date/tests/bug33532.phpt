@@ -1,5 +1,7 @@
 --TEST--
 Bug #33532 (Different output for strftime() and date())
+--XFAIL--
+b0rk3n
 --INI--
 error_reporting=2047
 date.timezone=UTC

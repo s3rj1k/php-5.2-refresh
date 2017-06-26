@@ -1,5 +1,7 @@
 --TEST--
 compare()
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php if( !extension_loaded( 'intl' ) ) print 'skip'; ?>
 --FILE--

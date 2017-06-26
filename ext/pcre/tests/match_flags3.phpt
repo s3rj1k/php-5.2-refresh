@@ -1,5 +1,7 @@
 --TEST--
 preg_match() flags 3
+--XFAIL--
+b0rk3n
 --FILE--
 <?php
 

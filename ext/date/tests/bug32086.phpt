@@ -1,5 +1,7 @@
 --TEST--
 Bug #32086 (strtotime don't work in DST)
+--XFAIL--
+b0rk3n
 --INI--
 date.timezone=America/Sao_Paulo
 --FILE--

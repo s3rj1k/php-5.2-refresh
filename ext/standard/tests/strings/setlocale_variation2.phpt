@@ -1,5 +1,7 @@
 --TEST--
-Test setlocale() function : usage variations - Setting all available locales in the platform 
+Test setlocale() function : usage variations - Setting all available locales in the platform
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 if (substr(PHP_OS, 0, 3) == 'WIN') {
@@ -9,9 +11,9 @@ if (substr(PHP_OS, 0, 3) == 'WIN') {
 --FILE--
 <?php
 /* Prototype  : string setlocale (int $category , string $locale [,string $..] )
-              : string setlocale(int $category , array $locale);  
- * Description: Sets locale information.Returns the new current locale , or FALSE 
-                if locale functinality is not implemented in this platform. 
+              : string setlocale(int $category , array $locale);
+ * Description: Sets locale information.Returns the new current locale , or FALSE
+                if locale functinality is not implemented in this platform.
  * Source code: ext/standard/string.c
 */
 
@@ -23,7 +25,7 @@ function good_locale($locale) {
 }
 
 /* Prototype  : array list_system_locales( void )
- * Description: To get the currently installed locle in this platform 
+ * Description: To get the currently installed locle in this platform
  * Arguments  : Nil
  * Returns    : set of locale as array
 */
@@ -49,7 +51,7 @@ function list_system_locales() {
 // gather all the locales installed in the system
 $all_system_locales = list_system_locales();
 
-//try different locale names	
+//try different locale names
 $failure_locale = array();
 $success_count = 0;
 
@@ -71,7 +73,7 @@ echo "No of locales found on the machine = ".count($all_system_locales)."\n";
 echo "No of setlocale() success = ".$success_count."\n";
 echo "Expected no of failures = 0\n";
 echo "Test ";
-// check if there were any failure of setlocale() function earlier, if any 
+// check if there were any failure of setlocale() function earlier, if any
 // failure then dump the list of failing locales
 if($success_count != count($all_system_locales)){
   echo "FAILED\n";

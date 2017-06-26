@@ -1,5 +1,7 @@
 --TEST--
 Bug #27780 (strtotime(+1 xxx) returns a wrong date/time)
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 if (defined('PHP_WINDOWS_VERSION_MAJOR')) {

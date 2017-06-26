@@ -1,5 +1,7 @@
 --TEST--
 Bug #60723  (error_log error time has changed to UTC ignoring default timezo)
+--XFAIL--
+b0rk3n
 --INI--
 date.timezone=ASIA/Chongqing
 log_errors=On

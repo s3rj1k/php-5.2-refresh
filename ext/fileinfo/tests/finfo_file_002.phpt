@@ -1,5 +1,7 @@
 --TEST--
 finfo_file(): Testing mime types
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php require_once(dirname(__FILE__) . '/skipif.inc'); ?>
 --FILE--

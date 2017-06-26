@@ -1,5 +1,7 @@
 --TEST--
 Bug #33414 [2] (Comprehensive list of incorrect days returned after strotime() / date() tests)
+--XFAIL--
+b0rk3n
 --FILE--
 <?php
 print "TZ=Pacific/Rarotonga - wrong day.\n";

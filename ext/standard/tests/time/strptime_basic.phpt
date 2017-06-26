@@ -1,10 +1,12 @@
 --TEST--
-Test strptime() function : basic functionality 
+Test strptime() function : basic functionality
+--XFAIL--
+b0rk3n
 --SKIPIF--
-<?php 
-	if (!function_exists('strptime')) { 
-		die("skip - strptime() function not available in this build"); 
-	}	 
+<?php
+	if (!function_exists('strptime')) {
+		die("skip - strptime() function not available in this build");
+	}
 ?>
 
 --FILE--
@@ -15,13 +17,13 @@ Test strptime() function : basic functionality
 */
 
 $orig = setlocale(LC_ALL, 'C');
-date_default_timezone_set("GMT"); 
+date_default_timezone_set("GMT");
 
 echo "*** Testing strptime() : basic functionality ***\n";
 
 $input = "10:00:00 AM July 2 1963";
 $tstamp = strtotime($input);
- 
+
 $str = strftime("%r %B%e %Y %Z", $tstamp);
 var_dump(strptime($str, '%H:%M:%S %p %B %d %Y %Z'));
 

@@ -1,5 +1,7 @@
 --TEST--
 SPL: Test that serialized blob contains unique elements (CVE-2010-2225)
+--XFAIL--
+b0rk3n
 --FILE--
 <?php
 

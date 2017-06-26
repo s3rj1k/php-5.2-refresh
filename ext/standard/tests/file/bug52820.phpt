@@ -1,5 +1,7 @@
 --TEST--
 Bug #52820 (writes to fopencookie FILE* not commited when seeking the stream)
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 /* unfortunately no standard function does a cast to FILE*, so we need

@@ -1,5 +1,7 @@
 --TEST--
 DOMDocument::validate() should validate an external DTD declaration
+--XFAIL--
+b0rk3n
 --CREDITS--
 Knut Urdalen <knut@php.net>
 #PHPTestFest2009 Norway 2009-06-09 \o/

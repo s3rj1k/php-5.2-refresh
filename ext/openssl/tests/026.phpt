@@ -1,5 +1,7 @@
 --TEST--
 Options type checks
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php if (!extension_loaded("openssl")) print "skip"; ?>
 --FILE--

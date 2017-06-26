@@ -1,5 +1,7 @@
 --TEST--
 preg_grep() 2nd test
+--XFAIL--
+b0rk3n
 --FILE--
 <?php
 

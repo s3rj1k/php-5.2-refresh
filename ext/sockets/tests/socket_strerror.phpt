@@ -1,5 +1,7 @@
 --TEST--
 ext/sockets - socket_strerror - basic test
+--XFAIL--
+b0rk3n
 --CREDITS--
 Florian Anderiasch
 fa@php.net

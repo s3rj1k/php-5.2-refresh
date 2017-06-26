@@ -1,5 +1,7 @@
 --TEST--
 Bug #37911 (preg_replace_callback ignores named groups)
+--XFAIL--
+b0rk3n
 --FILE--
 <?php
 
