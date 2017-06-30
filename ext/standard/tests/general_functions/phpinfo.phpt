@@ -1,5 +1,7 @@
 --TEST--
 phpinfo()
+--SKIPIF--
+<?php die("SKIP phpinfo - test suite's handling of "%s" is incompatible with this test"); ?>
 --FILE--
 <?php
 var_dump(phpinfo());
