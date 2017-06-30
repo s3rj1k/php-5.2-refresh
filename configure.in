@@ -1177,8 +1177,13 @@ dnl Build extension directory path
 
 ZEND_MODULE_API_NO=`$EGREP '#define ZEND_MODULE_API_NO ' $srcdir/Zend/zend_modules.h|$SED 's/#define ZEND_MODULE_API_NO //'`
 
+DEBIAN_PHP_API=$ZEND_MODULE_API_NO
+if echo "$CPPFLAGS $CFLAGS" | grep -q -- -D_FILE_OFFSET_BITS=64; then
+  DEBIAN_PHP_API="${DEBIAN_PHP_API}+lfs"
+fi
+
 if test -z "$EXTENSION_DIR"; then
-  extbasedir=$ZEND_MODULE_API_NO
+  extbasedir=$DEBIAN_PHP_API
   if test "$oldstyleextdir" = "yes"; then
     if test "$PHP_DEBUG" = "1"; then
       part1=debug
@@ -1321,6 +1326,7 @@ PHP_SUBST(CXX)
 PHP_SUBST(CXXFLAGS)
 PHP_SUBST(CXXFLAGS_CLEAN)
 PHP_SUBST_OLD(DEBUG_CFLAGS)
+PHP_SUBST_OLD(DEBIAN_PHP_API)
 PHP_SUBST_OLD(EXTENSION_DIR)
 PHP_SUBST_OLD(EXTRA_LDFLAGS)
 PHP_SUBST_OLD(EXTRA_LDFLAGS_PROGRAM)
