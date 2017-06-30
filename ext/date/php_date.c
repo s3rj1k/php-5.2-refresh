@@ -929,6 +929,23 @@ static char* guess_timezone(const timelib_tzdb *tzdb TSRMLS_DC)
 		DATEG(timezone_valid) = 1;
 		return DATEG(default_timezone);
 	}
+	/* Try to guess timezone from system information */
+	{
+		struct tm *ta, tmbuf;
+		time_t     the_time;
+		char      *tzid = NULL;
+
+		the_time = time(NULL);
+		ta = php_localtime_r(&the_time, &tmbuf);
+		if (ta) {
+			tzid = timelib_timezone_id_from_abbr(ta->tm_zone, ta->tm_gmtoff, ta->tm_isdst);
+		}
+		if (! tzid) {
+			tzid = "UTC";
+		}
+
+		return tzid;
+	}
 	/* Fallback to UTC */
 	php_error_docref(NULL TSRMLS_CC, E_WARNING, DATE_TZ_ERRMSG "We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone.");
 	return "UTC";
