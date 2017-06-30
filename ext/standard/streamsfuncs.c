@@ -629,8 +629,9 @@ static int stream_array_to_fd_set(zval *stream_array, fd_set *fds, php_socket_t 
 		 * is not displayed.
 		 * */
 		if (SUCCESS == php_stream_cast(stream, PHP_STREAM_AS_FD_FOR_SELECT | PHP_STREAM_CAST_INTERNAL, (void*)&tmp_fd, 1) && tmp_fd != -1) {
-
 			php_socket_t this_fd = (php_socket_t)tmp_fd;
+			if (this_fd > FD_SETSIZE)
+				continue;
 
 			PHP_SAFE_FD_SET(this_fd, fds);
 
