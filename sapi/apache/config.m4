@@ -56,12 +56,6 @@ if test "$PHP_APXS" != "no"; then
   APXS_HTTPD=`$APXS -q SBINDIR`/`$APXS -q TARGET`
   APACHE_INCLUDE=-I$APXS_INCLUDEDIR
 
-  # Test that we're trying to configure with apache 1.x
-  PHP_AP_EXTRACT_VERSION($APXS_HTTPD)
-  if test "$APACHE_VERSION" -ge 2000000; then
-    AC_MSG_ERROR([You have enabled Apache 1.3 support while your server is Apache 2.  Please use the appropriate switch --with-apxs2]) 
-  fi
-
   for flag in $APXS_CFLAGS; do
     case $flag in
     -D*) APACHE_CPPFLAGS="$APACHE_CPPFLAGS $flag";;
