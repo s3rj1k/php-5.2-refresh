@@ -406,6 +406,11 @@ static inline long object_common1(UNSERIALIZE_PARAMETER, zend_class_entry *ce)
 {
 	long elements;
 
+	if( *p >= max - 2) {
+		zend_error(E_WARNING, "Bad unserialize data");
+		return -1;
+	}
+
 	elements = parse_iv2((*p) + 2, p);
 
 	(*p) += 2;
@@ -420,7 +425,7 @@ static inline long object_common1(UNSERIALIZE_PARAMETER, zend_class_entry *ce)
 		/* If this class implements Serializable, it should not land here but in object_custom(). The passed string
 		obviously doesn't descend from the regular serializer. */
 		zend_error(E_WARNING, "Erroneous data format for unserializing '%s'", ce->name);
-		return 0;
+		return -1;
 	}
 
 	return elements;
@@ -769,6 +774,11 @@ yy20:
 
 	elements = object_common1(UNSERIALIZE_PASSTHRU, ce);
 
+	if (elements < 0) {
+	   efree(class_name);
+	   return 0;
+	}
+
 	if (incomplete_class) {
 		php_store_class_name(*rval, class_name, len2);
 	}
@@ -803,12 +813,16 @@ yy27:
 	++YYCURSOR;
 #line 683 "ext/standard/var_unserializer.re"
 	{
+	long elements;
     if (!var_hash) return 0;
 
 	INIT_PZVAL(*rval);
 
-	return object_common2(UNSERIALIZE_PASSTHRU,
-			object_common1(UNSERIALIZE_PASSTHRU, ZEND_STANDARD_CLASS_DEF_PTR));
+	elements = object_common1(UNSERIALIZE_PASSTHRU, ZEND_STANDARD_CLASS_DEF_PTR);
+	if (elements < 0) {
+		return 0;
+	}
+	return object_common2(UNSERIALIZE_PASSTHRU, elements);
 }
 #line 814 "ext/standard/var_unserializer.c"
 yy32:
