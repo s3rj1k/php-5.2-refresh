@@ -37,6 +37,7 @@
 #include "ext/standard/head.h"
 
 #include <sys/stat.h>
+#include <stdint.h>
 
 
 /* some defines for the different JPEG block types */
@@ -195,6 +196,11 @@ PHP_FUNCTION(iptcembed)
 		RETURN_FALSE;
 	}
 
+	if ((size_t)iptcdata_len >= SIZE_MAX - sizeof(psheader) - 1025) {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "IPTC data too large");
+		RETURN_FALSE;
+	}
+
 	if ((fp = VCWD_FOPEN(jpeg_file, "rb")) == 0) {
 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Unable to open %s", jpeg_file);
 		RETURN_FALSE;
@@ -203,7 +209,7 @@ PHP_FUNCTION(iptcembed)
 	if (spool < 2) {
 		fstat(fileno(fp), &sb);
 
-		poi = spoolbuf = safe_emalloc(1, iptcdata_len + sizeof(psheader) + sb.st_size + 1024, 1);
+		poi = spoolbuf = safe_emalloc(1, (size_t)iptcdata_len + sizeof(psheader) + 1024 + 1, sb.st_size);
 		memset(poi, 0, iptcdata_len + sizeof(psheader) + sb.st_size + 1024 + 1);
 	} 
 
