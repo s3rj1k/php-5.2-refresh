@@ -1081,6 +1081,9 @@ static void php_wddx_process_data(void *user_data, const XML_Char *s, int len)
 				break;
 
 			case ST_BOOLEAN:
+				if(!ent->data) {
+					break;
+				}
 				if (!strcmp(s, "true")) {
 					Z_LVAL_P(ent->data) = 1;
 				} else if (!strcmp(s, "false")) {
@@ -1088,8 +1091,10 @@ static void php_wddx_process_data(void *user_data, const XML_Char *s, int len)
 				} else {
 					stack->top--;
 					zval_ptr_dtor(&ent->data);
-					if (ent->varname)
+					if (ent->varname) {
 						efree(ent->varname);
+						ent->varname = NULL;
+					}
 					efree(ent);
 				}
 				break;
