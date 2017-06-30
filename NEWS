@@ -102,6 +102,10 @@ PHP                                                                        NEWS
   . Fixed bug #68776 (mail() does not have mail header injection prevention for
     additional headers). (Yasuo)
 
+- Phar:
+  . Fixed bug 64343 (PharData::extractTo fails for tarball created by BSD tar).
+    (Mike)
+
 - Postgres:
   . Fixed bug #69667 (segfault in php_pgsql_meta_data). (CVE-2015-4644) (Remi)
 
