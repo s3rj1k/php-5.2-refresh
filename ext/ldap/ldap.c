@@ -1250,7 +1250,7 @@ PHP_FUNCTION(ldap_explode_dn)
 	}
 
 	i=0;
-	while (ldap_value[i] != NULL) i++;
+	while (ldap_value && ldap_value[i] != NULL) i++;
 	count = i;
 
 	array_init(return_value);
@@ -1260,7 +1260,8 @@ PHP_FUNCTION(ldap_explode_dn)
 		add_index_string(return_value, i, ldap_value[i], 1);
 	}
 
-	ldap_value_free(ldap_value);
+	if (ldap_value)
+		ldap_value_free(ldap_value);
 }
 /* }}} */
 
