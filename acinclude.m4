@@ -1235,7 +1235,7 @@ $1
     }
 
   ],[
-    ac_cv_pwrite=yes
+    ac_cv_pwrite=no
   ],[
     ac_cv_pwrite=no
   ],[
@@ -1264,7 +1264,7 @@ $1
     exit(0);
     }
   ],[
-    ac_cv_pread=yes
+    ac_cv_pread=no
   ],[
     ac_cv_pread=no
   ],[
