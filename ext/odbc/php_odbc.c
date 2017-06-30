@@ -999,6 +999,15 @@ int odbc_bindcols(odbc_result *result TSRMLS_DC)
 			default:
 				rc = SQLColAttributes(result->stmt, (SQLUSMALLINT)(i+1), colfieldid,
 								NULL, 0, NULL, &displaysize);
+				if (colfieldid == SQL_DESC_OCTET_LENGTH && rc != SQL_SUCCESS && rc != SQL_SUCCESS_WITH_INFO) {
+					/* Fallback to old method because ADS ODBC driver version 11 doesn't support
+					 * SQL_DESC_OCTET_LENGTH.
+					 */
+					charextraalloc = 1;
+					rc = SQLColAttributes(result->stmt, (SQLUSMALLINT)(i+1), SQL_COLUMN_DISPLAY_SIZE,
+									NULL, 0, NULL, &displaysize);
+				}
+
 				/* Workaround for Oracle ODBC Driver bug (#50162) when fetching TIMESTAMP column */
 				if (result->values[i].coltype == SQL_TIMESTAMP) {
 					displaysize += 3;
