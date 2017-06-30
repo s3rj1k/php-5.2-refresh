@@ -20,7 +20,6 @@
 #include "config.h"
 #endif
 
-#define _GNU_SOURCE
 
 #include "php.h"
 #ifdef ZEND_ENGINE_2

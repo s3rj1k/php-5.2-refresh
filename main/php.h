@@ -30,6 +30,7 @@
 #define PHP_HAVE_STREAMS
 #define YYDEBUG 0
 
+#include "php_config.h"
 #include "php_version.h"
 #include "zend.h"
 #include "zend_qsort.h"
