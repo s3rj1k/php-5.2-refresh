@@ -93,15 +93,13 @@ Note that the MySQL client library is not bundled anymore!])
   fi
 
   for i in $PHP_LIBDIR $PHP_LIBDIR/mysql; do
-    MYSQL_LIB_CHK($i)
+    MYSQL_LIB_CHK($i/$DEB_HOST_MULTIARCH)
+    if test -z "$MYSQL_LIB_DIR"; then
+      MYSQL_LIB_CHK($i)
+    else
+      MYSQL_LIB_DIR=$MYSQL_DIR/$i
+    fi
   done
-
-  if test -z "$MYSQL_LIB_DIR"; then
-    MYSQL_LIB_CHK(lib/x86_64-linux-gnu)
-  fi
-  if test -z "$MYSQL_LIB_DIR"; then
-    MYSQL_LIB_CHK(lib/i386-linux-gnu)
-  fi
 
   if test -z "$MYSQL_LIB_DIR"; then
     AC_MSG_ERROR([Cannot find lib$MYSQL_LIBNAME under $MYSQL_DIR.

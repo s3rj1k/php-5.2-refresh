@@ -239,7 +239,7 @@ AC_DEFUN([PHP_DBA_DB_CHECK],[
     AC_MSG_ERROR([DBA: Could not find necessary header file(s).])
   fi
   for LIB in $2; do
-    if test -f $THIS_PREFIX/$PHP_LIBDIR/lib$LIB.a || test -f $THIS_PREFIX/$PHP_LIBDIR/lib$LIB.$SHLIB_SUFFIX_NAME; then
+    if test -f $THIS_PREFIX/$PHP_LIBDIR/lib$LIB.a || test -f $THIS_PREFIX/$PHP_LIBDIR/$DEB_HOST_MULTIARCH/lib$LIB.$SHLIB_SUFFIX_NAME || test -f $THIS_PREFIX/$PHP_LIBDIR/lib$LIB.$SHLIB_SUFFIX_NAME; then
       lib_found="";
       PHP_TEMP_LDFLAGS(-L$THIS_PREFIX/$PHP_LIBDIR, -l$LIB,[
         AC_TRY_LINK([

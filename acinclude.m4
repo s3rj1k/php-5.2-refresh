@@ -2282,7 +2282,7 @@ AC_DEFUN([PHP_SETUP_KERBEROS],[
     fi
 
     for i in $PHP_KERBEROS; do
-      if test -f $i/$PHP_LIBDIR/libkrb5.a || test -f $i/$PHP_LIBDIR/libkrb5.$SHLIB_SUFFIX_NAME; then
+      if test -f $i/$PHP_LIBDIR/libkrb5.$SHLIB_SUFFIX_NAME || test -f $i/$PHP_LIBDIR/$DEB_HOST_MULTIARCH/libkrb5.$SHLIB_SUFFIX_NAME || test -f $i/$PHP_LIBDIR/libkrb5.a; then
         PHP_KERBEROS_DIR=$i
         break
       fi
@@ -2361,7 +2361,7 @@ AC_DEFUN([PHP_SETUP_OPENSSL],[
       if test -r $i/include/openssl/evp.h; then
         OPENSSL_INCDIR=$i/include
       fi
-      if test -r $i/$PHP_LIBDIR/libssl.a -o -r $i/$PHP_LIBDIR/libssl.$SHLIB_SUFFIX_NAME; then
+      if test -r $i/$PHP_LIBDIR/libssl.a -o -r $i/$PHP_LIBDIR/$DEB_HOST_MULTIARCH/libssl.$SHLIB_SUFFIX_NAME -o -r $i/$PHP_LIBDIR/libssl.$SHLIB_SUFFIX_NAME; then
         OPENSSL_LIBDIR=$i/$PHP_LIBDIR
       fi
       test -n "$OPENSSL_INCDIR" && test -n "$OPENSSL_LIBDIR" && break
