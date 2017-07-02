@@ -1,6 +1,6 @@
 # php5.3-fpm - The PHP FastCGI Process Manager
 
-description "The PHP-5.2 FastCGI Process Manager"
+description "The PHP-5.3 FastCGI Process Manager"
 author "Ondřej Surý <ondrej@debian.org>"
 
 start on runlevel [2345]
