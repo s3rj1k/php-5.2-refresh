@@ -12,7 +12,7 @@
 # Author: Ondrej Sury <ondrej@debian.org>
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-DESC="php5.3 FastCGI Process Manager"
+DESC="PHP5.3 FastCGI Process Manager"
 NAME=php5.3-fpm
 DAEMON=/usr/sbin/$NAME
 DAEMON_ARGS="--daemonize --fpm-config /etc/php/5.3/fpm/php.ini"
