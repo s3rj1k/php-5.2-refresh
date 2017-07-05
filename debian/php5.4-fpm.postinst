@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" != "configure" ]; then
+	exit 0
+fi
+
+phpini="/etc/php/5.4/fpm/php.ini"
+
+ucf /usr/share/php/5.4/php-fpm.ini $phpini
+
+update-alternatives \
+	--install /usr/sbin/php-fpm php-fpm /usr/sbin/php5.4-fpm -540 \
+	--slave /usr/share/man/man1/php-fpm.1.gz php-fpm.1.gz /usr/share/man/man1/php5.4-fpm.1.gz
+
+echo "You need to manually enable php5.4-fpm daemon."
+
+exit 0

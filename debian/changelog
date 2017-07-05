@@ -1,0 +1,8 @@
+php5.4 (5.4.45+u1) unstable; urgency=low
+
+  * Repackaged
+
+  Repackaged PHP-5.4.45 for Debian Jessie with additional patches.
+  Patches are in sync with 5.4.45-0+deb7u8 package.
+
+ -- s3rj1k <evasive.gyron@gmail.com>  Mon, 27 Mar 2017 22:05:52 +0200

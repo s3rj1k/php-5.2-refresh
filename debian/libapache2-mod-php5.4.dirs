@@ -1,0 +1,6 @@
+/etc/apache2/mods-available
+/etc/php/5.4/apache2
+/usr/lib/apache2/modules
+/usr/share/lintian/overrides
+/usr/share/php/5.4
+/usr/lib/php/5.4

@@ -1,0 +1,13 @@
+/etc/php/5.4/conf.d
+/etc/php/5.4/mods-available
+/usr/lib/php/20100525
+/usr/lib/php/5.4
+/usr/sbin
+/usr/share/doc/php5.4-common
+/usr/share/lintian/overrides
+/usr/share/php/5.4
+/usr/share/php/5.4/pdo
+/usr/share/php/5.4/sapi
+/var/lib/php
+/var/lib/php/modules/5.4
+/var/lib/php/sessions/5.4

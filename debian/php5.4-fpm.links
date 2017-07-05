@@ -1,0 +1,2 @@
+etc/php/5.4/conf.d etc/php/5.4/fpm/conf.d
+usr/share/doc/php5.4-common usr/share/doc/php5.4-fpm

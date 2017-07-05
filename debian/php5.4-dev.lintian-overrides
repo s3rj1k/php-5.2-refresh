@@ -1,0 +1,1 @@
+php5.4-dev: php-script-but-no-phpX-cli-dep usr/lib/php/5.4/build/run-tests.php

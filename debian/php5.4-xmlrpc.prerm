@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+if [ "$1" = "remove" ]; then
+	for dsoname in xmlrpc; do
+		inifile=${dsoname}.ini
+		priority=$(sed -ne "s/^; priority=\([0-9]\+\)$/\\1/p" /usr/share/php/5.4/xmlrpc/${inifile})
+		rm -f /etc/php/5.4/conf.d/$priority-${inifile}
+	done
+fi
+
+exit 0
