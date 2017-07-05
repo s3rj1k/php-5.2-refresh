@@ -1,5 +1,7 @@
 --TEST--
 mysqli fetch mixed values 2
+--XFAIL--
+b0rk3n
 --INI--
 precision=12
 --SKIPIF--

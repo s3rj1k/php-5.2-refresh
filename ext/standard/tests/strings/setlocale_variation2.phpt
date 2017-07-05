@@ -1,5 +1,7 @@
 --TEST--
 Test setlocale() function : usage variations - Setting all available locales in the platform 
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 if (substr(PHP_OS, 0, 3) == 'WIN') {

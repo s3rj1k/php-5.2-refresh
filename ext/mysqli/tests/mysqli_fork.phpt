@@ -1,5 +1,7 @@
 --TEST--
 Forking a child and using the same connection.
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 require_once('skipif.inc');

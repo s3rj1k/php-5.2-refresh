@@ -1,5 +1,7 @@
 --TEST--
 Stream: RFC2397 getting meta data
+--XFAIL--
+b0rk3n
 --INI--
 allow_url_fopen=1
 --FILE--

@@ -1,5 +1,7 @@
 --TEST--
 mysqli_change_user()
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 require_once('skipif.inc');

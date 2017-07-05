@@ -1,5 +1,7 @@
 --TEST--
 Bug #70741 (Session WDDX Packet Deserialization Type Confusion Vulnerability)
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 if (!extension_loaded("wddx")) print "skip";

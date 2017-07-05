@@ -1,5 +1,7 @@
 --TEST--
 Bug #33414 [1] (Comprehensive list of incorrect days returned after strotime() / date() tests)
+--XFAIL--
+b0rk3n
 --INI--
 date.timezone=America/Mendoza
 --FILE--

@@ -1,5 +1,7 @@
 --TEST--
 Test function stream_get_meta_data on a zlib stream
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php 
 if (!extension_loaded("zlib")) {

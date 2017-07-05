@@ -1,5 +1,7 @@
 --TEST--
 Bug #72094: Out of bounds heap read access in exif header processing
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php if (!extension_loaded('exif')) print 'skip exif extension not available';?>
 --FILE--

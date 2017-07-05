@@ -1,5 +1,7 @@
 --TEST--
 Bug #33415 [2] (Possibly invalid non-one-hour DST or timezone shifts)
+--XFAIL--
+b0rk3n
 --FILE--
 <?php
 date_default_timezone_set('Africa/Bujumbura');

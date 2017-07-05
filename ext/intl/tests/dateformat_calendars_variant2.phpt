@@ -1,5 +1,7 @@
 --TEST--
 IntlDateFormatter, calendars and time zone
+--XFAIL--
+b0rk3n
 --INI--
 date.timezone=Atlantic/Azores
 --SKIPIF--

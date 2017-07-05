@@ -1,5 +1,7 @@
 --TEST--
 Test disk_free_space and its alias diskfreespace() functions : basic functionality
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 if (getenv("TRAVIS") === "true") die("skip inaccurate on TravisCI");

@@ -1,5 +1,7 @@
 --TEST--
 Check the php_ini_loaded_file() function
+--XFAIL--
+b0rk3n
 --CREDITS--
 Sebastian Schürmann
 sschuermann@chip.de

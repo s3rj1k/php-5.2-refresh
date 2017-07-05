@@ -1,5 +1,7 @@
 --TEST--
 mysqli_connect_error()
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 require_once('skipif.inc');

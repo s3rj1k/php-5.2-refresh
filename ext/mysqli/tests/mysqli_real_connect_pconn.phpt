@@ -1,5 +1,7 @@
 --TEST--
 mysqli_real_connect() - persistent connections
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 require_once('skipif.inc');

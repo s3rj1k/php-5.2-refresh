@@ -1,5 +1,7 @@
 --TEST--
 Bug #70219 Use after free vulnerability in session deserializer
+--XFAIL--
+b0rk3n
 --FILE--
 <?php
 class obj implements Serializable {

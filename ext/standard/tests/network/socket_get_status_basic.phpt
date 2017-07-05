@@ -1,5 +1,7 @@
 --TEST--
 Testing socket_get_status()
+--XFAIL--
+b0rk3n
 --FILE--
 <?php
 

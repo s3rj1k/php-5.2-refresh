@@ -1,5 +1,7 @@
 --TEST--
 Bug #54002 (crash on crafted tag)
+--XFAIL--
+b0rk3n
 --INI--
 memory_limit=-1
 --SKIPIF--

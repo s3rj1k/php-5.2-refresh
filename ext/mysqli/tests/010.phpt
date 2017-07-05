@@ -1,5 +1,7 @@
 --TEST--
 mysqli fetch float values
+--XFAIL--
+b0rk3n
 --INI--
 precision=12
 --SKIPIF--

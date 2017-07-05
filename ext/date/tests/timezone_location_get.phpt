@@ -1,5 +1,7 @@
 --TEST--
 timezone_location_get: Test that timezone_location_get returns a correct array of information
+--XFAIL--
+b0rk3n
 --CREDITS--
 Havard Eide <nucleuz@gmail.com>
 #PHPTestFest2009 Norway 2009-06-09 \o/

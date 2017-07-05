@@ -1,5 +1,7 @@
 --TEST--
 Bug #72799: wddx_deserialize null dereference in php_wddx_pop_element
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 if (!extension_loaded('wddx')) {

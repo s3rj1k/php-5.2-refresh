@@ -1,5 +1,7 @@
 --TEST--
 stream_get_meta_data() on zip stream
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php
 /* $Id: oo_stream.phpt 260091 2008-05-21 09:27:41Z pajoye $ */

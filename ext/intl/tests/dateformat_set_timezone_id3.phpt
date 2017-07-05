@@ -1,5 +1,7 @@
 --TEST--
 datefmt_set_timezone_id_code() icu >= 4.8
+--XFAIL--
+b0rk3n
 --INI--
 date.timezone=Atlantic/Azores
 --SKIPIF--

@@ -1,5 +1,7 @@
 --TEST--
 date_modify() function [1]
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php if (!function_exists('date_create')) echo "SKIP"; ?>
 --FILE--

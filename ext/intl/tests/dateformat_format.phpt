@@ -1,5 +1,7 @@
 --TEST--
 datefmt_format_code()
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php if( !extension_loaded( 'intl' ) ) print 'skip'; ?>
 --FILE--

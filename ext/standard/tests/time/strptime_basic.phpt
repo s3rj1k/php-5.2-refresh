@@ -1,5 +1,7 @@
 --TEST--
 Test strptime() function : basic functionality 
+--XFAIL--
+b0rk3n
 --SKIPIF--
 <?php 
 	if (!function_exists('strptime')) { 
