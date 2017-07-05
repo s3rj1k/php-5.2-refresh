@@ -693,7 +693,7 @@ default_mimetype = "text/html"
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; UNIX: "/path1:/path2"
-;include_path = ".:/php/includes"
+;include_path = ".:/usr/share/php"
 ;
 ; Windows: "\path1;\path2"
 ;include_path = ".;c:\php\includes"
@@ -1383,7 +1383,7 @@ session.save_handler = files
 ; where MODE is the octal representation of the mode. Note that this
 ; does not overwrite the process's umask.
 ; http://php.net/session.save-path
-;session.save_path = "/tmp"
+;session.save_path = "/var/lib/php/sessions/5.4"
 
 ; Whether to use cookies.
 ; http://php.net/session.use-cookies

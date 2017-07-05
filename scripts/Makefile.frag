@@ -3,8 +3,8 @@
 # Build environment install
 #
 
-phpincludedir = $(includedir)/php
-phpbuilddir = $(libdir)/build
+phpincludedir = $(includedir)/php/5.4
+phpbuilddir = $(prefix)/lib/php/5.4/build
 
 BUILD_FILES = \
 	scripts/phpize.m4 \

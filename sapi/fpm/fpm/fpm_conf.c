@@ -1644,7 +1644,7 @@ int fpm_conf_init_main(int test_conf, int force_daemon) /* {{{ */
 		char *tmp;
 
 		if (fpm_globals.prefix == NULL) {
-			spprintf(&tmp, 0, "%s/php-fpm.conf", PHP_SYSCONFDIR);
+			spprintf(&tmp, 0, "%s/php/5.4/fpm/php-fpm.conf", PHP_SYSCONFDIR);
 		} else {
 			spprintf(&tmp, 0, "%s/etc/php-fpm.conf", fpm_globals.prefix);
 		}
