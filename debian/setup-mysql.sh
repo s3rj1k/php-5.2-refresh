@@ -36,14 +36,32 @@ mkdir -p $datadir
 chmod go-rx $datadir
 chown $user: $datadir
 
-mysql_install_db --no-defaults --user=$user --datadir=$datadir --rpm --force
+mysqld_path=$(whereis -b mysqld | cut -f2 -d" ")
+
+if mysql --version | grep -iq "Distrib 5.7." ; then
+    mysql_install_db --no-defaults --user=$user --datadir=$datadir --mysqld-file=$mysqld_path
+else
+    mysql_install_db --no-defaults --user=$user --datadir=$datadir --rpm --force
+fi
 
 tmpf=$(mktemp)
+if mysql --version | grep -iq "Distrib 5.7." ; then
 cat > "$tmpf" <<EOF
+FLUSH PRIVILEGES;
+USE mysql;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '';
+FLUSH PRIVILEGES;
+CREATE DATABASE test;
+EOF
+else
+cat > "$tmpf" <<EOF
+FLUSH PRIVILEGES;
 USE mysql;
 UPDATE user SET password=PASSWORD('') WHERE user='root';
 FLUSH PRIVILEGES;
+CREATE DATABASE test;
 EOF
+fi
 
 $mysqld --bootstrap --skip-grant-tables < "$tmpf"
 
