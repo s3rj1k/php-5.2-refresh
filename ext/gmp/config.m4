@@ -14,7 +14,7 @@ if test "$PHP_GMP" != "no"; then
     test -f $i/include/$MACHINE_INCLUDES/gmp.h && GMP_DIR=$i && break
   done
 
-  if test -d "$GMP_DIR"; then
+  if test -z "$GMP_DIR"; then
     AC_MSG_ERROR(Unable to locate gmp.h)
   fi
 
