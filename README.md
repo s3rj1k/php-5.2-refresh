@@ -8,7 +8,7 @@ Resulting debian packages can be installed alongside original system PHP package
 
 ```
 apt-get install build-essential devscripts git
-apt-get install apache2-dev dh-apache2 dh-systemd libsystemd-dev autoconf automake bison chrpath debhelper dpkg-dev firebird-dev flex freetds-dev libapr1-dev libbz2-dev libc-client-dev libcurl4-openssl-dev libdb-dev libdjvulibre-dev libexpat1-dev libfreetype6-dev libgcrypt11-dev libgd-dev libgmp3-dev libjpeg-dev libkrb5-dev libldap2-dev libmcrypt-dev libmhash-dev libmysqlclient-dev libncurses5-dev libpam0g-dev libpcre3-dev libpng-dev libpspell-dev libreadline-dev librecode-dev libsasl2-dev libsqlite3-dev libssl-dev libtidy-dev libtiff-dev libtool libwrap0-dev libxmltok1-dev libxml2-dev libxslt1-dev re2c unixodbc-dev zlib1g-dev tzdata mysql-server
+apt-get install apache2-dev dh-apache2 dh-systemd libsystemd-dev autoconf automake bison chrpath debhelper dpkg-dev firebird-dev flex freetds-dev libapr1-dev libbz2-dev libc-client-dev libcurl4-openssl-dev libdb-dev libdjvulibre-dev libexpat1-dev libfreetype6-dev libgcrypt11-dev libgd-dev libgmp3-dev libjpeg-dev libkrb5-dev libldap2-dev libmcrypt-dev libmhash-dev libmysqlclient18-dev libncurses5-dev libpam0g-dev libpcre3-dev libpng-dev libpspell-dev libreadline-dev librecode-dev libsasl2-dev libsqlite3-dev libssl-dev libtidy-dev libtiff-dev libtool libwrap0-dev libxmltok1-dev libxml2-dev libxslt1-dev re2c unixodbc-dev zlib1g-dev tzdata mysql-server
 ```
 
 ### Fix for PHP-IMAP shared module:
