@@ -506,7 +506,7 @@ endif
 
 	# php5.4-dev
 	mv debian/libapache2-mod-php5.4/usr/lib/php/5.4 debian/php5.4-dev/usr/lib/php/5.4
-	mv debian/libapache2-mod-php5.4/usr/include/x86_64-linux-gnu/php/5.4 debian/php5.4-dev/usr/include/php
+	mv debian/libapache2-mod-php5.4/usr/include/php/5.4 debian/php5.4-dev/usr/include/php
 
 	install -m755 debian/libapache2-mod-php5.4/usr/bin/php-config5.4 debian/php5.4-dev/usr/bin/php-config5.4
 	install -m755 debian/libapache2-mod-php5.4/usr/bin/phpize5.4 debian/php5.4-dev/usr/bin/phpize5.4
