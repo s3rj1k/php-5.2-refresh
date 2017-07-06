@@ -7,10 +7,11 @@ PHP_ARG_WITH(gmp, for GNU MP support,
 
 if test "$PHP_GMP" != "no"; then
 
+  MACHINE_INCLUDES=$($CC -dumpmachine)
+
   for i in $PHP_GMP /usr/local /usr; do
-    libpath=$(find $i/include -type f -name gmp.h | head -1)
-    includedir=$(dirname $libpath)
-    test -f $libpath && GMP_DIR=$i && break
+    test -f $i/include/gmp.h && GMP_DIR=$i && break
+    test -f $i/include/$MACHINE_INCLUDES/gmp.h && GMP_DIR=$i && break
   done
 
   if test -d "$GMP_DIR"; then
@@ -30,7 +31,7 @@ if test "$PHP_GMP" != "no"; then
   ])
 
   PHP_ADD_LIBRARY_WITH_PATH(gmp, $GMP_DIR/$PHP_LIBDIR, GMP_SHARED_LIBADD)
-  PHP_ADD_INCLUDE($includedir)
+  PHP_ADD_INCLUDE($GMP_DIR/include)
 
   PHP_NEW_EXTENSION(gmp, gmp.c, $ext_shared)
   PHP_SUBST(GMP_SHARED_LIBADD)
