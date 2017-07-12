@@ -1,0 +1,14 @@
+Source: php5.3-xdebug
+Section: php
+Priority: optional
+Maintainer: s3rj1k <evasive.gyron@gmail.com>
+Build-Depends: debhelper (>= 9), php5.3-dev, build-essential, devscripts
+Standards-Version: 3.9.6
+Homepage: https://pecl.php.net/package/xdebug
+
+Package: php5.3-xdebug
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, php5.3-common
+Description: Xdebug module for PHP 5.3
+ The Xdebug extension helps you debugging your script
+ by providing a lot of valuable debug information.

@@ -1,0 +1,13 @@
+Source: php5.3-memcache
+Section: php
+Priority: optional
+Maintainer: s3rj1k <evasive.gyron@gmail.com>
+Build-Depends: debhelper (>= 9), php5.3-dev, build-essential, devscripts, zlib1g-dev
+Standards-Version: 3.9.6
+Homepage: http://pecl.php.net/package/memcache
+
+Package: php5.3-memcache
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, php5.3-common, zlib1g
+Description: Memcache module for PHP 5.3
+ This extension allows you to work with memcached server.

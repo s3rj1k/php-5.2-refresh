@@ -1,0 +1,13 @@
+Source: php5.4-memcached
+Section: php
+Priority: optional
+Maintainer: s3rj1k <evasive.gyron@gmail.com>
+Build-Depends: debhelper (>= 9), php5.4-dev, build-essential, devscripts, libmemcached-dev
+Standards-Version: 3.9.6
+Homepage: http://pecl.php.net/package/memcached
+
+Package: php5.4-memcached
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, php5.4-common, libmemcached11, libmemcachedutil2
+Description: Memcached module for PHP 5.4
+ This extension allows you to work with memcached server.

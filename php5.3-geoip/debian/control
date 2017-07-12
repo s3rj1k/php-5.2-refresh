@@ -1,0 +1,13 @@
+Source: php5.3-geoip
+Section: php
+Priority: optional
+Maintainer: s3rj1k <evasive.gyron@gmail.com>
+Build-Depends: debhelper (>= 9), php5.3-dev, build-essential, devscripts, libgeoip-dev
+Standards-Version: 3.9.6
+Homepage: http://pecl.php.net/package/geoip
+
+Package: php5.3-geoip
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, php5.3-common, libgeoip1
+Description: GeoIP module for PHP 5.3
+ This PHP module allows you to find the location of an IP address.

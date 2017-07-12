@@ -1,0 +1,14 @@
+Source: php5.4-imagick
+Section: php
+Priority: optional
+Maintainer: s3rj1k <evasive.gyron@gmail.com>
+Build-Depends: debhelper (>= 9), php5.4-dev, build-essential, devscripts, libmagickcore-dev, libmagickwand-dev
+Standards-Version: 3.9.6
+Homepage: http://pecl.php.net/package/imagick
+
+Package: php5.4-imagick
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, php5.4-common, libmagickcore-6.q16-2, libmagickwand-6.q16-2
+Description: ImageMagick module for PHP 5.4
+ Imagick is a native php extension to create and modify
+ images using the ImageMagick API.

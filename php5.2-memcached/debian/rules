@@ -1,0 +1,93 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+# enable dpkg build flags
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+CFLAGS = -O2 -Wall
+CFLAGS += -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
+ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -g
+	DEBUG := --enable-debug
+else
+	DEBUG := --disable-debug
+endif
+
+PECL_PKG_NAME=memcached
+PECL_PKG_REALNAME=memcached
+PECL_PKG_VERSION=2.1.0
+PHP_VER=5.2
+PACKAGE_NAME=php$(PHP_VER)-$(PECL_PKG_NAME)
+PHPIZE=/usr/bin/phpize$(PHP_VER)
+PHPCONFIG=/usr/bin/php-config$(PHP_VER)
+EXT_DIR=$(shell $(PHPCONFIG) --extension-dir)
+SOURCE_DIR= $(PECL_PKG_REALNAME)-$(PECL_PKG_VERSION)
+
+phpapiver=$(shell $(PHPCONFIG) --phpapi)
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	(cd $(SOURCE_DIR); \
+	$(PHPIZE); \
+	./configure --with-php-config=$(PHPCONFIG) --prefix=/usr )
+	touch $@
+
+build: build-stamp
+
+build-stamp: configure
+	dh_testdir
+	(cd $(SOURCE_DIR); $(MAKE); mkdir -p ../tmp/modules; cp modules/* ../tmp/modules; $(MAKE) clean)
+	touch build_stamp
+
+clean:
+	dh_clean
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+	rm -rf tmp
+	rm -rf debian/$(PACKAGE_NAME)
+	(cd $(SOURCE_DIR); \
+	$(MAKE) clean; \
+	$(PHPIZE) --clean)
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+	mkdir -p debian/$(PACKAGE_NAME)/$(EXT_DIR)
+	install -m 644 -o root -g root tmp/modules/$(PECL_PKG_NAME).so debian/$(PACKAGE_NAME)/$(EXT_DIR)/$(PECL_PKG_NAME).so
+	if [ -f "debian/$(PECL_PKG_NAME).ini" ]; then \
+		mkdir -p debian/$(PACKAGE_NAME)/etc/php/$(PHP_VER)/mods-available; \
+		cp debian/$(PECL_PKG_NAME).ini debian/$(PACKAGE_NAME)/etc/php/$(PHP_VER)/mods-available; \
+	fi
+
+# Build architecture-independent files here.
+binary-indep:
+
+# Build architecture-dependent files here.
+binary-arch: install
+	echo "php:Depends=phpapi-$(phpapiver)" >> debian/$(PACKAGE_NAME).substvars
+	dh_testdir
+	dh_testroot
+	dh_installdocs
+	dh_installchangelogs $(SOURCE_DIR)/CHANGELOG
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	dh_strip
+endif
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

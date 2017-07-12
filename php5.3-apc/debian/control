@@ -1,0 +1,13 @@
+Source: php5.3-apc
+Section: php
+Priority: optional
+Maintainer: s3rj1k <evasive.gyron@gmail.com>
+Build-Depends: debhelper (>= 9), php5.3-dev, build-essential, devscripts, libpcre3-dev
+Standards-Version: 3.9.6
+Homepage: http://pecl.php.net/package/APC
+
+Package: php5.3-apc
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, php5.3-common
+Description: APC module for PHP 5.3
+ APC (Alternative PHP Cache)

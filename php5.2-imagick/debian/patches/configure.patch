@@ -1,0 +1,32 @@
+Index: php5.2-imagick/imagick-3.1.2/config.m4
+===================================================================
+--- php5.2-imagick.orig/imagick-3.1.2/config.m4
++++ php5.2-imagick/imagick-3.1.2/config.m4
+@@ -12,22 +12,14 @@ if test $PHP_IMAGICK != "no"; then
+ 
+   AC_MSG_CHECKING(ImageMagick MagickWand API configuration program)
+ 
+-  for i in $PHP_IMAGICK /usr/local /usr;
+-  do
+-    test -r $i/bin/MagickWand-config && IMAGICK_AFTER_BWC_BREAK=true && WAND_BINARY=$i/bin/MagickWand-config && break
+-  done
+-
+-  if test -z "$WAND_BINARY"; then
+-    for i in $PHP_IMAGICK /usr/local /usr;
+-    do
+-      test -r $i/bin/Wand-config && WAND_BINARY=$i/bin/Wand-config && break
+-    done
+-  fi
++  WAND_BINARY=`find / -name MagickWand-config | head -1`
+ 
+-  if test -z "$WAND_BINARY"; then
+-    AC_MSG_ERROR(not found. Please provide a path to MagickWand-config or Wand-config program.)
++  if ! test -f "$WAND_BINARY"; then
++    AC_MSG_ERROR(not found. Please provide a path to MagickWand-config program.)
+   fi
+ 
++  IMAGICK_AFTER_BWC_BREAK="break"
++
+   AC_MSG_RESULT(found in $WAND_BINARY)
+ 
+   IMAGEMAGICK_VERSION_ORIG=`$WAND_BINARY --version`

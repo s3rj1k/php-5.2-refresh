@@ -1,0 +1,13 @@
+Source: php5.4-xcache
+Section: php
+Priority: optional
+Maintainer: s3rj1k <evasive.gyron@gmail.com>
+Build-Depends: debhelper (>= 9), php5.4-dev, build-essential, devscripts
+Standards-Version: 3.9.6
+Homepage: https://xcache.lighttpd.net
+
+Package: php5.4-xcache
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, php5.4-common
+Description: XCache module for PHP 5.4
+ XCache is a fast, stable PHP opcode cacher.

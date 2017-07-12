@@ -1,0 +1,95 @@
+3.0.8
+- Fix Bug #63142 - memcache client Segmentation fault
+- Fix Bug #63272 - Explicitly reserve range of flags in php_memcache.h so application code can use
+- Fix Bug #59602 - getExtendedStats fails on the host intermittently after restarting memcache
+- Fix Bug #63141 - Added LICENSE file and include tests folder in package
+
+3.0.7
+- Fixed bug #62589 - missing "$" in memcache.php
+- Fix php_stream_cast() usage.
+- Fixes for windows build and php 5.4 compat
+
+3.0.6
+- Fixed PECL Bug #16672 (memcache.php doesn't support unix socket)
+- Fixed PECL Bug #19374 (memcache.php throws Notice: Undefined index: VALUE when viewing expired items)
+- Fixed PECL Bug #17518 (Strange behavior in increment on non integer and after)
+- Fixed potential segfault in memcache queue.
+- Fixed various tests
+
+3.0.5
+- Fixed PECL bug #16059 (Build error: 'MSG_NOSIGNAL' undeclared)
+- Added method MemcachePool::findServer(key) which returns the server a key hashes to
+- Changed MemcachePool::findServer() to return only "hostname:port" since tcp port is significant
+- Fixed PECL bug #16536 (Weight of 0 causes SegFault on memcache_add_server)
+- Fixed PECL bug #17566 (3.0.4 cache delete bug)
+- Fixed PECL Bug #16442 (memcache_set fail with integer value)
+
+3.0.4
+- Improved performance of consistent hash strategy
+- Accept timeout parameter as float to enable microsecond timeouts, param is still
+given in seconds but with a microsecond fraction.
+- Added session locking to avoid concurrency problems with AJAX apps
+- Fixed PECL bug #14642 (3.0.x breaks BC with 2.2.x)
+- Fixed PECL request #13758 (Failed to extract 'connection' variable from object)
+- Fixed PECL request #14658 (Allow connection timeouts in ms, not seconds)
+- New INI directive
+	memcache.lock_timeout = 15
+
+3.0.3
+- Enabled compression by default for values larger than 20kb
+- Scalar data types (int, bool, double) are preserved by get/set
+- Reserved the lowest 2 bytes of the flags for internal use
+- Fixed PECL bug #14157 (Segmentation fault with errorcallback handler)
+- Fixed PECL bug #15342 (memcache keys whitespaces replace issue)
+- Fixed PECL bug #15447 (Persistent Connections Cause Segfaults if One Server Drops)
+- Fixed PECL bug #15529 (memcache object loses port information)
+- Fixed PECL bug #14730 (Types lost during get/set)
+- Fixed PECL request #14801 (Session handler and large sessions)
+- Added REPORT_ERRORS to php stream open
+- New INI directive
+	memcache.compress_threshold = 20000
+
+3.0.2
+- Updated binary protocol to be compatible with memcached 1.3.0
+- Added memcached stats script from Harun Yayli (http://livebookmark.net/memcachephp)
+- Fixed server weight not being used in the session handler
+- Fixed PECL bug #13343 (compilation breaks with CodeWarrior compiler)
+- Fixed PECL bug #13546 (Session handler through unix socket)
+- Fixed PECL bug #13592 (error in opcode)
+- Fixed PECL req #13588 (minor inefficiency in binary protocol implementation)
+- Fixed PECL bug #14044 (send of 32768 bytes failed with errno=11 Resource temporarily unavailable)
+- Fixed PECL bug #14239 (Memcache::set() modifies value parameter)
+- Fixed PECL bug #14156 (No check for parameter count in php_mmc_store)
+- Fixed PECL bug #14458 (off-by-one causes corrupted arrays in 3.0.x)
+- Fixed PECL bug #14104 (Malformed VALUE header (0))
+- Fixed PECL request #13725 (unnecessary allocations in mmc_consistent_add_server)
+- Changed behaviour when unserialize/uncompress fail to return false instead of failing the server
+
+3.0.1
+- Fixed PECL bug #12866 (Ignore memcache.default_port in memcache_connect)
+- Fixed PECL bug #12883 (Breaks UTF-8 in keys)
+- Fixed PECL bug #13060 (make problems, due to role="doc" instead of role="src")
+- Changed behaviour of close() to actually remove all servers from pool (PECL bug #12555)
+- Added configure option for PEAR installer to disable session handler support
+- Added package version to phpinfo()
+
+3.0.0
+See README for details on new API and INI directives.
+
+- UDP support
+- Binary protocol support
+- Non-blocking IO using select()
+- Pipelined multi-set/delete/increment/decrement
+- CAS (Compare-And-Swap) support
+- Append/prepend support
+- Key and session redundancy (values are written to N mirrors)
+- Improved error reporting and failover handling
+- Added class "MemcachePool" implementing the new API
+- New INI directives
+	memcache.protocol = {ascii, binary}
+	memcache.redundancy = 1
+	memcache.session_redundancy = 2
+- Changed INI defaults
+	memcache.hash_strategy = consistent
+	memcache.chunk_size = 32768
+
