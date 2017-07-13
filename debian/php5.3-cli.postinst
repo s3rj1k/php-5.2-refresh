@@ -13,7 +13,7 @@ phpini="/etc/php/5.3/cli/php.ini"
 ucf /usr/share/php/5.3/php.ini $phpini
 
 update-alternatives \
-	--install /usr/bin/php php /usr/bin/php5.3 -530 \
+	--install /usr/bin/php php /usr/bin/php5.3 53 \
 	--slave /usr/share/man/man1/php.1.gz php.1.gz /usr/share/man/man1/php5.3.1.gz
 
 exit 0

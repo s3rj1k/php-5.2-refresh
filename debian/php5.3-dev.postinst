@@ -5,7 +5,7 @@ set -e
 if [ "$1" = "configure" ]; then
 	for i in php-config phpize; do
 		update-alternatives \
-			--install /usr/bin/"$i" $i /usr/bin/"$i"5.3 -530 \
+			--install /usr/bin/"$i" $i /usr/bin/"$i"5.3 53 \
 			--slave /usr/share/man/man1/"$i".1.gz "$i".1.gz /usr/share/man/man1/"$i"5.3.1.gz
 	done
 fi
