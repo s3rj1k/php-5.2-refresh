@@ -378,6 +378,9 @@ static timelib_sll timelib_meridian(char **ptr, timelib_sll h)
 {
 	timelib_sll retval = 0;
 
+	if (**ptr == '\0') {
+	  return 0;
+	}
 	while (!strchr("AaPp", **ptr)) {
 		++*ptr;
 	}
