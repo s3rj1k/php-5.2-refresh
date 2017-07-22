@@ -1,0 +1,51 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE=1
+export DH_OPTIONS
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	touch $@
+
+build: build-stamp
+
+build-stamp: configure
+	dh_testdir
+	touch build_stamp
+
+clean:
+	dh_clean
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+	rm -rf tmp
+	rm -rf debian/php-switcher
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+	mkdir -p debian/php-switcher/usr/bin
+	mkdir -p debian/php-switcher/usr/share/lintian/overrides
+	install -m 755 -o root -g root php-switch debian/php-switcher/usr/bin/php-switch
+	install -m 644 debian/php-switcher.lintian-overrides \
+	    debian/php-switcher/usr/share/lintian/overrides/php-switcher
+
+binary-indep:
+
+binary-arch: install
+	dh_testdir
+	dh_testroot
+	dh_installdocs
+	dh_installchangelogs
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

@@ -1,0 +1,14 @@
+Source: php-switcher
+Section: php
+Priority: optional
+Maintainer: s3rj1k <evasive.gyron@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+
+Package: php-switcher
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, dpkg (>= 1.17), mawk | gawk, apache2
+Description: multi-php switcher
+ AWK script that changer current active PHP version
+ using debian update-alternatives and apache2 tools
+ for module switching (a2enmod / a2dismod).

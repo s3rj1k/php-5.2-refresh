@@ -1,0 +1,210 @@
+#!/usr/bin/awk -f
+
+# print php status
+function php_status() {
+
+  RESET       = "\033[0m"
+  BLACK       = "\033[30m"
+  RED         = "\033[31m"
+  GREEN       = "\033[32m"
+  YELLOW      = "\033[33m"
+  BLUE        = "\033[34m"
+  MAGENTA     = "\033[35m"
+  CYAN        = "\033[36m"
+  WHITE       = "\033[37m"
+  BOLDBLACK   = "\033[1m\033[30m"
+  BOLDRED     = "\033[1m\033[31m"
+  BOLDGREEN   = "\033[1m\033[32m"
+  BOLDYELLOW  = "\033[1m\033[33m"
+  BOLDBLUE    = "\033[1m\033[34m"
+  BOLDMAGENTA = "\033[1m\033[35m"
+  BOLDCYAN    = "\033[1m\033[36m"
+  BOLDWHITE   = "\033[1m\033[37m"
+
+  sCmd = "update-alternatives --query php"
+  while (sCmd | getline sLine) {
+
+    # capture output using regex "^value|^alternative"
+    if (tolower(sLine) ~ /^value:|^alternative:/) {
+      split(sLine, aLine)
+
+      # int, count lines that AWK is currently processing starting from 0
+      i++
+      # str, stores type (value or alternative)
+      sType = aLine[1]
+      # str, stores binary path
+      sPath = aLine[2]
+
+      if (tolower(sType) ~ /^value:/) {
+        # str, store current active PHP binary path into variable
+        sActive = sPath
+      } else {
+
+        if (tolower(sPath) == sActive) {
+          # mark active PHP binary path using string replace
+          gsub(/^[Aa]lternative:/, "Active:", sType)
+        }
+
+        # mark alternative PHP binary path using string replace
+        gsub(/^[Aa]lternative:/, "Alternative:", sType)
+        # split path to components
+        split(sPath, aPath, "/")
+        # mawk apparently cannot get length of array o_O, [j-1] is last elemet of array
+        for(j=1; j in aPath; j++) {}
+
+        # mawk provides only one-dimensional arrays :(
+
+        # arr[str], stores type (value or alternative)
+        aTypes[i] = sType
+        # arr[str], stores binary paths
+        aPaths[i] = sPath
+        # arr[str], short PHP binary names
+        aNames[i] = aPath[j-1]
+        # store only short version number
+        gsub(/^php/, "", aNames[i])
+
+        # str, command to invoke
+        sCmdPHP = sPath" -v 2>/dev/null"
+        while (sCmdPHP | getline sLinePHP) {
+          # capture PHP line, PHP 5.4.45-0+deb7u8 (cli) (built: Mar 27 2017 22:43:09)
+          if (toupper(sLinePHP) ~ /^PHP/) {
+            # split line by default space delimiter
+            split(sLinePHP, aLinePHP)
+            # arr[str], split full version number by "-"
+            split(aLinePHP[2], aTmp, "-")
+            # arr[str], stores short PHP version
+            aVersions[i] = aTmp[1]
+          } else {
+            # if parsing fails, report error
+            if (length(aVersions[i]) < 1) {
+              aVersions[i] = "error"
+            }
+          }
+        }
+        # close output redirection
+        close(sCmdPHP)
+
+      }
+    }
+  }
+
+  # close output redirection
+  close(sCmd)
+
+  print "PHP version selections:"
+  for(j in aNames) {
+    if (tolower(aTypes[j]) == "active:") {
+      printf "%s %-12s %-3s (%s)%s\n", BOLDWHITE, aTypes[j], aNames[j], aVersions[j], RESET
+    } else {
+      printf " %-12s %-3s (%s)\n", aTypes[j], aNames[j], aVersions[j]
+    }
+  }
+
+}
+
+# activate php
+function php_activate(php_version) {
+
+  # str, var to lower case
+  sVer = tolower(php_version)
+
+  # arr[str], alternative binary names
+  aName[0] = "php"
+  aName[1] = "phpize"
+  aName[2] = "php-config"
+
+  # get full path for binary
+  for(i=0; i in aName; i++) {
+    # str, command
+    sCmd = "update-alternatives --list " aName[i]
+    # str, short binary name
+    sBin = aName[i] sVer
+    while (sCmd | getline sPath) {
+      if (tolower(sPath) ~ sBin"$") {
+        if (length(sPath) > 0) {
+          # arr[str], full binary paths
+          aPath[i] = sPath
+        }
+      }
+    }
+    close(sCmd)
+  }
+
+  # set alternatives for binaries
+  for(i=0; i in aPath; i++) {
+    # str, command
+    sCmd = "update-alternatives --set " aName[i] " " aPath[i]
+    if (system(sCmd) != 0) {
+      # exit if error, set exit code
+      exit 1
+    }
+    close(sCmd)
+  }
+
+  # check if module already enabled
+  sCmd = "a2query -qm php" sVer
+  if (system(sCmd) == 0) {
+    exit
+  }
+  close(sCmd)
+
+  # check if module is available to be enabled
+  sCmd = "ls -1 /etc/apache2/mods-available/"
+  sPHPmodName = "php" sVer ".load"
+  while (sCmd | getline sLine) {
+    if (tolower(sLine) == sPHPmodName ) {
+      sIsAvailable = "true"
+      break
+    }
+  }
+  close(sCmd)
+  if (tolower(sIsAvailable) != "true" ) {
+    exit 1
+  }
+
+  # disable currently enabled modules
+  sCmd = "ls -1 /etc/apache2/mods-enabled/"
+  while (sCmd | getline sLine) {
+    if (tolower(sLine) ~ /^php.+\.load$/) {
+      gsub(/\.load$/, "", sLine)
+      if (sLine !~ sVer"$") {
+        # str, list of modules to disable
+        sModDisable = sLine " " sModDisable
+      }
+    }
+  }
+  close(sCmd)
+
+  # arr[str], apache mod_php related commands
+  aCmd[0] = "a2dismod " sModDisable
+  aCmd[1] = "a2enmod php" sVer
+  aCmd[2] = "apache2ctl -t"
+  aCmd[3] = "service apache2 restart"
+
+  for(i=0; i in aCmd; i++) {
+    if (system(aCmd[i]) != 0) {
+      exit 1
+    }
+    close(aCmd[i])
+  }
+
+}
+
+function usage() {
+  printf "PHP version switcher, usage: \n"
+  printf " " ENVIRON["_"] " status {list available PHP versions}\n"
+  printf " " ENVIRON["_"] " activate X {change PHP to specified version}\n"
+}
+
+BEGIN {
+
+  if (tolower(ARGV[1]) == "status" && length(ARGV[2]) == 0) {
+    php_status()
+  } else if (tolower(ARGV[1]) == "activate" && length(ARGV[2]) > 0) {
+    php_activate(ARGV[2])
+  } else {
+    usage()
+    exit
+  }
+
+}
