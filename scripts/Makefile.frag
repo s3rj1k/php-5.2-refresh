@@ -39,9 +39,11 @@ HEADER_DIRS = \
 	regex/ \
 	ext/gd/ \
 	ext/iconv/ \
+	ext/pgsql/ \
 	ext/standard/ \
 	ext/session/ \
 	ext/xml/ \
+	ext/xml/expat/ \
 	ext/mbstring/ \
 	ext/mbstring/mbregex/ \
 	ext/mbstring/libmbfl/ \
