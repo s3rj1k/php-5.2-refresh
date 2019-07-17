@@ -276,7 +276,7 @@ PHPAPI int php_connect_nonb(int sockfd,
 	fd_set wset;
 	fd_set eset;
 
-	if (timeout == NULL)	{
+	if (timeout == NULL || sockfd > FD_SETSIZE)	{
 		/* blocking mode */
 		return connect(sockfd, addr, addrlen);
 	}
@@ -1002,6 +1002,8 @@ static void php_sock_stream_wait_for_data(php_stream *stream, php_netstream_data
 	int retval;
 	struct timeval timeout, *ptimeout;
 
+        if (sock->socket > FD_SETSIZE) return;
+
 	FD_ZERO(&fdr);
 	FD_SET(sock->socket, &fdr);
 	sock->timeout_event = 0;
@@ -1178,6 +1180,9 @@ int _php_network_is_stream_alive(php_stream *stream TSRMLS_DC)
 	fd_set rfds;
 	struct timeval tv = {0, 0};
 	char buf;
+
+        if (fd > FD_SETSIZE)
+                return 1;
 	
 	/* logic: if the select call indicates that there is data to
 	 * be read, but a read returns 0 bytes of data, then the socket
