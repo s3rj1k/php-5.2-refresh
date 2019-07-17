@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config0.m4,v 1.2.2.3 2004/12/30 14:54:35 sniper Exp $
 dnl
 
 PHP_ARG_WITH(openssl, for OpenSSL support,

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: exif.c,v 1.118.2.37.2.8 2007/12/31 07:22:46 sebastian Exp $ */
 
 /*  ToDos
  *
@@ -107,7 +107,7 @@ function_entry exif_functions[] = {
 };
 /* }}} */
 
-#define EXIF_VERSION "1.4 $Id$"
+#define EXIF_VERSION "1.4 $Id: exif.c,v 1.118.2.37.2.8 2007/12/31 07:22:46 sebastian Exp $"
 
 /* {{{ PHP_MINFO_FUNCTION
  */

@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id$ 
+# $Id: build.mk,v 1.18.2.1.4.2 2006/01/01 13:46:49 sniper Exp $ 
 #
 #
 # Makefile to generate build tools

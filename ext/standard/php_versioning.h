@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id$ */
+/* $Id: php_versioning.h,v 1.5.8.1.8.3 2007/12/31 07:22:52 sebastian Exp $ */
 
 #ifndef PHP_VERSIONING_H
 #define PHP_VERSIONING_H

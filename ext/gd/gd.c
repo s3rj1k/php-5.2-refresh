@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: gd.c,v 1.221.2.56.2.7 2008/07/17 18:08:04 pajoye Exp $ */
 
 /* gd 1.2 is copyright 1994, 1995, Quest Protein Database Center, 
    Cold Spring Harbor Labs. */

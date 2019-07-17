@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id$ */
+/* $Id: php_odbc_includes.h,v 1.2.4.3.2.4 2007/12/31 07:22:50 sebastian Exp $ */
 
 #ifndef PHP_ODBC_INCLUDES_H
 #define PHP_ODBC_INCLUDES_H

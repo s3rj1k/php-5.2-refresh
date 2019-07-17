@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.10.4.1 2003/10/01 02:54:05 sniper Exp $
 dnl
 
 PHP_ARG_WITH(recode,for recode support,

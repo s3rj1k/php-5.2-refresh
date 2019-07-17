@@ -18,7 +18,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id$ */
+/* $Id: fsock.c,v 1.106.2.13.4.4 2007/12/31 07:22:52 sebastian Exp $ */
 
 /* converted to PHP Streams and moved much code to main/network.c [wez] */
 

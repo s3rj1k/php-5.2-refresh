@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.13.2.4 2003/12/09 20:33:22 sniper Exp $
 dnl
 
 PHP_ARG_WITH(ncurses, for ncurses support,

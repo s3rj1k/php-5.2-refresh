@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.19.2.1.4.1 2005/12/21 21:50:08 sniper Exp $
 dnl
 
 PHP_ARG_WITH(ming, for MING support,

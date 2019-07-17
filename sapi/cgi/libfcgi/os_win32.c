@@ -17,7 +17,7 @@
  *  significantly more enjoyable.)
  */
 #ifndef lint
-static const char rcsid[] = "$Id$";
+static const char rcsid[] = "$Id: os_win32.c,v 1.6.2.1.4.4 2007/04/19 13:41:37 dmitry Exp $";
 #endif /* not lint */
 
 #define WIN32_LEAN_AND_MEAN 

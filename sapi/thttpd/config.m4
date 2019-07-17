@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.17.2.5 2003/11/27 23:04:49 sniper Exp $
 dnl
 
 AC_ARG_WITH(thttpd,

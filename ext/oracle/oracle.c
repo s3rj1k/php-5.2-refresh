@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: oracle.c,v 1.80.2.2.8.3 2007/12/31 07:22:50 sebastian Exp $ */
 
 /* comment out the next line if you're on Oracle 7.x and don't have the olog 
    call. */

@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.62.4.11 2005/03/04 15:16:27 sniper Exp $
 dnl
 AC_DEFUN([PHP_APACHE_FD_CHECK], [
 AC_CACHE_CHECK([for member fd in BUFF *],ac_cv_php_fd_in_buff,[

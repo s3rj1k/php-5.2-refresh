@@ -16,7 +16,7 @@
    |          Jani Taskinen <sniper@php.net>                              |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: rfc1867.c,v 1.122.2.34.2.5 2007/12/31 07:22:55 sebastian Exp $ */
 
 /*
  *  This product includes software developed by the Apache Group

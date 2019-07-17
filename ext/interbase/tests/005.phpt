@@ -5,7 +5,7 @@ InterBase: transactions
 --POST--
 --GET--
 --FILE--
-<?php /* $Id$ */
+<?php /* $Id: 005.phpt,v 1.2.4.4 2004/02/15 20:47:21 abies Exp $ */
 
 require("interbase.inc");
 

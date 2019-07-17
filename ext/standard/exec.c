@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf                                               |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: exec.c,v 1.84.2.15.2.5 2007/12/31 07:22:52 sebastian Exp $ */
 
 #include <stdio.h>
 #include "php.h"

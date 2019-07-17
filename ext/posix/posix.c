@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: posix.c,v 1.51.2.4.2.4 2007/12/31 07:22:51 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -134,7 +134,7 @@ function_entry posix_functions[] = {
 static PHP_MINFO_FUNCTION(posix)
 {
 	php_info_print_table_start();
-	php_info_print_table_row(2, "Revision", "$Revision$");
+	php_info_print_table_row(2, "Revision", "$Revision: 1.51.2.4.2.4 $");
 	php_info_print_table_end();
 }
 /* }}} */

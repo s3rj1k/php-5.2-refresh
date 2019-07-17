@@ -1,4 +1,4 @@
-# $Id$
+# $Id: htaccessfix.awk,v 1.2 1999/08/07 15:31:57 zeev Exp $
 
 /^[ \t]*php3_*/ {
 	phpcommand=substr($1,6)

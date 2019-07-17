@@ -1,6 +1,6 @@
 <?php
 
-/* $Id$ */
+/* $Id: interbase.inc,v 1.1.16.3 2003/06/14 17:46:33 daniela Exp $ */
 /* used in tests */
 
 srand((double)microtime()*1000000);

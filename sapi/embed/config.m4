@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.7.2.1 2003/01/21 03:04:38 edink Exp $
 dnl
 
 AC_MSG_CHECKING(for embedded SAPI library support)

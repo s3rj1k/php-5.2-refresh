@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.55.2.12.2.2 2006/01/10 14:17:26 tony2001 Exp $
 dnl
 
 dnl

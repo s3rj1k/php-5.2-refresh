@@ -16,7 +16,7 @@
 #  |          Sascha Schumann <sascha@schumann.cx>                        |
 #  +----------------------------------------------------------------------+
 #
-# $Id: buildcheck.sh,v 1.21.2.13.2.2 2006-01-01 13:46:49 sniper Exp $
+# $Id: buildcheck.sh,v 1.21.2.13.2.2 2006/01/01 13:46:49 sniper Exp $
 #
 
 echo "buildconf: checking installation..."

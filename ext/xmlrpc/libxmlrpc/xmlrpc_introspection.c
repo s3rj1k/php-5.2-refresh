@@ -35,7 +35,10 @@
  * AUTHOR
  *   Dan Libby, aka danda  (dan@libby.com)
  * HISTORY
- *   $Log$
+ *   $Log: xmlrpc_introspection.c,v $
+ *   Revision 1.3.4.1  2003/12/16 21:00:36  sniper
+ *   MFH: fix compile warnings
+ *
  *   Revision 1.3  2002/07/05 04:43:53  danda
  *   merged in updates from SF project.  bring php repository up to date with xmlrpc-epi version 0.51
  *

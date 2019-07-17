@@ -1,6 +1,6 @@
 #!/usr/bin/awk -f
 #
-# $Id$
+# $Id: mk_eaw_tbl.awk,v 1.2.2.1.2.1 2005/12/30 05:25:54 hirokawa Exp $
 #
 # Description: a script to generate east asian width table.
 #

@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.6.2.4 2003/10/03 05:25:37 sniper Exp $
 dnl
 
 PHP_ARG_WITH(mime-magic, whether to include mime_magic support,

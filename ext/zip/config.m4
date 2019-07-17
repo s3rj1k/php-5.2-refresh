@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.5.2.2 2004/12/31 02:57:08 iliaa Exp $
 dnl 
 
 PHP_ARG_WITH(zip,for ZIP support, 

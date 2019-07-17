@@ -22,7 +22,7 @@
 */
 
 
-/* $Id$ */
+/* $Id: array.c,v 1.199.2.44.2.17 2007/12/31 07:22:51 sebastian Exp $ */
 
 #include "php.h"
 #include "php_ini.h"

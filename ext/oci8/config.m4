@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.37.2.12.2.1 2006/05/30 13:50:28 tony2001 Exp $
 dnl
 
 AC_DEFUN([PHP_OCI_IF_DEFINED],[

@@ -17,7 +17,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: w32api_type_definition_scanner.l,v 1.1.2.1.12.1 2006/01/01 13:46:59 sniper Exp $ */
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -17,7 +17,7 @@
    |          Hartmut Holzgraefe <hholzgra@php.net>                       |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: ftp_fopen_wrapper.c,v 1.38.2.8.2.7 2007/12/31 07:22:52 sebastian Exp $ */
 
 #include "php.h"
 #include "php_globals.h"

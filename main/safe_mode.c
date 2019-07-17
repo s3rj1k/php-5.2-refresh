@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: safe_mode.c,v 1.51.2.5.2.3 2007/12/31 07:22:55 sebastian Exp $ */
 
 #include "php.h"
 

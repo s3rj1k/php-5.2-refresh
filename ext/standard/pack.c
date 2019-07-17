@@ -15,7 +15,7 @@
    | Author: Chris Schneider <cschneid@relog.ch>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: pack.c,v 1.40.2.7.2.8 2007/12/31 07:22:52 sebastian Exp $ */
 
 #include "php.h"
 

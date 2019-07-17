@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: inifile.h,v 1.1.2.1.6.3 2007/12/31 07:22:46 sebastian Exp $ */
 
 #ifndef PHP_LIB_INIFILE_H
 #define PHP_LIB_INIFILE_H

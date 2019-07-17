@@ -5,7 +5,7 @@ InterBase: misc sql types (may take a while)
 --POST--
 --GET--
 --FILE--
-<?php /* $Id$ */
+<?php /* $Id: 003.phpt,v 1.2.4.5 2004/02/15 20:47:21 abies Exp $ */
 
 require("interbase.inc");
 

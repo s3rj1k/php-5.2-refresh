@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: inifile.c,v 1.6.2.3.4.3 2007/12/31 07:22:46 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -44,7 +44,7 @@
 /* {{{ inifile_version */
 char *inifile_version() 
 {
-	return "1.0, $Revision$";
+	return "1.0, $Revision: 1.6.2.3.4.3 $";
 }
 /* }}} */ 
 

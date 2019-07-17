@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.15 2002/03/07 14:19:58 sas Exp $
 dnl
 
 RESULT=no

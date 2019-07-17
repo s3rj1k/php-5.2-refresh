@@ -1,7 +1,7 @@
 --TEST--
 mktime()
 --FILE--
-<?php /* $Id$ */
+<?php /* $Id: mktime.phpt,v 1.1.2.3 2004/03/31 10:31:43 abies Exp $ */
 $timezones = array(
     'GMT0',
     'Europe/London'

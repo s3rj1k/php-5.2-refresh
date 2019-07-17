@@ -20,7 +20,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id$ */
+/* $Id: dbx_mssql.h,v 1.8.2.1.8.3 2007/12/31 07:22:46 sebastian Exp $ */
 
 #ifndef ZEND_DBX_MSSQL_H
 #define ZEND_DBX_MSSQL_H

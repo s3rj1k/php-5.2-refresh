@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.44.2.1 2004/12/30 07:02:17 sniper Exp $
 dnl
 
 AC_DEFUN([PHP_DOM_CHECK_VERSION],[

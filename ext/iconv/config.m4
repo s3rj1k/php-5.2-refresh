@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.19.2.6 2005/01/10 21:38:56 tony2001 Exp $
 dnl
 
 PHP_ARG_WITH(iconv, for iconv support,

@@ -5,7 +5,7 @@ InterBase: BLOB test
 --POST--
 --GET--
 --FILE--
-<?php /* $Id$ */
+<?php /* $Id: 004.phpt,v 1.2.4.6 2004/02/15 20:47:21 abies Exp $ */
 
 require("interbase.inc");
 

@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.8 2002/09/19 20:14:34 derick Exp $
 dnl
 
 PHP_ARG_ENABLE(exif, whether to enable EXIF (metadata from images) support,

@@ -5,7 +5,7 @@ BZ2 with strings
 --POST--
 --GET--
 --FILE--
-<?php // $Id$
+<?php // $Id: with_strings.phpt,v 1.1.2.2 2003/09/24 02:29:15 iliaa Exp $
 
 error_reporting(E_ALL);
 

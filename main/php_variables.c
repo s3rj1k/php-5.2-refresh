@@ -16,7 +16,7 @@
    |          Zeev Suraski <zeev@zend.com>                                |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: php_variables.c,v 1.45.2.13.2.14 2007/12/31 07:22:55 sebastian Exp $ */
 
 #include <stdio.h>
 #include "php.h"

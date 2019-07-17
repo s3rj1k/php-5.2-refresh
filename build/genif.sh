@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $Id: genif.sh,v 1.3 2002-03-22 10:22:41 sas Exp $
+# $Id: genif.sh,v 1.3 2002/03/22 10:22:41 sas Exp $
 # replacement for genif.pl
 
 infile=$1

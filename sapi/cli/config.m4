@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.11.2.6.4.1 2005/07/28 14:47:53 hyanantha Exp $
 dnl
 
 AC_MSG_CHECKING(for CLI build)

@@ -18,7 +18,7 @@
    |          Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */ 
+/* $Id: http_fopen_wrapper.c,v 1.53.2.20.2.11 2007/12/31 07:22:52 sebastian Exp $ */ 
 
 #include "php.h"
 #include "php_globals.h"

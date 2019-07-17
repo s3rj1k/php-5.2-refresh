@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.35.2.6 2004/11/29 09:13:39 derick Exp $
 dnl
 
 PHP_ARG_WITH(pdflib,for PDFlib support,

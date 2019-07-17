@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id$ */
+/* $Id: php_filepro.h,v 1.9.8.2.2.3 2007/12/31 07:22:47 sebastian Exp $ */
 
 /*
   filePro 4.x support developed by Chad Robinson, chadr@brttech.com

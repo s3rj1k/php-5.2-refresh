@@ -16,7 +16,7 @@
 // | Author: Andrei Zmievski <andrei@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id$
+// $Id: Getopt.php,v 1.21.4.10.2.2 2006/01/01 13:51:22 sniper Exp $
 
 require_once 'PEAR.php';
 

@@ -16,7 +16,7 @@ REM ----------------------------------------------------------------------
 REM  Authors:     Alexander Merz (alexmerz@php.net)
 REM ----------------------------------------------------------------------
 REM
-REM  $Id: peardev.bat,v 1.1.2.3 2006-01-01 13:51:23 sniper Exp $
+REM  $Id: peardev.bat,v 1.1.2.3 2006/01/01 13:51:23 sniper Exp $
 
 REM change this lines to match the paths of your system
 REM -------------------

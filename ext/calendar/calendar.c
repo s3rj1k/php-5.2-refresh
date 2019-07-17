@@ -18,7 +18,7 @@
    |          Wez Furlong               <wez@thebrainroom.com>            |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: calendar.c,v 1.30.2.4.2.3 2007/12/31 07:22:45 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

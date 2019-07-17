@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id$";
+static const char rcsid[] = "#(@) $Id: simplestring.c,v 1.3.4.1 2003/12/16 21:00:35 sniper Exp $";
 
 
 #define SIMPLESTRING_INCR 32
@@ -44,7 +44,10 @@ static const char rcsid[] = "#(@) $Id$";
  * CREATION DATE
  *   06/2000
  * HISTORY
- *   $Log$
+ *   $Log: simplestring.c,v $
+ *   Revision 1.3.4.1  2003/12/16 21:00:35  sniper
+ *   MFH: fix compile warnings
+ *
  *   Revision 1.3  2002/08/22 01:25:50  sniper
  *   kill some compile warnings
  *

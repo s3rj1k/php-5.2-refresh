@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: php4activescript.h,v 1.2.4.1.8.3 2007/12/31 07:22:55 sebastian Exp $ */
 
 extern zend_module_entry php_activescript_module;
 extern sapi_module_struct activescript_sapi_module;

@@ -17,7 +17,7 @@
  */
 
 #ifndef lint
-static const char rcsid[] = "$Id$";
+static const char rcsid[] = "$Id: os_unix.c,v 1.2.2.3 2003/12/07 12:57:26 stas Exp $";
 #endif /* not lint */
 
 #include "fcgi_config.h"

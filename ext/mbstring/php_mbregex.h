@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: php_mbregex.h,v 1.2.2.2.8.3 2007/12/31 07:22:48 sebastian Exp $ */
  
 #ifndef _PHP_MBREGEX_H
 #define _PHP_MBREGEX_H

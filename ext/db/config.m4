@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.14.4.3 2004/12/30 07:02:16 sniper Exp $
 dnl 
 
 # Checks for libraries.

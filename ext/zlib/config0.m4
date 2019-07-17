@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config0.m4,v 1.12.2.3 2003/07/01 23:54:44 sas Exp $
 dnl
 
 PHP_ARG_WITH(zlib,for ZLIB support,

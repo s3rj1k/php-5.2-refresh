@@ -8,7 +8,7 @@
 **  This code is in the public domain and has no copyright.
 */
 
-/* $Id$ */
+/* $Id: parsedate.y,v 1.34.2.8 2005/05/20 11:13:14 derick Exp $ */
 
 #include "php.h"
 

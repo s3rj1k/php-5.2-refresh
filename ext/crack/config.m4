@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.8.4.3 2004/12/31 03:10:59 iliaa Exp $
 dnl
 
 PHP_ARG_WITH(crack, for CRACKlib support,

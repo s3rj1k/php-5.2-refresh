@@ -15,7 +15,7 @@
  * @author     Stig Bakken <ssb@php.net>
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id$
+ * @version    CVS: $Id: Autoloader.php,v 1.4.6.13.2.1 2005/11/02 16:57:19 cellog Exp $
  * @link       http://pear.php.net/manual/en/core.ppm.php#core.ppm.pear-autoloader
  * @since      File available since Release 0.1
  * @deprecated File deprecated in Release 1.4.0a1

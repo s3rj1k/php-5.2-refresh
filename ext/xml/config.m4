@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.38.2.3 2004/12/20 20:38:18 sniper Exp $
 dnl
 
 PHP_C_BIGENDIAN

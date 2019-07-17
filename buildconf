@@ -1,5 +1,5 @@
 #!/bin/sh
-# $Id$
+# $Id: buildconf,v 1.57.4.4.2.1 2005/11/29 22:39:46 sniper Exp $
 
 eval `grep '^EXTRA_VERSION=' configure.in`
 case "$EXTRA_VERSION" in

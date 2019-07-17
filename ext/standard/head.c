@@ -15,7 +15,7 @@
    | Author: Rasmus Lerdorf <rasmus@lerdorf.on.ca>                        |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: head.c,v 1.66.2.4.2.4 2007/12/31 07:22:52 sebastian Exp $ */
 
 #include <stdio.h>
 #include "php.h"

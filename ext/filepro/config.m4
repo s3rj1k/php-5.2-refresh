@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.6.4.1 2003/10/03 05:25:34 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(filepro,whether to enable the bundled filePro support,

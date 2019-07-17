@@ -16,7 +16,7 @@
    |         Hartmut Holzgraefe <hartmut@six.de>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: zlib_fopen_wrapper.c,v 1.33.2.7.2.3 2007/12/31 07:22:54 sebastian Exp $ */
 #define IS_EXT_MODULE
 #define _GNU_SOURCE
 

@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id$ */
+/* $Id: php_readline.h,v 1.13.8.1.8.3 2007/12/31 07:22:51 sebastian Exp $ */
 
 #ifndef PHP_READLINE_H
 #define PHP_READLINE_H

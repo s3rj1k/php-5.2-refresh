@@ -17,7 +17,7 @@
    |          Jaakko Hyvätti <jaakko@hyvatti.iki.fi>                      | 
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: reg.c,v 1.66.2.8.2.4 2007/12/31 07:22:52 sebastian Exp $ */
 
 #include <stdio.h>
 #include <ctype.h>

@@ -21,7 +21,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id$ */
+/* $Id: dbx_fbsql.h,v 1.6.2.2.6.3 2007/12/31 07:22:46 sebastian Exp $ */
 
 #ifndef ZEND_DBX_FBSQL_H
 #define ZEND_DBX_FBSQL_H

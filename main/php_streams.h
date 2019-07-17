@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: php_streams.h,v 1.61.2.18.2.4 2007/12/31 07:22:54 sebastian Exp $ */
 
 #ifndef PHP_STREAMS_H
 #define PHP_STREAMS_H

@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: php4as_scriptengine.h,v 1.2.4.1.8.3 2007/12/31 07:22:55 sebastian Exp $ */
 
 #include <activscp.h>
 #include "zend.h"

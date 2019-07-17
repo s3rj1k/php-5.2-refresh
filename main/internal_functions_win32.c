@@ -16,7 +16,7 @@
 	|          Zeev Suraski <zeev@zend.com>                                |
 	+----------------------------------------------------------------------+
 
-	$Id$
+	$Id: internal_functions_win32.c,v 1.65.2.3.4.3 2007/12/31 07:22:54 sebastian Exp $
 */
 
 /* {{{ includes

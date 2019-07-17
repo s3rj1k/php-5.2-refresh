@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: scriptengine.cpp,v 1.4.16.1 2006/01/01 13:47:01 sniper Exp $ */
 
 /* Implementation Notes:
  *

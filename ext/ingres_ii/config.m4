@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.8.4.2 2005/05/20 15:57:12 grantc Exp $
 dnl
 
 PHP_ARG_WITH(ingres, for Ingres II support,

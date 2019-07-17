@@ -1,5 +1,5 @@
-/* $Source$ */
-/* $Id$ */
+/* $Source: /repository/php-src/ext/mnogosearch/Attic/php_mnogo.c,v $ */
+/* $Id: php_mnogo.c,v 1.66.2.14.2.4 2007/12/31 07:22:49 sebastian Exp $ */
 
 /*
    +----------------------------------------------------------------------+

@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.16.2.1 2003/06/01 21:45:26 thetaphi Exp $
 dnl
 
 AC_MSG_CHECKING(for NSAPI support)

@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.9.2.2 2003/10/01 02:54:03 sniper Exp $
 dnl
 
 PHP_ARG_WITH(pfpro, for Verisign Payflow Pro support,

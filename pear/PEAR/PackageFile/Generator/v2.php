@@ -16,7 +16,7 @@
  * @author     Stephan Schmidt (original XML_Serializer code)
  * @copyright  1997-2005 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id$
+ * @version    CVS: $Id: v2.php,v 1.1.2.2 2006/01/01 13:47:00 sniper Exp $
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.4.0a1
  */
@@ -885,7 +885,7 @@ http://pear.php.net/dtd/package-2.0.xsd',
 // | Authors: Stephan Schmidt <schst@php-tools.net>                       |
 // +----------------------------------------------------------------------+
 //
-//    $Id$
+//    $Id: v2.php,v 1.1.2.2 2006/01/01 13:47:00 sniper Exp $
 
 /**
  * error code for invalid chars in XML name

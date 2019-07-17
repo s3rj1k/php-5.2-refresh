@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.54.2.3.2.1 2005/07/26 14:02:00 hyanantha Exp $
 dnl
 
 sinclude(ext/mysql/libmysql/acinclude.m4)

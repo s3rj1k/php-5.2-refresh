@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: url.c,v 1.58.2.21.2.7 2007/12/31 07:22:53 sebastian Exp $ */
 
 #include <stdlib.h>
 #include <string.h>

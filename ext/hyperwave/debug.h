@@ -3,20 +3,23 @@
 *          Copyright (C) 1991 Kendall Bennett.
 *              All rights reserved.
 *
-* Filename:    $RCSfile$
-* Version:    $Revision$
+* Filename:    $RCSfile: debug.h,v $
+* Version:    $Revision: 1.3 $
 *
 * Language:    ANSI C
 * Environment:  any
 *
 * Description:  General header file for portable code.
 *
-* $Id$
+* $Id: debug.h,v 1.3 2001/08/11 16:38:30 zeev Exp $
 *
 * Revision History:
 * -----------------
 *
-* $Log$
+* $Log: debug.h,v $
+* Revision 1.3  2001/08/11 16:38:30  zeev
+* Whitespace
+*
 * Revision 1.2  2000/07/02 23:46:41  sas
 * Change header protection macros to conform to standard.
 *

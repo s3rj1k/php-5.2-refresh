@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id$";
+static const char rcsid[] = "#(@) $Id: xmlrpc.c,v 1.4.4.2 2004/04/27 17:34:05 iliaa Exp $";
 
 
 /****h* ABOUT/xmlrpc
@@ -42,7 +42,10 @@ static const char rcsid[] = "#(@) $Id$";
  * CREATION DATE
  *   9/1999 - 10/2000
  * HISTORY
- *   $Log$
+ *   $Log: xmlrpc.c,v $
+ *   Revision 1.4.4.2  2004/04/27 17:34:05  iliaa
+ *   MFH: Removed C++ style comments.
+ *
  *   Revision 1.4.4.1  2003/12/16 21:00:36  sniper
  *   MFH: fix compile warnings
  *

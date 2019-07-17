@@ -9,7 +9,7 @@
  * See the file "LICENSE.TERMS" for information on usage and redistribution
  * of this file, and for a DISCLAIMER OF ALL WARRANTIES.
  *
- * $Id$
+ * $Id: fcgiapp.h,v 1.1.4.2 2003/09/21 22:08:17 sas Exp $
  */
 
 #ifndef _FCGIAPP_H

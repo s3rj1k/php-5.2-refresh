@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.14.4.1 2003/11/29 13:35:32 sniper Exp $
 dnl
 
 PHP_ARG_ENABLE(bcmath, whether to enable bc style precision math functions,

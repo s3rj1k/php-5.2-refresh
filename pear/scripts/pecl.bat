@@ -16,7 +16,7 @@ REM ----------------------------------------------------------------------
 REM  Authors:     Alexander Merz (alexmerz@php.net)
 REM ----------------------------------------------------------------------
 REM
-REM  Last updated 02/08/2004 ($Id: pecl.bat,v 1.1.2.3 2006-01-01 13:51:23 sniper Exp $ is not replaced if the file is binary)
+REM  Last updated 02/08/2004 ($Id: pecl.bat,v 1.1.2.3 2006/01/01 13:51:23 sniper Exp $ is not replaced if the file is binary)
 
 REM change this lines to match the paths of your system
 REM -------------------

@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.22.2.2 2003/10/01 02:53:56 sniper Exp $
 dnl
 
 PHP_ARG_WITH(fdftk, for FDF support,

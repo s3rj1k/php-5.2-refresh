@@ -1,4 +1,4 @@
-dnl $Id$
+dnl $Id: config.m4,v 1.10.4.8 2004/12/30 07:02:16 sniper Exp $
 
 AC_DEFUN([CPDF_JPEG_TEST],[
   AC_ARG_WITH(jpeg-dir,

@@ -5,7 +5,7 @@ InterBase: connect, close and pconnect
 --POST--
 --GET--
 --FILE--
-<?php /* $Id$ */
+<?php /* $Id: 002.phpt,v 1.2.4.3 2004/02/15 20:47:21 abies Exp $ */
 
 require("interbase.inc");
 

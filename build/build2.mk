@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id$
+# $Id: build2.mk,v 1.27.4.9.2.2 2006/01/01 13:46:49 sniper Exp $
 #
 
 include generated_lists

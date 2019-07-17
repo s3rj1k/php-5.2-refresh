@@ -17,7 +17,7 @@
    | PHP 4.0 patches by Zeev Suraski <zeev@zend.com>                      |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: mod_php4.c,v 1.146.2.15.2.6 2007/12/31 07:22:55 sebastian Exp $ */
 
 #include "php_apache_http.h"
 #include "http_conf_globals.h"

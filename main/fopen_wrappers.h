@@ -15,7 +15,7 @@
    | Author: Jim Winstead <jimw@php.net>                                  |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: fopen_wrappers.h,v 1.38.4.2.4.3 2007/12/31 07:22:54 sebastian Exp $ */
 
 #ifndef FOPEN_WRAPPERS_H
 #define FOPEN_WRAPPERS_H

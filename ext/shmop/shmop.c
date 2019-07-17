@@ -16,7 +16,7 @@
    |          Ilia Alshanetsky <ilia@prohost.org>                         |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: shmop.c,v 1.23.8.3.2.4 2007/12/31 07:22:51 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

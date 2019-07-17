@@ -36,7 +36,7 @@
 
 #if defined(LIBC_SCCS) && !defined(lint)
 /*static char *sccsid = "from: @(#)strerror.c	5.6 (Berkeley) 5/4/91";*/
-static char *rcsid = "$Id$";
+static char *rcsid = "$Id: strerror.c,v 1.1 2002/03/10 21:39:28 shane Exp $";
 #endif /* LIBC_SCCS and not lint */
 
 #include "fcgi_config.h"

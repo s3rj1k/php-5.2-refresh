@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.12.4.2 2003/10/01 02:54:01 sniper Exp $
 dnl
 
 PHP_ARG_WITH(mhash, for mhash support,

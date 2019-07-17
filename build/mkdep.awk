@@ -14,7 +14,7 @@
 #  | Author: Sascha Schumann <sascha@schumann.cx>                         |
 #  +----------------------------------------------------------------------+
 #
-# $Id$
+# $Id: mkdep.awk,v 1.5.20.1 2006/01/01 13:46:49 sniper Exp $
 #
 # Usage:
 #

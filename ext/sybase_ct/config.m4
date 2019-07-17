@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.11.4.3 2003/06/18 18:29:04 sniper Exp $
 dnl
 
 PHP_ARG_WITH(sybase-ct, for Sybase-CT support,

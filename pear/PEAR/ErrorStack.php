@@ -23,7 +23,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  2004-2005 Greg Beaver
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id$
+ * @version    CVS: $Id: ErrorStack.php,v 1.1.2.3.2.2 2005/11/02 16:57:20 cellog Exp $
  * @link       http://pear.php.net/package/PEAR_ErrorStack
  */
 
@@ -137,7 +137,7 @@ define('PEAR_ERRORSTACK_ERR_OBJTOSTRING', 2);
  * @category   Debugging
  * @copyright  2004-2005 Greg Beaver
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    CVS: $Id$
+ * @version    CVS: $Id: ErrorStack.php,v 1.1.2.3.2.2 2005/11/02 16:57:20 cellog Exp $
  * @link       http://pear.php.net/package/PEAR_ErrorStack
  */
 class PEAR_ErrorStack {

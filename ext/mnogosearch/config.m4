@@ -1,6 +1,6 @@
 dnl
-dnl $Source$
-dnl $Id$
+dnl $Source: /repository/php-src/ext/mnogosearch/Attic/config.m4,v $
+dnl $Id: config.m4,v 1.10.4.2 2004/08/29 14:18:11 gluke Exp $
 dnl
 
 PHP_ARG_WITH(mnogosearch,for mnoGoSearch support,

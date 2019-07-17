@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.1.2.2 2004/01/21 05:04:50 sniper Exp $
 dnl
 
 PHP_ARG_WITH(bz2, for BZip2 support,

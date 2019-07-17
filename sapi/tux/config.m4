@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.3 2002/03/07 14:20:01 sas Exp $
 dnl
 
 PHP_TUX=no

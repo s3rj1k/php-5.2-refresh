@@ -1,6 +1,6 @@
 <?php
 
-/* $Id$ */
+/* $Id: install-pear.php,v 1.6.2.14.4.9 2006/05/22 11:17:01 cellog Exp $ */
 
 error_reporting(E_ALL);
 $pear_dir = dirname(__FILE__);

@@ -15,7 +15,7 @@
    | Authors: Wez Furlong <wez@thebrainroom.com>                          |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: php4as_classfactory.h,v 1.1.4.1.8.3 2007/12/31 07:22:55 sebastian Exp $ */
 
 /* IClassFactory Implementation */
 

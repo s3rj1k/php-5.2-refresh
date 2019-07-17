@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.20.2.2.2.2 2005/11/22 22:53:50 tony2001 Exp $
 dnl
 
 PHP_ARG_WITH(curl, for CURL support,

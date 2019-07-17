@@ -31,7 +31,7 @@
 */
 
 
-static const char rcsid[] = "#(@) $Id$";
+static const char rcsid[] = "#(@) $Id: xml_element.c,v 1.3.4.4 2005/04/22 11:57:53 jorton Exp $";
 
 
 
@@ -43,7 +43,10 @@ static const char rcsid[] = "#(@) $Id$";
  * CREATION DATE
  *   06/2000
  * HISTORY
- *   $Log$
+ *   $Log: xml_element.c,v $
+ *   Revision 1.3.4.4  2005/04/22 11:57:53  jorton
+ *   MFH: Fixed bug #32797 (invalid C code in xmlrpc extension).
+ *
  *   Revision 1.3.4.3  2004/06/01 20:16:18  iliaa
  *   MFH: Fixed bug #28597 (xmlrpc_encode_request() incorrectly encodes chars in
  *   200-210 range).

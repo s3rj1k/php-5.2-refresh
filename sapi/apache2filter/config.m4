@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.25.2.12 2004/12/16 23:14:28 moriyoshi Exp $
 dnl
 
 AC_MSG_CHECKING(for Apache 2.0 filter-module support via DSO through APXS)

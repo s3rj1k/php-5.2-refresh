@@ -20,7 +20,7 @@
    | Based on code from: Shawn Cokus <Cokus@math.washington.edu>          |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: rand.c,v 1.60.2.3.4.4 2007/12/31 07:22:52 sebastian Exp $ */
 
 #include <stdlib.h>
 

@@ -17,7 +17,7 @@
  */
 
 
-/* $Id$ */
+/* $Id: incomplete_class.c,v 1.14.4.5.2.3 2007/12/31 07:22:52 sebastian Exp $ */
 
 #include "php.h"
 #include "basic_functions.h"

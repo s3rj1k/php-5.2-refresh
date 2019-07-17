@@ -1,5 +1,5 @@
 OpenSSL extension for PHP4
-$Id$
+$Id: README,v 1.2.12.1 2002/12/12 13:46:28 wez Exp $
 
 The functions implemented so far make it possible to seal and open data, and
 also create and verify signatures.

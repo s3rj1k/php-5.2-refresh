@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id$ */
+/* $Id: spprintf.c,v 1.10.4.3.2.3 2007/12/31 07:22:55 sebastian Exp $ */
 
 /* This is the spprintf implementation.
  * It has emerged from apache snprintf. See original header:

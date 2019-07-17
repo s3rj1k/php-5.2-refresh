@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
  
-/* $Id$ */
+/* $Id: php_metaphone.h,v 1.12.8.1.8.3 2007/12/31 07:22:52 sebastian Exp $ */
 
 #ifndef PHP_METAPHONE_H
 #define PHP_METAPHONE_H

@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.11.2.2 2004/04/08 23:54:08 sniper Exp $
 dnl
 
 PHP_ARG_WITH(yaz,for YAZ support,

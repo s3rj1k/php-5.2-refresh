@@ -16,7 +16,7 @@
    |          Derick Rethans <derick@derickrethans.nl>                    |
    +----------------------------------------------------------------------+
  */
-/* $Id$ */
+/* $Id: mcrypt.c,v 1.77.4.7.4.5 2007/12/31 07:22:48 sebastian Exp $ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

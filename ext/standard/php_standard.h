@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
 */
 
-/* $Id$ */
+/* $Id: php_standard.h,v 1.16.4.1.8.3 2007/12/31 07:22:52 sebastian Exp $ */
 
 #include "basic_functions.h"
 #include "php_math.h"

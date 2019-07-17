@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: php_functions.c,v 1.1.2.12.2.7 2007/12/31 07:22:55 sebastian Exp $ */
 
 #include "php.h"
 #include "ext/standard/php_smart_str.h"

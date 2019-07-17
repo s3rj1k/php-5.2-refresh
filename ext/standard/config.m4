@@ -1,4 +1,4 @@
-dnl $Id$ -*- sh -*-
+dnl $Id: config.m4,v 1.47.2.16.2.1 2007/01/22 19:59:21 derick Exp $ -*- sh -*-
 
 divert(3)dnl
 

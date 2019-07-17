@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: php_session.h,v 1.84.2.8.2.3 2007/12/31 07:22:51 sebastian Exp $ */
 
 #ifndef PHP_SESSION_H
 #define PHP_SESSION_H

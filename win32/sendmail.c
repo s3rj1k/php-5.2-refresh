@@ -17,7 +17,7 @@
  *
  */
 
-/* $Id$ */
+/* $Id: sendmail.c,v 1.47.2.10.2.4 2007/01/16 00:11:53 iliaa Exp $ */
 
 #include "php.h"				/*php specific */
 #include <stdio.h>

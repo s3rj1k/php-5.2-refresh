@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.11.4.1 2003/10/03 05:25:45 sniper Exp $
 dnl 
 
 RESULT=no

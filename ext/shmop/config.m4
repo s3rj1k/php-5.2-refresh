@@ -1,4 +1,4 @@
-dnl $Id$
+dnl $Id: config.m4,v 1.5 2002/03/12 16:35:09 sas Exp $
 PHP_ARG_ENABLE(shmop, whether to enable shmop support, 
 [  --enable-shmop          Enable shmop support])
 

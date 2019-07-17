@@ -1,5 +1,5 @@
 #!/usr/bin/php
-<?php # $Id$
+<?php # $Id: make-pear-bundle.php,v 1.2.2.2 2006/08/18 12:44:27 pajoye Exp $
 /* piece together a windows pear distro */
 
 if (!$argv[1] || !$argv[2]) {

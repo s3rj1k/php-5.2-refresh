@@ -16,7 +16,7 @@
    +----------------------------------------------------------------------+
  */
 
-/* $Id$ */
+/* $Id: dispatch.c,v 1.3.6.2.4.3 2007/12/31 07:22:45 sebastian Exp $ */
 
 /* 
  * This module is used to export PHP objects to COM and DOTNET by exposing

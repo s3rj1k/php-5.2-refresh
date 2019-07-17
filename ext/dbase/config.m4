@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.7 2002/03/12 16:13:43 sas Exp $
 dnl
 
 AC_ARG_WITH(dbase,[],[enable_dbase=$withval])

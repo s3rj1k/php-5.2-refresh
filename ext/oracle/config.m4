@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.29.4.2 2004/12/30 07:02:18 sniper Exp $
 dnl
 
 AC_DEFUN([AC_ORACLE_VERSION],[

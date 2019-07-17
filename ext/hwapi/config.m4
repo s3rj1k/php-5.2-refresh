@@ -1,4 +1,4 @@
-dnl $Id$
+dnl $Id: config.m4,v 1.3 2002/09/19 20:14:33 derick Exp $
 
 PHP_ARG_WITH(hwapi, for hwapi support,
 [  --with-hwapi[=DIR]      Include official Hyperwave API support])

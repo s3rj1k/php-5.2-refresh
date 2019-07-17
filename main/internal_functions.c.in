@@ -18,7 +18,7 @@
  */
 
 
-/* $Id$ */
+/* $Id: internal_functions.c.in,v 1.22.4.2.4.1 2006/01/01 13:46:59 sniper Exp $ */
 
 #include "php.h"
 #include "php_main.h"

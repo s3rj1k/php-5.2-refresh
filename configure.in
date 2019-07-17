@@ -1,4 +1,4 @@
-dnl ## $Id$ -*- sh -*-
+dnl ## $Id: configure.in,v 1.396.2.164.2.53 2008/08/06 08:32:30 derick Exp $ -*- sh -*-
 dnl ## Process this file with autoconf to produce a configure script.
 
 divert(1)

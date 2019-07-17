@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.11.4.2 2003/10/01 02:53:58 sniper Exp $
 dnl
 
 PHP_ARG_WITH(gettext,for GNU gettext support,

@@ -1,5 +1,5 @@
 dnl
-dnl $Id$
+dnl $Id: config.m4,v 1.8.2.2 2005/02/17 03:51:50 sniper Exp $
 dnl
 
 PHP_ARG_WITH(pspell,for PSPELL support,
