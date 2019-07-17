@@ -29,9 +29,9 @@
 
 #if HAVE_LIBREADLINE || HAVE_LIBEDIT
 
-#include <readline/readline.h>
+#include <editline/readline.h>
 #ifndef HAVE_LIBEDIT
-#include <readline/history.h>
+#include <editline/history.h>
 #endif
 
 PHP_FUNCTION(readline);
