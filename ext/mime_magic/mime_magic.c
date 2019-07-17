@@ -562,6 +562,15 @@ static int parse(char *l, int lineno)
     else if (strncmp(l, "string", NSTRING) == 0) {
 		m->type = STRING;
 		l += NSTRING;
+		if (*l == '/') {
+			++l;
+			if ((*l == 'B') || (*l == 'b') || (*l == 'c')) {
+				++l;
+				if ((*l == 'B') || (*l == 'b') || (*l == 'c')) {
+					++l;
+				}
+			}
+		}
     }
     else if (strncmp(l, "date", NDATE) == 0) {
 		m->type = DATE;
