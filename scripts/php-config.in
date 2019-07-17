@@ -7,6 +7,7 @@ includes="-I$includedir -I$includedir/main -I$includedir/TSRM -I$includedir/Zend
 ldflags="@PHP_LDFLAGS@"
 libs="@EXTRA_LIBS@"
 extension_dir='@EXTENSION_DIR@'
+phpapi="@DEBIAN_PHP_API@"
 
 case "$1" in
 --prefix)
@@ -21,8 +22,10 @@ case "$1" in
 	echo $extension_dir;;
 --version)
 	echo $version;;
+--phpapi)
+	echo $phpapi;;
 *)
-	echo "Usage: $0 [--prefix|--includes|--ldflags|--libs|--extension-dir|--version]"
+	echo "Usage: $0 [--prefix|--includes|--ldflags|--libs|--extension-dir|--version|--phpapi]"
 	exit 1;;
 esac
 
