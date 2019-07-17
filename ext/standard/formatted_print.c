@@ -183,7 +183,7 @@ php_sprintf_appendstring(char **buffer, int *pos, int *size, char *add,
 	if (npad < 0) {
 		npad = 0;
 	}
-	
+
 	PRINTF_DEBUG(("sprintf: appendstring(%x, %d, %d, \"%s\", %d, '%c', %d)\n",
 				  *buffer, *pos, *size, add, min_width, padding, alignment));
 
@@ -220,7 +220,7 @@ php_sprintf_appendstring(char **buffer, int *pos, int *size, char *add,
 
 inline static void
 php_sprintf_appendint(char **buffer, int *pos, int *size, long number,
-						int width, char padding, int alignment, 
+						int width, char padding, int alignment,
 						int always_sign)
 {
 	char numbuf[NUM_BUF_SIZE];
@@ -320,7 +320,7 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 	} else if (precision > MAX_FLOAT_PRECISION) {
 		precision = MAX_FLOAT_PRECISION;
 	}
-	
+
 	if (zend_isnan(number)) {
 		sign = (number<0);
 		php_sprintf_appendstring(buffer, pos, size, "NaN", 3, 0, padding,
@@ -368,26 +368,26 @@ php_sprintf_appenddouble(char **buffer, int *pos,
 	} else if (fmt == 'e' || fmt == 'E') {
 		char *exp_p;
 		int dec2;
-		
+
 		decpt--;
-		
+
 		numbuf[i++] = cvt[j++];
-		numbuf[i++] = decimal_point;	
+		numbuf[i++] = decimal_point;
 
 		if (precision > 0) {
 			int k = precision;
-				
+
 			while (k-- && cvt[j]) {
 				numbuf[i++] = cvt[j++];
 			}
 		} else {
 			numbuf[i++] = '0';
 		}
-		
+
 		numbuf[i++] = fmt;
 		exp_p = php_convert_to_decimal(decpt, 0, &dec2, &sign, 0);
 		numbuf[i++] = sign ? '-' : '+';
-		if (*exp_p) { 
+		if (*exp_p) {
 			while (*exp_p) {
 				numbuf[i++] = *(exp_p++);
 			}
@@ -491,9 +491,10 @@ php_formatted_print(int ht, int *len, int use_array TSRMLS_DC)
 {
 	zval ***args, **z_format, **array;
 	int argc, size = 240, inpos = 0, outpos = 0, temppos;
-	int alignment, currarg, adjusting, argnum, width, precision;
+	int alignment, currarg, adjusting;
 	char *format, *result, padding;
 	int always_sign;
+	long argnum, width, precision;
 
 	argc = ZEND_NUM_ARGS();
 
@@ -694,7 +695,7 @@ php_formatted_print(int ht, int *len, int use_array TSRMLS_DC)
 											 format[inpos], always_sign
 											 TSRMLS_CC);
 					break;
-					
+
 				case 'c':
 					convert_to_long(tmp);
 					php_sprintf_appendchar(&result, &outpos, &size,
@@ -746,12 +747,12 @@ php_formatted_print(int ht, int *len, int use_array TSRMLS_DC)
 			inpos++;
 		}
 	}
-	
+
 	efree(args);
-	
+
 	/* possibly, we have to make sure we have room for the terminating null? */
 	result[outpos]=0;
-	*len = outpos;	
+	*len = outpos;
 	return result;
 }
 /* }}} */
@@ -762,7 +763,7 @@ PHP_FUNCTION(user_sprintf)
 {
 	char *result;
 	int len;
-	
+
 	if ((result=php_formatted_print(ht, &len, 0 TSRMLS_CC))==NULL) {
 		RETURN_FALSE;
 	}
@@ -777,7 +778,7 @@ PHP_FUNCTION(vsprintf)
 {
 	char *result;
 	int len;
-	
+
 	if ((result=php_formatted_print(ht, &len, 1 TSRMLS_CC))==NULL) {
 		RETURN_FALSE;
 	}
@@ -792,7 +793,7 @@ PHP_FUNCTION(user_printf)
 {
 	char *result;
 	int len;
-	
+
 	if ((result=php_formatted_print(ht, &len, 0 TSRMLS_CC))==NULL) {
 		RETURN_FALSE;
 	}
@@ -808,7 +809,7 @@ PHP_FUNCTION(vprintf)
 {
 	char *result;
 	int len;
-	
+
 	if ((result=php_formatted_print(ht, &len, 1 TSRMLS_CC))==NULL) {
 		RETURN_FALSE;
 	}
