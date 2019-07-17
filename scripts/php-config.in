@@ -2,8 +2,8 @@
 
 prefix="@prefix@"
 version="@PHP_VERSION@"
-includedir="@includedir@/php"
-includes="-I$includedir -I$includedir/main -I$includedir/TSRM -I$includedir/Zend"
+includedir="@includedir@/php4"
+includes="-I$includedir -I$includedir/main -I$includedir/TSRM -I$includedir/Zend $(getconf LFS_CFLAGS)"
 ldflags="@PHP_LDFLAGS@"
 libs="@EXTRA_LIBS@"
 extension_dir='@EXTENSION_DIR@'

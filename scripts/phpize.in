@@ -3,8 +3,8 @@
 # Variable declaration
 prefix='@prefix@'
 exec_prefix="`eval echo @exec_prefix@`"
-phpdir="`eval echo @libdir@`/build"
-includedir="`eval echo @includedir@`/php"
+phpdir="$prefix/lib/php4/build"
+includedir="$prefix/include/php4"
 builddir="`pwd`"
 
 FILES_BUILD="mkdep.awk scan_makefile_in.awk shtool libtool.m4"
