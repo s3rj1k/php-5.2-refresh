@@ -35,7 +35,6 @@ AC_ARG_WITH(apxs2,
   APXS_BINDIR=`$APXS -q BINDIR`
   APXS_HTTPD=`$APXS -q SBINDIR`/`$APXS -q TARGET`
   APXS_CFLAGS=`$APXS -q CFLAGS`
-  APXS_MPM=`$APXS -q MPM_NAME`
   APU_BINDIR=`$APXS -q APU_BINDIR`
   APR_BINDIR=`$APXS -q APR_BINDIR`
 
@@ -114,9 +113,18 @@ dnl  fi
     ;;
   esac
 
-  if test "$APXS_MPM" != "prefork"; then
-    PHP_BUILD_THREAD_SAFE
+  if test "$APACHE_VERSION" -lt 2004001; then
+    APXS_MPM=`$APXS -q MPM_NAME`
+    if test "$APXS_MPM" != "prefork" && test "$APXS_MPM" != "peruser" && test "$APXS_MPM" != "itk"; then
+      PHP_BUILD_THREAD_SAFE
+    fi
+  else
+    APACHE_THREADED_MPM=`$APXS_HTTPD -V | grep 'threaded:.*yes'`
+    if test -n "$APACHE_THREADED_MPM"; then
+      PHP_BUILD_THREAD_SAFE
+    fi
   fi
+
   AC_MSG_RESULT(yes)
  
   PHP_SUBST(APXS)
