@@ -31,7 +31,7 @@ if test "$PHP_XML" = "yes"; then
     PHP_NEW_EXTENSION(xml, xml.c, $ext_shared)
 
     for i in $PHP_XML $PHP_EXPAT_DIR; do
-      if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.$SHLIB_SUFFIX_NAME ; then
+      if test -f $i/lib/libexpat.a -o -f $i/lib/libexpat.$SHLIB_SUFFIX_NAME -o -f $i/lib/x86_64-linux-gnu/libexpat.a; then
         EXPAT_DIR=$i
       fi
     done
