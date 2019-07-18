@@ -121,7 +121,7 @@ elif test "$PHP_MYSQL" != "no"; then
       ;;
   esac
 
-  for i in lib lib/mysql; do
+  for i in lib lib/mysql lib/x86_64-linux-gnu; do
     MYSQL_LIB_CHK($i)
   done
 
