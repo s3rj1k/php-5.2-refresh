@@ -102,7 +102,7 @@ Note that the MySQL client library is not bundled anymore!])
     PHP_LIBDIR=lib
   fi
 
-  for i in $PHP_LIBDIR $PHP_LIBDIR/mysql; do
+  for i in $PHP_LIBDIR $PHP_LIBDIR/mysql lib; do
     MYSQL_LIB_CHK($i)
   done
 
