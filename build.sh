@@ -1,0 +1,66 @@
+./buildconf --force
+autoconf
+
+CFLAGS="-O2 -Wall -fsigned-char -fno-strict-aliasing" PROG_SENDMAIL="/usr/sbin/sendmail" ./configure \
+--prefix=/usr --with-apxs2=/usr/bin/apxs2 \
+--disable-experimental-zts \
+--with-config-file-path=/etc/php4/apache2 \
+--with-config-file-scan-dir=/etc/php4/apache2/conf.d \
+--build=x86_64-linux-gnu \
+--host=x86_64-linux-gnu \
+--mandir=/usr/share/man \
+--enable-memory-limit \
+--without-pear \
+--disable-cgi \
+--disable-debug \
+--with-regex=php \
+--disable-rpath \
+--disable-static \
+--with-pic \
+--with-layout=GNU \
+--enable-calendar \
+--enable-sysvsem \
+--enable-sysvshm \
+--enable-sysvmsg \
+--enable-track-vars \
+--enable-trans-sid \
+--enable-bcmath \
+--with-bz2 \
+--enable-ctype \
+--without-gdbm \
+--with-iconv \
+--enable-exif \
+--enable-filepro \
+--enable-ftp \
+--with-gettext \
+--enable-mbstring \
+--with-pcre-regex=/usr \
+--enable-shmop \
+--enable-sockets \
+--enable-wddx \
+--disable-xml --with-expat-dir=/usr \
+--with-xmlrpc \
+--enable-yp \
+--with-zlib \
+--with-zip=/usr \
+--enable-dbx \
+--with-mime-magic=/etc/magic.mime \
+--with-exec-dir=/usr/lib/php4/libexec \
+--without-mm \
+--with-curl=shared,/usr \
+--with-zlib-dir=/usr \
+--with-gd=shared,/usr --enable-gd-native-ttf \
+--with-jpeg-dir=shared,/usr \
+--with-xpm-dir=shared,/usr/X11R6 \
+--with-png-dir=shared,/usr \
+--with-freetype-dir=shared,/usr  \
+--with-ttf=shared,/usr \
+--with-mcrypt=shared,/usr \
+--with-mhash=shared,/usr \
+--with-pspell=shared,/usr \
+--with-unixODBC=shared,/usr \
+--with-recode=shared,/usr \
+--with-openssl=/usr \
+--with-mysql=shared,/usr
+
+make
