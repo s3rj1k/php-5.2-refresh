@@ -78,6 +78,8 @@ ifeq ($(LTMAIN_DIR), /usr/share/libtool/)
 LIBTOOL_CONFLICTS:=libtool (>= 2.2)
 else ifeq ($(LTMAIN_DIR), /usr/share/libtool/config/)
 LIBTOOL_CONFLICTS:=libtool (<< 2.2)
+else ifeq ($(LTMAIN_DIR), /usr/share/libtool/build-aux/)
+LIBTOOL_CONFLICTS:=libtool (<< 2.4.6)
 else
 LIBTOOL_CONFLICTS:=$(error "could not resolve path to ltmain.sh")
 endif
