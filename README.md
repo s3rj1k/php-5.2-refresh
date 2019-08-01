@@ -14,10 +14,23 @@ apt-get install apache2-dev dh-apache2 autoconf automake bison chrpath debhelper
 ### Fix for PHP-IMAP shared module:
 
 ```
+# Build uw-imap from sources
 cd /root
-export DEB_CFLAGS_MAINT_APPEND=-fPIC
-apt-get -y build-dep uw-imap && apt-get -y --build source uw-imap
-dpkg -i libc-client*.deb mlock*.deb
+apt-get source uw-imap
+cd /root/uw-imap-2007f~dfsg
+sed -i 's/libssl-dev/libssl1.0-dev|libssl-dev/g' debian/control debian/rules debian/changelog
+sed -i 's/CFLAGS\ +=\ -D_REENTRANT\ -DDISABLE_POP_PROXY/CFLAGS\ +=\ -D_REENTRANT\ -DDISABLE_POP_PROXY\ -fPIC/g' debian/rules
+DEB_CFLAGS_MAINT_APPEND=-fPIC debuild -us -uc -b
+
+# Repack libc-client2007e-dev_2007f_amd64.deb for fix libssl deps
+mkdir -p /root/tmp
+dpkg-deb -R /root/libc-client2007e-dev_2007f*_amd64.deb /root/tmp
+sed -i 's/libssl-dev/libssl1.0-dev|libssl-dev/g' /root/tmp/DEBIAN/control
+dpkg-deb -b /root/tmp /root/libc-client2007e-dev_2007f~dfsg-5_amd64.deb
+rm -r /root/tmp
+
+# Install uw-imap
+cd /root/ && dpkg -i libc-client*.deb mlock*.deb
 ```
 
 ### Clone this branch to your build server:
