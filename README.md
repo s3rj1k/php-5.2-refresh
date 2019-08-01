@@ -20,7 +20,7 @@ apt-get source uw-imap
 cd /root/uw-imap-2007f~dfsg
 sed -i 's/libssl-dev/libssl1.0-dev|libssl-dev/g' debian/control debian/rules debian/changelog
 sed -i 's/CFLAGS\ +=\ -D_REENTRANT\ -DDISABLE_POP_PROXY/CFLAGS\ +=\ -D_REENTRANT\ -DDISABLE_POP_PROXY\ -fPIC/g' debian/rules
-debuild -us -uc -b
+DEB_CFLAGS_MAINT_APPEND=-fPIC debuild -us -uc -b
 
 # Repack libc-client2007e-dev_2007f_amd64.deb for fix libssl deps
 mkdir -p /root/tmp
