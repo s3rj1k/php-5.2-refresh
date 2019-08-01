@@ -70,7 +70,7 @@ CFLAGS += -g
 PHPIZE_BUILDDIR = debian/php5.4-dev/usr/lib/php/5.4
 
 # support new (>= 2.2) and older versions of libtool for backporting ease
-LIBTOOL_DIRS = /usr/share/libtool/config /usr/share/libtool
+LIBTOOL_DIRS = /usr/share/libtool/config /usr/share/libtool /usr/share/libtool/build-aux
 LTMAIN = $(firstword $(wildcard $(foreach d,$(LIBTOOL_DIRS),$d/ltmain.sh)))
 LTMAIN_DIR = $(dir $(LTMAIN))
 
