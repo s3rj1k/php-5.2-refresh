@@ -186,6 +186,7 @@ AC_DEFUN([PHP_GD_FREETYPE2],[
       elif test -f "$i/include/freetype2/freetype/freetype.h"; then
         FREETYPE2_DIR=$i
         FREETYPE2_INC_DIR=$i/include/freetype2/freetype
+        FREETYPE2_ADDITIONAL_INC_DIR=$i/include/freetype2
         break
       fi
     done
@@ -194,6 +195,9 @@ AC_DEFUN([PHP_GD_FREETYPE2],[
       PHP_ADD_LIBRARY_WITH_PATH(freetype, $FREETYPE2_DIR/lib, GD_SHARED_LIBADD)
       PHP_ADD_INCLUDE($FREETYPE2_DIR/include)
       PHP_ADD_INCLUDE($FREETYPE2_INC_DIR)
+      if test -n "FREETYPE2_ADDITIONAL_INC_DIR"; then
+        PHP_ADD_INCLUDE($FREETYPE2_ADDITIONAL_INC_DIR)
+      fi
       AC_DEFINE(USE_GD_IMGSTRTTF, 1, [ ])
       AC_DEFINE(HAVE_LIBFREETYPE,1,[ ])
     else
