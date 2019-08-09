@@ -25,6 +25,13 @@ apt-get install apache2-dev autoconf automake bison chrpath debhelper dh-apache2
 apt-get install mariadb-server
 ```
 
+### Fix libmysqlclient_r.so
+#### (only in case of using libmariadbclient-dev v10.0 !!!)
+
+```
+cd /usr/lib/ && ln -fs libmysqlclient.so libmysqlclient_r.so
+```
+
 ### Fix for PHP-IMAP shared module:
 
 ```
