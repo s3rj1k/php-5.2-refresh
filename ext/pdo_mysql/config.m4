@@ -47,8 +47,17 @@ if test "$PHP_PDO_MYSQL" != "no"; then
         break;
       fi
       if test -r $i/include/mysql/mysql.h || test -r $i/include/mysql.h ; then
-        PDO_MYSQL_DIR="$i"
-        break;
+        if which dpkg-architecture>/dev/null; then
+          AC_MSG_CHECKING(for mysql in multiarch path)
+          PDO_MYSQL_MULTIARCH_LIB=$i/lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH)
+          if test -r $PDO_MYSQL_MULTIARCH_LIB/libmysqlclient.so; then
+            PDO_MYSQL_DIR="PDO_MYSQL_MULTIARCH_LIB"
+            break;
+          else
+            PDO_MYSQL_DIR="$i"
+            break
+          fi
+        fi
       fi
     done
   fi
