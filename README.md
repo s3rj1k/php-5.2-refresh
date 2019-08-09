@@ -32,6 +32,12 @@ apt-get install mariadb-server
 cd /usr/lib/ && ln -fs libmysqlclient.so libmysqlclient_r.so
 ```
 
+#### (only in case of using libmysqlclient-dev v5.6 !!!)
+
+```
+cd /usr/lib/x86_64-linux-gnu/ && ln -fs libmysqlclient.so libmysqlclient_r.so
+```
+
 ### Fix for PHP-IMAP shared module:
 
 ```
