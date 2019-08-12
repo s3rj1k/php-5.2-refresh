@@ -28,7 +28,7 @@ ALWAYS = generated_lists
 
 
 all: $(STAMP) $(ALWAYS)
-	@$(MAKE) -s -f build/build2.mk
+	@$(MAKE) -s -B -f build/build2.mk
 
 generated_lists:
 	@echo makefile_am_files = Zend/Makefile.am TSRM/Makefile.am > $@
