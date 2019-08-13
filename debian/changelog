@@ -1,3 +1,21 @@
+php5.4 (5.4.45+u4) unstable; urgency=low
+
+  * Repackaged
+
+  Repackaged PHP-5.4.45 for Debian Stretch with additional patches.
+  Patches are in sync with 5.4.45-0+deb7u9 package.
+
+ -- kaut <maksimkaut92@gmail.com>  Tue, 14 Aug 2019 12:30:36 +0200
+
+php5.4 (5.4.45+u3) unstable; urgency=low
+
+  * Repackaged
+
+  Repackaged PHP-5.4.45 for Debian Stretch with additional patches.
+  Patches are in sync with 5.4.45-0+deb7u9 package.
+
+ -- kaut <maksimkaut92@gmail.com>  Fri, 9 Aug 2019 17:10:05 +0200
+
 php5.4 (5.4.45+u2) unstable; urgency=low
 
   * Repackaged
