@@ -8,7 +8,7 @@ Homepage: http://pecl.php.net/package/imagick
 
 Package: php5.3-imagick
 Architecture: any
-Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, php5.3-common, libmagickcore-6.q16-2, libmagickwand-6.q16-2
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, php5.3-common, libmagickcore-6.q16-2 | libmagickcore-6.q16-3, libmagickwand-6.q16-2 | libmagickwand-6.q16-3
 Description: ImageMagick module for PHP 5.3
  Imagick is a native php extension to create and modify
  images using the ImageMagick API.
